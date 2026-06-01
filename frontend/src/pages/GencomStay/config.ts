@@ -207,4 +207,280 @@ export const GENCOM_PORTFOLIO: Property[] = [
       "30-day advance notice preferred; concierge holds keys.",
     ],
   },
+
+  // ----------------------------------------------------------
+  // Additional Gencom-owned/operated properties. Names, brands,
+  // cities, and street addresses are real and verified from public
+  // sources. The operational data below — friends-&-family rates,
+  // on-property contacts (intentionally fake @*.example emails),
+  // blackout ranges, and notes — is PROVISIONAL placeholder data and
+  // must be replaced with the figures from the asset-manager source
+  // documents before this is shared beyond the team.
+  // ----------------------------------------------------------
+  {
+    id: "rc-bachelor-gulch",
+    name: "The Ritz-Carlton Bachelor Gulch",
+    brand: "Ritz-Carlton",
+    location: "Beaver Creek, CO",
+    tagline: "Slopeside Rocky Mountain grandeur in Beaver Creek.",
+    heroImage: null,
+    address: "0130 Daybreak Ridge, Avon, CO 81620",
+    contact: {
+      name: "Daniel Mercer",
+      title: "Director of Sales",
+      email: "daniel.mercer@ritzcarlton.example",
+      phone: "+1 (970) 748-6200",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Deluxe Room", friendsAndFamilyRate: 425, notes: "Mountain or valley view" },
+      { category: "Junior Suite", friendsAndFamilyRate: 695, notes: "Fireplace + sitting area" },
+      { category: "Residential Suite", friendsAndFamilyRate: 1095, notes: "Ski-in/ski-out, 1BR" },
+    ],
+    blackoutRanges: [
+      { start: "2026-12-20", end: "2027-01-03", reason: "Holiday ski week compression" },
+      { start: "2026-02-13", end: "2026-02-22", reason: "Presidents' week peak ski" },
+      { start: "2026-03-14", end: "2026-03-22", reason: "Spring break peak" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "Ski valet and slope access included; resort fee waived for owner/F&F.",
+      "14-day advance notice; 30 days during holiday ski windows.",
+    ],
+  },
+  {
+    id: "rc-philadelphia",
+    name: "The Ritz-Carlton Philadelphia",
+    brand: "Ritz-Carlton",
+    location: "Philadelphia, PA",
+    tagline: "Beaux-Arts landmark on Avenue of the Arts.",
+    heroImage: null,
+    address: "10 Avenue of the Arts, Philadelphia, PA 19102",
+    contact: {
+      name: "Rebecca Lowe",
+      title: "Front Office Manager",
+      email: "rebecca.lowe@ritzcarlton.example",
+      phone: "+1 (215) 523-8000",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Deluxe King", friendsAndFamilyRate: 239 },
+      { category: "Club Level King", friendsAndFamilyRate: 369, notes: "Lounge access incl." },
+      { category: "Rotunda Suite", friendsAndFamilyRate: 649 },
+    ],
+    blackoutRanges: [
+      { start: "2026-07-02", end: "2026-07-06", reason: "Independence Day / Wawa Welcome America" },
+      { start: "2026-11-25", end: "2026-11-29", reason: "Thanksgiving + parade weekend" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "Resort fee waived; valet parking at 50% off for owner/F&F.",
+      "10-day advance notice typical.",
+    ],
+  },
+  {
+    id: "rc-coconut-grove",
+    name: "The Ritz-Carlton Coconut Grove, Miami",
+    brand: "Ritz-Carlton",
+    location: "Miami, FL",
+    tagline: "Tropical calm above the Grove.",
+    heroImage: null,
+    address: "3300 SW 27th Avenue, Miami, FL 33133",
+    contact: {
+      name: "Carlos Reyes",
+      title: "Director of Sales",
+      email: "carlos.reyes@ritzcarlton.example",
+      phone: "+1 (305) 644-4680",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Deluxe Room", friendsAndFamilyRate: 299 },
+      { category: "Junior Suite", friendsAndFamilyRate: 489, notes: "Bay or city view" },
+      { category: "Grove Suite", friendsAndFamilyRate: 749 },
+    ],
+    blackoutRanges: [
+      { start: "2026-12-01", end: "2026-12-07", reason: "Art Basel Miami Beach" },
+      { start: "2026-02-06", end: "2026-02-09", reason: "Super Bowl / F1 window" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "Resort fee waived for owner/F&F; valet at $30/night.",
+      "14-day advance notice; 30 days during Art Basel.",
+    ],
+  },
+  {
+    id: "rc-key-biscayne",
+    name: "The Ritz-Carlton Key Biscayne, Miami",
+    brand: "Ritz-Carlton",
+    location: "Key Biscayne, FL",
+    tagline: "Oceanfront island retreat, freshly reimagined.",
+    heroImage: null,
+    address: "455 Grand Bay Drive, Key Biscayne, FL 33149",
+    contact: {
+      name: "Olivia Grant",
+      title: "Director of Rooms",
+      email: "olivia.grant@ritzcarlton.example",
+      phone: "+1 (305) 365-4500",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Resort View King", friendsAndFamilyRate: 359 },
+      { category: "Ocean View King", friendsAndFamilyRate: 519 },
+      { category: "Oceanfront Suite", friendsAndFamilyRate: 895, notes: "Balcony over the Atlantic" },
+    ],
+    blackoutRanges: [
+      { start: "2026-03-21", end: "2026-04-05", reason: "Miami Open + spring break" },
+      { start: "2026-12-26", end: "2027-01-02", reason: "Holiday beach compression" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "Resort fee waived for owner/F&F; beach service included.",
+      "21-day advance notice during Miami Open window.",
+    ],
+  },
+  {
+    id: "st-regis-chicago",
+    name: "The St. Regis Chicago",
+    brand: "St. Regis",
+    location: "Chicago, IL",
+    tagline: "Jeanne Gang's riverfront tower off the Magnificent Mile.",
+    heroImage: null,
+    address: "401 East Wacker Drive, Chicago, IL 60601",
+    contact: {
+      name: "Nathan Brooks",
+      title: "Director of Sales",
+      email: "nathan.brooks@stregis.example",
+      phone: "+1 (312) 770-8700",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Deluxe River View", friendsAndFamilyRate: 279 },
+      { category: "Astor Suite", friendsAndFamilyRate: 559, notes: "Corner, lake + river views" },
+      { category: "Caroline Astor Suite", friendsAndFamilyRate: 899 },
+    ],
+    blackoutRanges: [
+      { start: "2026-05-22", end: "2026-05-26", reason: "Memorial Day / festival season" },
+      { start: "2026-09-04", end: "2026-09-07", reason: "Labor Day + jazz festival" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "Includes St. Regis Butler Service; valet at 50% off for owner/F&F.",
+      "10-day advance notice typical.",
+    ],
+  },
+  {
+    id: "nekajui-papagayo",
+    name: "Nekajui, a Ritz-Carlton Reserve",
+    brand: "Ritz-Carlton Reserve",
+    location: "Peninsula Papagayo, Costa Rica",
+    tagline: "Pacific-coast Reserve hidden in the Guanacaste jungle.",
+    heroImage: null,
+    address: "Peninsula Papagayo, Guanacaste 50503, Costa Rica",
+    contact: {
+      name: "Isabela Quirós",
+      title: "Reserve Host Manager",
+      email: "isabela.quiros@ritzcarltonreserve.example",
+      phone: "+506 4080 0000",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Jungle Casita", friendsAndFamilyRate: 895, notes: "Plunge pool + outdoor shower" },
+      { category: "Ocean View Casita", friendsAndFamilyRate: 1295 },
+      { category: "Reserve Villa — 1BR", friendsAndFamilyRate: 2150, notes: "Private pool, butler" },
+    ],
+    blackoutRanges: [
+      { start: "2026-12-20", end: "2027-01-04", reason: "Holiday high season" },
+      { start: "2026-03-28", end: "2026-04-05", reason: "Semana Santa (Holy Week)" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "All-Reserve experience; daily breakfast and Reserve Host included.",
+      "30-day advance notice; 3-night minimum for villas.",
+    ],
+  },
+  {
+    id: "thompson-central-park",
+    name: "Thompson Central Park New York",
+    brand: "Thompson",
+    location: "New York, NY",
+    tagline: "Design-forward stays steps from Central Park.",
+    heroImage: null,
+    address: "119 West 56th Street, New York, NY 10019",
+    contact: {
+      name: "Maya Lindqvist",
+      title: "Front Office Manager",
+      email: "maya.lindqvist@thompsonhotels.example",
+      phone: "+1 (212) 707-8000",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Cozy King", friendsAndFamilyRate: 219 },
+      { category: "Deluxe Park View", friendsAndFamilyRate: 349 },
+      { category: "Thompson Suite", friendsAndFamilyRate: 595 },
+    ],
+    blackoutRanges: [
+      { start: "2026-09-20", end: "2026-09-27", reason: "UN General Assembly" },
+      { start: "2026-11-25", end: "2026-11-29", reason: "Macy's Parade + Thanksgiving" },
+      { start: "2026-12-28", end: "2027-01-01", reason: "New Year's compression" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "No resort fee; breakfast available at the lobby restaurant.",
+      "10-day advance notice typical.",
+    ],
+  },
+  {
+    id: "intercontinental-nyts",
+    name: "InterContinental New York Times Square",
+    brand: "InterContinental",
+    location: "New York, NY",
+    tagline: "Floor-to-ceiling glass over the Theater District.",
+    heroImage: null,
+    address: "300 West 44th Street, New York, NY 10036",
+    contact: {
+      name: "Gregory Hahn",
+      title: "Director of Sales",
+      email: "gregory.hahn@ihg.example",
+      phone: "+1 (212) 803-4500",
+    },
+    assetManager: {
+      name: "Ben Dennis",
+      email: "bdennis@gencomgrp.com",
+    },
+    rates: [
+      { category: "Classic King", friendsAndFamilyRate: 209 },
+      { category: "Premium City View", friendsAndFamilyRate: 309 },
+      { category: "Junior Suite", friendsAndFamilyRate: 489 },
+    ],
+    blackoutRanges: [
+      { start: "2026-09-20", end: "2026-09-27", reason: "UN General Assembly" },
+      { start: "2026-12-28", end: "2027-01-01", reason: "Times Square New Year's Eve" },
+    ],
+    notes: [
+      "PLACEHOLDER rates/policies — confirm with asset manager.",
+      "No resort fee; valet parking available nearby.",
+      "7-day advance notice typical.",
+    ],
+  },
 ];
