@@ -131,7 +131,7 @@ export default function ChatPanel({ propertyId, open, onClose }: Props) {
           <div className="text-[11px] text-gencom-stone">
             Context: this property's scope + metadata
             {extraContext && (
-              <span className="ml-1 px-1 rounded bg-emerald-100 text-emerald-800 font-medium">
+              <span className="ml-1 px-1 rounded bg-gencom-greensoft text-gencom-green font-medium">
                 + {extraContext.split("\n").filter((l) => l.trim()).length} pending preview items
               </span>
             )}
@@ -168,7 +168,7 @@ export default function ChatPanel({ propertyId, open, onClose }: Props) {
             <div
               className={`max-w-[85%] px-3 py-2 rounded-lg text-sm whitespace-pre-wrap ${
                 m.role === "user"
-                  ? "bg-emerald-700 text-white"
+                  ? "bg-gencom-green text-white"
                   : "bg-white border border-gencom-sand text-gencom-ink"
               }`}
             >
@@ -196,7 +196,7 @@ export default function ChatPanel({ propertyId, open, onClose }: Props) {
             }}
             placeholder="Ask about this property's scope…"
             rows={2}
-            className="flex-1 resize-none border border-gencom-sand rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-700"
+            className="flex-1 resize-none border border-gencom-sand rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-gencom-green"
             disabled={streaming}
           />
           {streaming ? (
@@ -210,7 +210,7 @@ export default function ChatPanel({ propertyId, open, onClose }: Props) {
             <button
               onClick={send}
               disabled={!input.trim()}
-              className="px-3 bg-emerald-700 text-white rounded-md text-sm hover:bg-emerald-800 disabled:opacity-50"
+              className="px-3 bg-gencom-green text-white rounded-md text-sm hover:bg-gencom-greendark disabled:opacity-50"
             >
               Send
             </button>

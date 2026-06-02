@@ -194,7 +194,7 @@ export default function DmCostsPage() {
         </div>
       )}
       {uploadResult && (
-        <div className="text-sm p-3 rounded border border-emerald-300 bg-emerald-50 text-emerald-900">
+        <div className="text-sm p-3 rounded border border-gencom-green/30 bg-gencom-greensoft text-gencom-green">
           ✓ Extracted <b>{uploadResult.created}</b> row{uploadResult.created !== 1 ? "s" : ""}.
           {uploadResult.warnings.length > 0 && (
             <details className="mt-1 text-xs">

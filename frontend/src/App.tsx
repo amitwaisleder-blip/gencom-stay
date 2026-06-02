@@ -129,8 +129,8 @@ function PropertyTabs() {
             to={href}
             className={`px-4 py-2 text-xs uppercase tracking-wider whitespace-nowrap rounded-md font-semibold transition shadow-sm ${
               active
-                ? "bg-emerald-700 text-white ring-2 ring-emerald-700/30"
-                : "bg-emerald-600 text-white hover:bg-emerald-700"
+                ? "bg-gencom-green text-white ring-2 ring-gencom-green/30"
+                : "bg-gencom-green text-white hover:bg-gencom-greendark"
             }`}
           >
             {t.label}

@@ -193,7 +193,7 @@ function SaveIndicator({ status }: { status: "saved" | "saving" | "idle" }) {
   return (
     <div className="text-xs text-slate-500 flex items-center gap-1 whitespace-nowrap">
       {status === "saving" && <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />}
-      {status === "saved" && <span className="h-2 w-2 rounded-full bg-emerald-500" />}
+      {status === "saved" && <span className="h-2 w-2 rounded-full bg-gencom-green" />}
       {text}
     </div>
   );
@@ -1362,7 +1362,7 @@ function OutlookButton({
   } else if (status.status === "error") {
     dot = "bg-red-500"; label = "Outlook · error";
   } else {
-    dot = "bg-emerald-500"; label = "Outlook · synced";
+    dot = "bg-gencom-green"; label = "Outlook · synced";
   }
   return (
     <button
@@ -1893,7 +1893,7 @@ function UploadDocsModal({
 
           {phase === "saving" && (
             <div className="py-12 text-center">
-              <div className="inline-block w-10 h-10 border-2 border-slate-300 border-t-emerald-600 rounded-full animate-spin" />
+              <div className="inline-block w-10 h-10 border-2 border-slate-300 border-t-gencom-green rounded-full animate-spin" />
               <div className="mt-4 text-sm text-slate-700">Saving files and merging into trip…</div>
             </div>
           )}

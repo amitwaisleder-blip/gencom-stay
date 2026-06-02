@@ -127,7 +127,7 @@ function ServerDown({ status }: { status: Reachability }) {
               </a>
               <button
                 onClick={() => window.location.reload()}
-                className="t-eyebrow px-3 py-1.5 bg-emerald-700 text-white rounded-md hover:bg-emerald-800"
+                className="t-eyebrow px-3 py-1.5 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark"
               >
                 Reload now
               </button>

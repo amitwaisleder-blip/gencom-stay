@@ -144,7 +144,7 @@ export default function ExportPage() {
                 const included = selected.has(s.id);
                 const filterHint = (s.auto_filter as any)?.priority_in?.join(" + ") ?? "all priorities";
                 return (
-                  <div key={s.id} className={`flex items-center gap-2 text-sm py-1 px-2 rounded ${isPrimary ? "bg-emerald-50 border border-emerald-600/30" : ""}`}>
+                  <div key={s.id} className={`flex items-center gap-2 text-sm py-1 px-2 rounded ${isPrimary ? "bg-gencom-greensoft border border-gencom-green/30" : ""}`}>
                     <input
                       type="radio"
                       name="primary-scenario"
@@ -169,7 +169,7 @@ export default function ExportPage() {
                     <span className="flex-1">
                       {s.name}
                       {s.is_default && <span className="ml-2 text-[10px] text-gencom-gold uppercase">(default)</span>}
-                      {isPrimary && <span className="ml-2 text-[10px] text-emerald-700 font-semibold uppercase">· PRIMARY</span>}
+                      {isPrimary && <span className="ml-2 text-[10px] text-gencom-green font-semibold uppercase">· PRIMARY</span>}
                     </span>
                     <span className="text-xs text-gencom-stone whitespace-nowrap" title={`Filter: ${filterHint}`}>
                       {count != null ? `${count} items` : "…"}
@@ -179,7 +179,7 @@ export default function ExportPage() {
               })}
             </div>
             <div className="text-xs text-gencom-stone mt-2">
-              The <b className="text-emerald-700">PRIMARY</b> scenario populates the main budget sheet. All selected scenarios appear in the "Scope Detail" tab.
+              The <b className="text-gencom-green">PRIMARY</b> scenario populates the main budget sheet. All selected scenarios appear in the "Scope Detail" tab.
               If items are missing from your export, pick the scenario with the most items (often "Full Scope") as primary.
             </div>
           </div>

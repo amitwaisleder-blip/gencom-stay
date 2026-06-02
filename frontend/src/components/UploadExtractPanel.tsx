@@ -234,13 +234,13 @@ export default function UploadExtractPanel({ propertyId, onExtracted }: Props) {
   const canExtract = docs.length > 0 && !extracting && !retryingDocId;
 
   return (
-    <div className="mb-6 bg-white border border-emerald-700/40 rounded-lg overflow-hidden shadow-sm">
+    <div className="mb-6 bg-white border border-gencom-green/40 rounded-lg overflow-hidden shadow-sm">
       <button
         onClick={() => setExpanded((v) => !v)}
         className="w-full flex items-center justify-between px-4 py-3 hover:bg-gencom-mist/40"
       >
         <div className="flex items-center gap-3">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-600"></span>
+          <span className="inline-block w-2 h-2 rounded-full bg-gencom-green"></span>
           <span className="font-display text-lg">Upload & Extract</span>
           <span className="text-xs text-gencom-stone">
             {docs.length === 0
@@ -260,7 +260,7 @@ export default function UploadExtractPanel({ propertyId, onExtracted }: Props) {
             className="p-6 border-2 border-dashed border-gencom-sand rounded-lg text-center"
           >
             <div className="text-sm mb-2">Drop PIP, OM, walk notes, or photos here</div>
-            <label className="inline-block px-3 py-1.5 bg-emerald-600 text-white rounded-md text-xs cursor-pointer hover:bg-emerald-700">
+            <label className="inline-block px-3 py-1.5 bg-gencom-green text-white rounded-md text-xs cursor-pointer hover:bg-gencom-greendark">
               Browse files
               <input
                 type="file"
@@ -297,7 +297,7 @@ export default function UploadExtractPanel({ propertyId, onExtracted }: Props) {
               <button
                 onClick={doUpload}
                 disabled={uploading}
-                className="mt-3 px-4 py-1.5 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 disabled:opacity-50"
+                className="mt-3 px-4 py-1.5 bg-gencom-green text-white rounded-md text-sm hover:bg-gencom-greendark disabled:opacity-50"
               >
                 {uploading ? "Uploading…" : "Upload"}
               </button>
@@ -312,7 +312,7 @@ export default function UploadExtractPanel({ propertyId, onExtracted }: Props) {
                 <button
                   onClick={openExtractVersionPicker}
                   disabled={!canExtract}
-                  className="px-4 py-1.5 bg-emerald-700 text-white rounded-md text-sm hover:bg-emerald-800 disabled:opacity-50"
+                  className="px-4 py-1.5 bg-gencom-green text-white rounded-md text-sm hover:bg-gencom-greendark disabled:opacity-50"
                 >
                   {extracting ? "Extracting…" : "Extract & Review"}
                 </button>
@@ -394,7 +394,7 @@ export default function UploadExtractPanel({ propertyId, onExtracted }: Props) {
 
           {/* Extraction result */}
           {result && (
-            <div className="bg-emerald-50 border border-emerald-600/40 rounded-md p-3 text-sm">
+            <div className="bg-gencom-greensoft border border-gencom-green/40 rounded-md p-3 text-sm">
               <div className="font-medium mb-1">Extraction complete · {result.duration_seconds.toFixed(1)}s</div>
               <ul className="text-xs space-y-0.5">
                 <li>{result.documents_processed} document(s) processed</li>
@@ -496,8 +496,8 @@ function ExtractVersionPicker({
                 key={v.key}
                 className={`block border rounded-md p-3 cursor-pointer transition ${
                   selected
-                    ? "border-emerald-700 bg-emerald-50/40 ring-1 ring-emerald-700/30"
-                    : "border-gencom-sand hover:border-emerald-700/50 hover:bg-gencom-mist/40"
+                    ? "border-gencom-green bg-gencom-greensoft/40 ring-1 ring-gencom-green/30"
+                    : "border-gencom-sand hover:border-gencom-green/50 hover:bg-gencom-mist/40"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -537,7 +537,7 @@ function ExtractVersionPicker({
           </button>
           <button
             onClick={() => onConfirm(choice)}
-            className="px-4 py-1.5 text-sm bg-emerald-700 text-white rounded-md font-semibold hover:bg-emerald-800"
+            className="px-4 py-1.5 text-sm bg-gencom-green text-white rounded-md font-semibold hover:bg-gencom-greendark"
           >
             Extract with this version →
           </button>
@@ -591,7 +591,7 @@ function ExtractionProgress({
       </div>
       <div className="h-2 bg-white border border-gencom-sand rounded overflow-hidden">
         <div
-          className="h-full bg-emerald-600 transition-all duration-500 ease-out"
+          className="h-full bg-gencom-green transition-all duration-500 ease-out"
           style={{ width: `${progress * 100}%` }}
         />
       </div>
@@ -742,7 +742,7 @@ function PreviewReview({
             {" "}<b>{includedCount}</b> selected for import
           </div>
           {preview.property_fields_updated.length > 0 && (
-            <div className="text-xs text-emerald-800 bg-emerald-50 border border-emerald-600/30 rounded px-2 py-1 mt-1.5">
+            <div className="text-xs text-gencom-green bg-gencom-greensoft border border-gencom-green/30 rounded px-2 py-1 mt-1.5">
               <b>✓ {preview.property_fields_updated.length} property field{preview.property_fields_updated.length !== 1 ? "s" : ""} auto-populated from the PIP:</b>
               {" "}{preview.property_fields_updated.map((f) => f.replace(/_/g, " ")).join(", ")}
             </div>
@@ -758,7 +758,7 @@ function PreviewReview({
           <button
             onClick={onImport}
             disabled={importing || includedCount === 0}
-            className="px-4 py-1.5 text-xs bg-emerald-700 text-white rounded-md font-semibold hover:bg-emerald-800 disabled:opacity-50"
+            className="px-4 py-1.5 text-xs bg-gencom-green text-white rounded-md font-semibold hover:bg-gencom-greendark disabled:opacity-50"
           >
             {importing ? "Importing…" : `Import ${includedCount} item${includedCount !== 1 ? "s" : ""}`}
           </button>
@@ -797,8 +797,8 @@ function PreviewReview({
                       onClick={() => onPatch(u._id, { _include: true })}
                       className={`text-[10px] px-2 py-0.5 rounded border whitespace-nowrap ${
                         u._include
-                          ? "border-emerald-700 bg-emerald-50 text-emerald-800"
-                          : "border-gencom-sand text-gencom-stone hover:border-emerald-700 hover:text-emerald-700"
+                          ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
+                          : "border-gencom-sand text-gencom-stone hover:border-gencom-green hover:text-gencom-green"
                       }`}
                       title="Keep this item — will be created on import"
                     >
@@ -812,8 +812,8 @@ function PreviewReview({
                         const el = document.getElementById(`preview-row-${u._id}`);
                         if (el) {
                           el.scrollIntoView({ behavior: "smooth", block: "center" });
-                          el.classList.add("ring-2", "ring-emerald-500");
-                          setTimeout(() => el.classList.remove("ring-2", "ring-emerald-500"), 2500);
+                          el.classList.add("ring-2", "ring-gencom-green");
+                          setTimeout(() => el.classList.remove("ring-2", "ring-gencom-green"), 2500);
                         }
                       }}
                       className="text-[10px] px-2 py-0.5 rounded border border-gencom-sand text-gencom-stone hover:border-gencom-ink hover:text-gencom-ink whitespace-nowrap"
@@ -953,7 +953,7 @@ function BreakdownPreviewModal({
                     <label
                       key={idx}
                       className={`flex items-start gap-3 p-3 border rounded-md cursor-pointer transition ${
-                        checked ? "border-emerald-700 bg-emerald-50/40" : "border-gencom-sand hover:border-gencom-stone/50"
+                        checked ? "border-gencom-green bg-gencom-greensoft/40" : "border-gencom-sand hover:border-gencom-stone/50"
                       }`}
                     >
                       <input type="checkbox" checked={checked} onChange={() => onToggle(idx)} className="mt-1" />
@@ -984,7 +984,7 @@ function BreakdownPreviewModal({
           <button
             onClick={onConfirm}
             disabled={state.loading || state.accepted.size === 0}
-            className="px-4 py-1.5 text-sm bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+            className="px-4 py-1.5 text-sm bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
           >
             Replace with {state.accepted.size} item{state.accepted.size !== 1 ? "s" : ""}
           </button>
@@ -1083,7 +1083,7 @@ function PreviewRow({
               onChange={(e) => onPatch(item._id, { sub_area: e.target.value || null })}
               className={`shrink-0 text-[10px] px-1 py-0.5 border rounded ${
                 item.sub_area
-                  ? "border-emerald-700/60 bg-emerald-50/60 text-emerald-800"
+                  ? "border-gencom-green/60 bg-gencom-greensoft/60 text-gencom-green"
                   : "border-gencom-sand bg-white text-gencom-stone"
               }`}
               title="Sub-area (Claude suggested this — edit if needed)"
@@ -1111,7 +1111,7 @@ function PreviewRow({
               className={`shrink-0 text-[10px] px-1.5 py-0.5 rounded border whitespace-nowrap ${
                 looksCompound
                   ? "border-amber-500 bg-amber-50 text-amber-800 hover:bg-amber-100"
-                  : "border-gencom-sand text-gencom-stone hover:border-emerald-700 hover:text-emerald-700"
+                  : "border-gencom-sand text-gencom-stone hover:border-gencom-green hover:text-gencom-green"
               }`}
             >
               🪄 AI break down
@@ -1120,7 +1120,7 @@ function PreviewRow({
               <button
                 onClick={onAddScope}
                 title="Read the PIP narrative below and pull every distinct scope line it calls for."
-                className="shrink-0 text-[10px] px-1.5 py-0.5 rounded border whitespace-nowrap border-emerald-300 bg-emerald-100 text-emerald-900 hover:bg-emerald-200"
+                className="shrink-0 text-[10px] px-1.5 py-0.5 rounded border whitespace-nowrap border-gencom-green/30 bg-gencom-greensoft text-gencom-green hover:bg-gencom-green/20"
               >
                 + Add Scope
               </button>

@@ -1742,7 +1742,7 @@ export default function OrgChartEditor() {
       })()}
 
       {boxAction && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gencom-green text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
           {boxAction.mode === "newBox"
             ? "Click a + on the box edge to add a new box in that direction — Esc to cancel"
             : "Click a + on the box edge to start a connection — Esc to cancel"}
@@ -1838,19 +1838,19 @@ export default function OrgChartEditor() {
       })()}
 
       {connectorDropAction && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gencom-green text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
           Click a box to drop the new connector — Esc to cancel
         </div>
       )}
 
       {resizingBoxId && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gencom-green text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
           Drag any handle to resize — Esc or click outside to finish
         </div>
       )}
 
       {linkPickFrom && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gencom-green text-white text-xs font-semibold px-3 py-2 rounded-md shadow-lg">
           Click any box to connect — Esc to cancel
         </div>
       )}
@@ -1928,14 +1928,14 @@ function SlidePickerModal({
                   className={
                     "w-full text-left px-3 py-2 mx-1 rounded-md text-[13px] flex items-center justify-between transition " +
                     (isRec
-                      ? "bg-emerald-50 text-gencom-ink hover:bg-emerald-100 border border-emerald-200"
+                      ? "bg-gencom-greensoft text-gencom-ink hover:bg-gencom-greensoft border border-gencom-green/20"
                       : "text-gencom-ink hover:bg-gencom-mist border border-transparent")
                   }
                 >
                   <span>
                     Slide {s.index}
                     {isRec && (
-                      <span className="ml-2 text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
+                      <span className="ml-2 text-[10px] font-semibold text-gencom-green uppercase tracking-wider">
                         Recommended
                       </span>
                     )}
@@ -1972,7 +1972,7 @@ function SaveIndicator({ at }: { at: number | null }) {
   if (!at) {
     return (
       <span
-        className="text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded px-2 py-0.5"
+        className="text-[11px] text-gencom-green bg-gencom-greensoft border border-gencom-green/20 rounded px-2 py-0.5"
         title="Every edit you make is auto-saved to this browser. To hand off a copy, use File → Download JSON."
       >
         Auto-save on
@@ -1984,7 +1984,7 @@ function SaveIndicator({ at }: { at: number | null }) {
   const label = sec < 5 ? "just now" : sec < 60 ? `${sec}s ago` : `${Math.round(sec / 60)}m ago`;
   return (
     <span
-      className="text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded px-2 py-0.5"
+      className="text-[11px] text-gencom-green bg-gencom-greensoft border border-gencom-green/20 rounded px-2 py-0.5"
       title="Every edit auto-saves to this browser. File → Download JSON exports a copy."
     >
       Saved · {label}
@@ -2032,7 +2032,7 @@ function BoxContextMenu({
   const w = 180;
   const left = Math.min(window.innerWidth - w - 8, Math.max(8, anchor.x + 8));
   const top = Math.min(window.innerHeight - 240, Math.max(8, anchor.y + 8));
-  const itemCls = "w-full text-left px-3 py-2 hover:bg-emerald-50 transition text-[13px] font-medium text-gencom-ink";
+  const itemCls = "w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition text-[13px] font-medium text-gencom-ink";
   return (
     <div
       ref={ref}
@@ -2130,7 +2130,7 @@ function ConnectorContextMenu({
         type="button"
         role="menuitem"
         onClick={onPickAddNew}
-        className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition text-[13px] font-medium text-gencom-ink"
+        className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition text-[13px] font-medium text-gencom-ink"
       >
         Add new connector
       </button>
@@ -2139,7 +2139,7 @@ function ConnectorContextMenu({
           type="button"
           role="menuitem"
           onClick={onPickAddElbow}
-          className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition border-t border-gencom-sand text-[13px] font-medium text-gencom-ink"
+          className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition border-t border-gencom-sand text-[13px] font-medium text-gencom-ink"
         >
           Add elbow here
         </button>
@@ -2148,7 +2148,7 @@ function ConnectorContextMenu({
         type="button"
         role="menuitem"
         onClick={onPickAddText}
-        className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition border-t border-gencom-sand text-[13px] font-medium text-gencom-ink"
+        className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition border-t border-gencom-sand text-[13px] font-medium text-gencom-ink"
       >
         Add text
       </button>

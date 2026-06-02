@@ -418,7 +418,7 @@ function ConnectorLabelEditor({
               className={
                 "px-3 h-8 capitalize " +
                 (align === a
-                  ? "bg-emerald-700 text-white"
+                  ? "bg-gencom-green text-white"
                   : "text-gencom-stone hover:bg-gencom-mist")
               }
             >
@@ -446,7 +446,7 @@ function ConnectorLabelEditor({
               className={
                 "px-3 h-8 " +
                 (mode === m.key
-                  ? "bg-emerald-700 text-white"
+                  ? "bg-gencom-green text-white"
                   : "text-gencom-stone hover:bg-gencom-mist")
               }
             >
@@ -576,7 +576,7 @@ function MultiConnectorEditor({
                 className={
                   "px-3 h-8 capitalize " +
                   (active
-                    ? "bg-emerald-700 text-white"
+                    ? "bg-gencom-green text-white"
                     : "text-gencom-stone hover:bg-gencom-mist")
                 }
               >
@@ -627,7 +627,7 @@ function MultiConnectorEditor({
             className={
               "h-7 px-3 transition " +
               (canCombine
-                ? "text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800"
+                ? "text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green"
                 : "text-gencom-sand cursor-not-allowed")
             }
             title={canCombine
@@ -639,7 +639,7 @@ function MultiConnectorEditor({
           <button
             type="button"
             onClick={() => onUpdateAll({ manifoldId: undefined })}
-            className="h-7 px-3 border-l border-gencom-sand text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800 transition"
+            className="h-7 px-3 border-l border-gencom-sand text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green transition"
             title="Separate — break the manifold grouping so each connector moves independently again. Each connector keeps its current elbow / endpoint position so the visual layout doesn't jump."
           >
             Separate
@@ -849,8 +849,8 @@ function BoxEditor({
                 className={
                   "h-8 w-10 grid place-items-center transition " +
                   (active
-                    ? "bg-emerald-700 text-white"
-                    : "bg-white text-gencom-ink hover:bg-emerald-50")
+                    ? "bg-gencom-green text-white"
+                    : "bg-white text-gencom-ink hover:bg-gencom-greensoft")
                 }
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -1093,7 +1093,7 @@ function ConnectorEditor({
                   className={
                     "px-3 h-8 capitalize " +
                     ((connector.labelAlign ?? "center") === a
-                      ? "bg-emerald-700 text-white"
+                      ? "bg-gencom-green text-white"
                       : "text-gencom-stone hover:bg-gencom-mist")
                   }
                 >
@@ -1125,7 +1125,7 @@ function ConnectorEditor({
                   className={
                     "px-3 h-8 " +
                     ((connector.labelMode ?? "on-connector") === m.key
-                      ? "bg-emerald-700 text-white"
+                      ? "bg-gencom-green text-white"
                       : "text-gencom-stone hover:bg-gencom-mist")
                   }
                 >
@@ -1151,7 +1151,7 @@ function ConnectorEditor({
               className={
                 "px-3 h-8 capitalize " +
                 (connector.routeStyle === r
-                  ? "bg-emerald-700 text-white"
+                  ? "bg-gencom-green text-white"
                   : "text-gencom-stone hover:bg-gencom-mist")
               }
             >
@@ -1197,7 +1197,7 @@ function ConnectorEditor({
                 onUpdateConnectors(all.map((c) => c.id), patch);
               }
             }}
-            className="text-[11px] h-7 px-3 rounded border border-gencom-sand text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800"
+            className="text-[11px] h-7 px-3 rounded border border-gencom-sand text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green"
             title={`Merge this connector with ${siblings.length} sibling${siblings.length === 1 ? "" : "s"} that share its source or target box into a single trunk`}
           >
             Combine with {siblings.length} sibling{siblings.length === 1 ? "" : "s"}
@@ -1227,8 +1227,8 @@ function ConnectorEditor({
               className={
                 "h-7 px-3 transition " +
                 (connector.axisLock === "horizontal"
-                  ? "bg-emerald-700 text-white"
-                  : "text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800")
+                  ? "bg-gencom-green text-white"
+                  : "text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green")
               }
               aria-pressed={connector.axisLock === "horizontal"}
               title={connector.axisLock === "horizontal"
@@ -1243,8 +1243,8 @@ function ConnectorEditor({
               className={
                 "h-7 px-3 border-l border-gencom-sand transition " +
                 (connector.axisLock === "vertical"
-                  ? "bg-emerald-700 text-white"
-                  : "text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800")
+                  ? "bg-gencom-green text-white"
+                  : "text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green")
               }
               aria-pressed={connector.axisLock === "vertical"}
               title={connector.axisLock === "vertical"
@@ -1273,7 +1273,7 @@ function ConnectorEditor({
                 aria-pressed={active}
                 className={
                   "h-7 px-3 border-l border-gencom-sand first:border-l-0 transition " +
-                  (active ? "bg-emerald-700 text-white" : "text-gencom-ink hover:bg-gencom-mist")
+                  (active ? "bg-gencom-green text-white" : "text-gencom-ink hover:bg-gencom-mist")
                 }
               >
                 {o.label}
@@ -1309,7 +1309,7 @@ function ConnectorEditor({
                   aria-pressed={active}
                   className={
                     "h-7 px-3 border-l border-gencom-sand first:border-l-0 transition " +
-                    (active ? "bg-emerald-700 text-white" : "text-gencom-ink hover:bg-gencom-mist")
+                    (active ? "bg-gencom-green text-white" : "text-gencom-ink hover:bg-gencom-mist")
                   }
                 >
                   {o.label}
@@ -1372,7 +1372,7 @@ function SidePicker({
           className={
             "h-7 px-2 border-l border-gencom-sand first:border-l-0 transition " +
             (value === o.key
-              ? "bg-emerald-700 text-white"
+              ? "bg-gencom-green text-white"
               : "text-gencom-ink hover:bg-gencom-mist")
           }
         >
@@ -1525,8 +1525,8 @@ function MultiBoxEditor({
                 className={
                   "h-8 w-10 grid place-items-center transition " +
                   (active
-                    ? "bg-emerald-700 text-white"
-                    : "bg-white text-gencom-ink hover:bg-emerald-50")
+                    ? "bg-gencom-green text-white"
+                    : "bg-white text-gencom-ink hover:bg-gencom-greensoft")
                 }
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -1604,7 +1604,7 @@ function MultiPalettePicker({
             aria-pressed={isActive}
             className={
               "relative h-7 w-full rounded grid place-items-center transition " +
-              (isActive ? "ring-2 ring-emerald-700 ring-offset-1" : "hover:ring-1 hover:ring-gencom-sand")
+              (isActive ? "ring-2 ring-gencom-green ring-offset-1" : "hover:ring-1 hover:ring-gencom-sand")
             }
             style={{
               background: p.defaults.fillColor,
@@ -1660,7 +1660,7 @@ function PalettePicker({
             aria-pressed={isActive}
             className={
               "relative h-7 w-full rounded grid place-items-center transition " +
-              (isActive ? "ring-2 ring-emerald-700 ring-offset-1" : "hover:ring-1 hover:ring-gencom-sand")
+              (isActive ? "ring-2 ring-gencom-green ring-offset-1" : "hover:ring-1 hover:ring-gencom-sand")
             }
             style={{
               background: p.defaults.fillColor,
@@ -1704,7 +1704,7 @@ function SwatchRow({
               className={
                 "h-6 w-6 rounded border transition " +
                 (isActive
-                  ? "border-emerald-700 ring-2 ring-emerald-700 ring-offset-1"
+                  ? "border-gencom-green ring-2 ring-gencom-green ring-offset-1"
                   : "border-gencom-sand hover:border-gencom-stone")
               }
               style={{ background: c }}

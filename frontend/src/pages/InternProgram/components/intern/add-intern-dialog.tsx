@@ -232,7 +232,7 @@ export function AddInternDialog({
               )}
             </div>
             {parseStats && (
-              <p className="text-[11.5px] text-emerald-700 mt-2">
+              <p className="text-[11.5px] text-gencom-green mt-2">
                 Pre-filled from resume: {parseStats.educations} education{parseStats.educations === 1 ? "" : "s"}, {parseStats.experiences} role{parseStats.experiences === 1 ? "" : "s"}, {parseStats.projects} project{parseStats.projects === 1 ? "" : "s"}.
               </p>
             )}

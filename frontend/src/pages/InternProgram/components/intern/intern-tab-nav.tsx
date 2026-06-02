@@ -91,8 +91,8 @@ export function InternTabNav({ internId }: { internId: string }) {
                 "w-32 py-1.5 text-center text-[10px] uppercase tracking-wider font-semibold transition whitespace-nowrap",
                 i > 0 && "border-l-2 border-gencom-sand",
                 active
-                  ? "bg-emerald-700 text-white"
-                  : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50",
+                  ? "bg-gencom-green text-white"
+                  : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft",
               )}
             >
               {t.label}

@@ -191,7 +191,7 @@ function EmptyState({ onCreate }: { onCreate: () => void }) {
   return (
     <div className="rounded-md border border-dashed border-gencom-sand bg-white py-12 grid place-items-center">
       <div className="text-center max-w-sm">
-        <div className="h-12 w-12 rounded-full bg-emerald-50 text-emerald-700 grid place-items-center mx-auto mb-3">
+        <div className="h-12 w-12 rounded-full bg-gencom-greensoft text-gencom-green grid place-items-center mx-auto mb-3">
           <FileText className="h-5 w-5" />
         </div>
         <div className="t-h3">No projects yet</div>
@@ -233,7 +233,7 @@ function ProjectCard({
   const [dragOver, setDragOver] = useState(false);
   return (
     <div
-      className="orgchart-card group relative rounded-md border border-gencom-sand bg-white hover:border-emerald-700 hover:shadow-md transition cursor-pointer overflow-hidden"
+      className="orgchart-card group relative rounded-md border border-gencom-sand bg-white hover:border-gencom-green hover:shadow-md transition cursor-pointer overflow-hidden"
       onClick={onOpen}
       onDragOver={(e) => {
         if (Array.from(e.dataTransfer.types).includes("Files")) {
@@ -281,7 +281,7 @@ function ProjectCard({
             </div>
           )}
           {dragOver && (
-            <div className="absolute inset-0 grid place-items-center bg-emerald-700/85 text-white text-[11px] font-semibold text-center px-2 pointer-events-none">
+            <div className="absolute inset-0 grid place-items-center bg-gencom-green/85 text-white text-[11px] font-semibold text-center px-2 pointer-events-none">
               Drop image
             </div>
           )}

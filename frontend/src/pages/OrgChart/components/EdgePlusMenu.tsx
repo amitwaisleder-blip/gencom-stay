@@ -62,9 +62,9 @@ export function EdgePlusMenu({
         type="button"
         role="menuitem"
         onClick={onPickNewBox}
-        className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+        className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
       >
-        <BoxIcon className="h-4 w-4 mt-0.5 text-emerald-700 shrink-0" />
+        <BoxIcon className="h-4 w-4 mt-0.5 text-gencom-green shrink-0" />
         <span className="flex-1">
           <span className="block text-[13px] font-semibold text-gencom-ink">New box</span>
           <span className="block text-[11px] text-gencom-stone leading-snug">Add and link a fresh box in this direction.</span>
@@ -74,9 +74,9 @@ export function EdgePlusMenu({
         type="button"
         role="menuitem"
         onClick={onPickConnectExisting}
-        className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+        className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
       >
-        <Link2 className="h-4 w-4 mt-0.5 text-emerald-700 shrink-0" />
+        <Link2 className="h-4 w-4 mt-0.5 text-gencom-green shrink-0" />
         <span className="flex-1">
           <span className="block text-[13px] font-semibold text-gencom-ink">Connect to existing</span>
           <span className="block text-[11px] text-gencom-stone leading-snug">Click any other box to draw a line.</span>
@@ -86,9 +86,9 @@ export function EdgePlusMenu({
         type="button"
         role="menuitem"
         onClick={onPickResize}
-        className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+        className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
       >
-        <Move className="h-4 w-4 mt-0.5 text-emerald-700 shrink-0" />
+        <Move className="h-4 w-4 mt-0.5 text-gencom-green shrink-0" />
         <span className="flex-1">
           <span className="block text-[13px] font-semibold text-gencom-ink">Resize</span>
           <span className="block text-[11px] text-gencom-stone leading-snug">Drag any edge or corner to adjust dimensions.</span>

@@ -138,11 +138,11 @@ export function EntityBox({
       className={
         "absolute group select-none transition-shadow " +
         (isLinkTarget || isLinkPickTarget
-          ? "ring-4 ring-emerald-500 ring-offset-2 ring-offset-transparent shadow-lg"
+          ? "ring-4 ring-gencom-green ring-offset-2 ring-offset-transparent shadow-lg"
           : selected
-          ? "ring-2 ring-emerald-700 ring-offset-2 ring-offset-transparent shadow-md"
+          ? "ring-2 ring-gencom-green ring-offset-2 ring-offset-transparent shadow-md"
           : multiSelected
-          ? "ring-2 ring-emerald-600 ring-offset-2 ring-offset-transparent shadow-md"
+          ? "ring-2 ring-gencom-green ring-offset-2 ring-offset-transparent shadow-md"
           : "hover:shadow-md")
       }
       style={{
@@ -223,7 +223,7 @@ export function EntityBox({
                 cancelRename();
               }
             }}
-            className="w-full bg-white/90 border border-emerald-700 rounded px-1 outline-none"
+            className="w-full bg-white/90 border border-gencom-green rounded px-1 outline-none"
             style={{
               color: box.textColor,
               fontFamily: box.fontFamily || "'Cormorant Garamond', Georgia, serif",
@@ -341,7 +341,7 @@ function EdgePlus({ edge, onClick }: { edge: Edge; onClick: (anchor: { x: number
       title={`${edge} — add box or connect`}
       aria-label={`${edge} edge — add box or connect to an existing one`}
       className={
-        "absolute h-5 w-5 rounded-full bg-emerald-700 text-white text-xs leading-none grid place-items-center shadow-sm opacity-0 group-hover:opacity-100 transition " +
+        "absolute h-5 w-5 rounded-full bg-gencom-green text-white text-xs leading-none grid place-items-center shadow-sm opacity-0 group-hover:opacity-100 transition " +
         pos[edge]
       }
     >

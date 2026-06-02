@@ -124,7 +124,7 @@ export default function IssuesBell() {
                       <a
                         href={issue.link}
                         onClick={() => setOpen(false)}
-                        className="text-xs text-emerald-700 hover:underline inline-block mt-0.5"
+                        className="text-xs text-gencom-green hover:underline inline-block mt-0.5"
                       >
                         {issue.linkLabel} →
                       </a>

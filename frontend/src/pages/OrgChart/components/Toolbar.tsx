@@ -298,7 +298,7 @@ function ExportMenu({
         type="button"
         onClick={() => setOpen((v) => !v)}
         title="Export — print, .pptx, or HTML"
-        className="inline-flex items-center gap-1.5 h-9 px-3 text-xs font-semibold rounded-md bg-emerald-700 text-white hover:bg-emerald-800 transition"
+        className="inline-flex items-center gap-1.5 h-9 px-3 text-xs font-semibold rounded-md bg-gencom-green text-white hover:bg-gencom-greendark transition"
       >
         <Upload className="h-4 w-4" />
         Export
@@ -314,7 +314,7 @@ function ExportMenu({
             type="button"
             role="menuitem"
             onClick={() => { setOpen(false); onPrint(); }}
-            className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-2"
+            className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-2"
           >
             <Printer className="h-4 w-4 mt-0.5 flex-shrink-0 text-gencom-stone" />
             <span>
@@ -326,7 +326,7 @@ function ExportMenu({
             type="button"
             role="menuitem"
             onClick={() => { setOpen(false); onExportPptx(); }}
-            className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-2 border-t border-gencom-sand"
+            className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-2 border-t border-gencom-sand"
           >
             <Presentation className="h-4 w-4 mt-0.5 flex-shrink-0 text-gencom-stone" />
             <span>
@@ -338,7 +338,7 @@ function ExportMenu({
             type="button"
             role="menuitem"
             onClick={() => { setOpen(false); onExportHtml(); }}
-            className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-2 border-t border-gencom-sand"
+            className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-2 border-t border-gencom-sand"
           >
             <Code2 className="h-4 w-4 mt-0.5 flex-shrink-0 text-gencom-stone" />
             <span>
@@ -387,7 +387,7 @@ function SegButton({
       className={
         "seg-button h-9 px-3 inline-flex items-center gap-1.5 text-[12px] border-l border-gencom-sand first:border-l-0 transition " +
         (emphasis
-          ? "bg-emerald-700 text-white hover:bg-emerald-800"
+          ? "bg-gencom-green text-white hover:bg-gencom-greendark"
           : "text-gencom-ink hover:bg-gencom-mist")
       }
     >
@@ -481,31 +481,31 @@ function FileMenuButton({
         >
           <FileMenuItem
             onClick={() => pick(onNew)}
-            icon={<FilePlus className="h-4 w-4 text-emerald-700" />}
+            icon={<FilePlus className="h-4 w-4 text-gencom-green" />}
             title="New"
             subtitle="Reset the chart to a fresh seed (current edits are auto-saved as a separate project from the home screen)."
           />
           <FileMenuItem
             onClick={() => pick(onOpen)}
-            icon={<FileUp className="h-4 w-4 text-emerald-700" />}
+            icon={<FileUp className="h-4 w-4 text-gencom-green" />}
             title="Open"
             subtitle="Open a saved Org Chart JSON file (Cmd/Ctrl+O)."
           />
           <FileMenuItem
             onClick={() => pick(onDownloadJson)}
-            icon={<FileDown className="h-4 w-4 text-emerald-700" />}
+            icon={<FileDown className="h-4 w-4 text-gencom-green" />}
             title="Download JSON"
             subtitle="Save a JSON copy for handoff or backup."
           />
           <FileMenuItem
             onClick={() => pick(onImportPptx)}
-            icon={<Presentation className="h-4 w-4 text-emerald-700" />}
+            icon={<Presentation className="h-4 w-4 text-gencom-green" />}
             title="Import .pptx"
             subtitle="Load an existing org chart from PowerPoint."
           />
           <FileMenuItem
             onClick={() => { if (!sketchBusy) pick(onImportSketch); }}
-            icon={<ImageDown className="h-4 w-4 text-emerald-700" />}
+            icon={<ImageDown className="h-4 w-4 text-gencom-green" />}
             title={sketchBusy ? "Reading sketch…" : "Import sketch"}
             subtitle="PDF or image of a hand-drawn chart — Claude reconstructs the layout."
             disabled={sketchBusy}
@@ -529,7 +529,7 @@ function FileMenuItem({
         "w-full text-left px-3 py-2 transition flex items-start gap-3 " +
         (disabled
           ? "opacity-50 cursor-not-allowed"
-          : "hover:bg-emerald-50")
+          : "hover:bg-gencom-greensoft")
       }
     >
       <span className="mt-0.5 shrink-0">{icon}</span>
@@ -554,7 +554,7 @@ function SegToggle({
       className={
         "seg-button h-9 px-3.5 inline-flex items-center text-[11px] font-bold tracking-wider border-l border-gencom-sand first:border-l-0 transition " +
         (active
-          ? "bg-emerald-700 text-white"
+          ? "bg-gencom-green text-white"
           : "text-gencom-ink hover:bg-gencom-mist")
       }
     >

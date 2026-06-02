@@ -187,7 +187,7 @@ export function NewProjectModal({
               type="button"
               onClick={() => photoInputRef.current?.click()}
               disabled={photoBusy}
-              className="h-12 w-16 shrink-0 rounded border border-dashed border-gencom-sand grid place-items-center text-gencom-stone hover:border-emerald-700 hover:text-emerald-700 transition disabled:opacity-50"
+              className="h-12 w-16 shrink-0 rounded border border-dashed border-gencom-sand grid place-items-center text-gencom-stone hover:border-gencom-green hover:text-gencom-green transition disabled:opacity-50"
               title="Add property photo"
             >
               {photoBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />}
@@ -218,7 +218,7 @@ export function NewProjectModal({
                 type="button"
                 onClick={handleLookup}
                 disabled={lookupBusy || !hotelName.trim()}
-                className="text-[10px] uppercase tracking-wider font-semibold text-emerald-700 hover:text-emerald-800 disabled:text-gencom-stone/50 disabled:cursor-not-allowed inline-flex items-center gap-1 whitespace-nowrap"
+                className="text-[10px] uppercase tracking-wider font-semibold text-gencom-green hover:text-gencom-green disabled:text-gencom-stone/50 disabled:cursor-not-allowed inline-flex items-center gap-1 whitespace-nowrap"
                 title="Use Claude to auto-fill address, keys, year built"
               >
                 {lookupBusy ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
@@ -252,7 +252,7 @@ export function NewProjectModal({
                 <p className="text-[11px] text-gencom-stone">
                   AI confidence:{" "}
                   <span className={
-                    confidence === "high"   ? "text-emerald-700 font-semibold" :
+                    confidence === "high"   ? "text-gencom-green font-semibold" :
                     confidence === "medium" ? "text-amber-700 font-semibold"   :
                                               "text-red-700 font-semibold"
                   }>
@@ -296,8 +296,8 @@ export function NewProjectModal({
                   className={
                     "text-left px-3 py-1.5 rounded border transition " +
                     (structure === s.key
-                      ? "border-emerald-700 bg-emerald-50/60 ring-1 ring-emerald-700"
-                      : "border-gencom-sand hover:border-emerald-700/40")
+                      ? "border-gencom-green bg-gencom-greensoft/60 ring-1 ring-gencom-green"
+                      : "border-gencom-sand hover:border-gencom-green/40")
                   }
                 >
                   <div className="text-[12.5px] font-semibold text-gencom-ink leading-tight">{s.label}</div>
@@ -319,7 +319,7 @@ export function NewProjectModal({
                     title={`${t.label} — ${t.description}`}
                     className={
                       "h-6 w-6 rounded transition " +
-                      (active ? "ring-2 ring-emerald-700 ring-offset-1" : "hover:ring-1 hover:ring-emerald-700/40")
+                      (active ? "ring-2 ring-gencom-green ring-offset-1" : "hover:ring-1 hover:ring-gencom-green/40")
                     }
                     style={{
                       background: t.defaults.fillColor,

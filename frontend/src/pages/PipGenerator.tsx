@@ -435,7 +435,7 @@ export default function PipGenerator() {
                         {idx + 1}
                       </span>
                       <span className="truncate">{qi.short || qi.title}</span>
-                      {answered && idx !== step && <span className="ml-auto text-emerald-600">✓</span>}
+                      {answered && idx !== step && <span className="ml-auto text-gencom-green">✓</span>}
                     </button>
                   </li>
                 );
@@ -501,7 +501,7 @@ export default function PipGenerator() {
                     <button
                       onClick={runScopeRecommend}
                       disabled={!!aiBusy.q10}
-                      className="px-3 py-1 rounded bg-emerald-700 text-white font-semibold hover:bg-emerald-800 disabled:opacity-60"
+                      className="px-3 py-1 rounded bg-gencom-green text-white font-semibold hover:bg-gencom-greendark disabled:opacity-60"
                     >
                       {aiBusy.q10 ? "Thinking…" : "💡 Recommend scope"}
                     </button>
@@ -604,7 +604,7 @@ export default function PipGenerator() {
             <button
               onClick={importToBudget}
               disabled={importing}
-              className="px-4 py-2 bg-emerald-700 text-white rounded-md font-semibold uppercase tracking-wider text-sm hover:bg-emerald-800 disabled:opacity-60"
+              className="px-4 py-2 bg-gencom-green text-white rounded-md font-semibold uppercase tracking-wider text-sm hover:bg-gencom-greendark disabled:opacity-60"
             >
               {importing ? "Creating…" : "→ Import into Budget Generator"}
             </button>

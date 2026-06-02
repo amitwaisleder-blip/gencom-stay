@@ -1511,7 +1511,7 @@ export const Canvas = forwardRef<CanvasHandle, {
             <>
               {/* Highlight outline for the resizing box. */}
               <div
-                className="absolute pointer-events-none border-2 border-emerald-500 rounded"
+                className="absolute pointer-events-none border-2 border-gencom-green rounded"
                 style={{
                   left: b.x - 2,
                   top: b.y - 2,
@@ -1524,7 +1524,7 @@ export const Canvas = forwardRef<CanvasHandle, {
                   key={hh.h}
                   onPointerDown={(e) => startResizeDrag(b.id, hh.h, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute bg-white border-2 border-emerald-700 rounded-sm shadow"
+                  className="absolute bg-white border-2 border-gencom-green rounded-sm shadow"
                   style={{
                     left: hh.cx - sizeWorld / 2,
                     top: hh.cy - sizeWorld / 2,
@@ -1580,7 +1580,7 @@ export const Canvas = forwardRef<CanvasHandle, {
                   key={"grp-" + hh.h}
                   onPointerDown={(e) => startGroupResizeDrag(hh.h, e)}
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute bg-white border-2 border-emerald-700 rounded-sm shadow"
+                  className="absolute bg-white border-2 border-gencom-green rounded-sm shadow"
                   style={{
                     left: hh.cx - sizeWorld / 2,
                     top: hh.cy - sizeWorld / 2,
@@ -1621,11 +1621,11 @@ export const Canvas = forwardRef<CanvasHandle, {
             style={{ left: screenX, top: screenY }}
             onPointerDown={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-1 bg-white rounded-md border border-emerald-700 shadow-lg p-1">
+            <div className="flex items-center gap-1 bg-white rounded-md border border-gencom-green shadow-lg p-1">
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); multiActions.onConnect(); }}
-                className="text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded px-2.5 py-1.5 inline-flex items-center gap-1"
+                className="text-xs font-semibold text-white bg-gencom-green hover:bg-gencom-greendark rounded px-2.5 py-1.5 inline-flex items-center gap-1"
                 title="Chain selected boxes — first becomes parent of the rest"
               >
                 Connect
@@ -1633,7 +1633,7 @@ export const Canvas = forwardRef<CanvasHandle, {
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); multiActions.onBuildHierarchy(); }}
-                className="text-xs font-semibold text-emerald-800 hover:bg-emerald-50 rounded px-2.5 py-1.5"
+                className="text-xs font-semibold text-gencom-green hover:bg-gencom-greensoft rounded px-2.5 py-1.5"
                 title="Snap selected boxes to a clean grid; infer parent/child by row"
               >
                 Build hierarchy
@@ -1697,7 +1697,7 @@ export const Canvas = forwardRef<CanvasHandle, {
                 type="button"
                 onClick={(e) => { e.stopPropagation(); multiActions.onGroup(); }}
                 title="Group — selected boxes move/resize/align as a unit (Ctrl+G)"
-                className="text-[10px] font-semibold text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800 rounded px-2 h-7"
+                className="text-[10px] font-semibold text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green rounded px-2 h-7"
               >
                 Group
               </button>
@@ -1705,7 +1705,7 @@ export const Canvas = forwardRef<CanvasHandle, {
                 type="button"
                 onClick={(e) => { e.stopPropagation(); multiActions.onUngroup(); }}
                 title="Ungroup — break the group so boxes act independently again (Ctrl+Shift+G)"
-                className="text-[10px] font-semibold text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800 rounded px-2 h-7"
+                className="text-[10px] font-semibold text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green rounded px-2 h-7"
               >
                 Ungroup
               </button>
@@ -1719,7 +1719,7 @@ export const Canvas = forwardRef<CanvasHandle, {
                 className={
                   "text-[10px] font-semibold rounded px-2 h-7 " +
                   (multiActions.hasPaperSize
-                    ? "text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800"
+                    ? "text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green"
                     : "text-gencom-sand cursor-not-allowed")
                 }
               >
@@ -2587,7 +2587,7 @@ function MatchSizeDropdown({
         title={titleHint}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="text-[10px] font-semibold text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800 rounded px-2 h-7 inline-flex items-center gap-1"
+        className="text-[10px] font-semibold text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green rounded px-2 h-7 inline-flex items-center gap-1"
       >
         {icon}
         {label}
@@ -2606,7 +2606,7 @@ function MatchSizeDropdown({
             type="button"
             role="menuitem"
             onClick={(e) => { e.stopPropagation(); pick("largest"); }}
-            className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition"
+            className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition"
           >
             <span className="block text-[13px] font-semibold text-gencom-ink">Match largest</span>
             <span className="block text-[11px] text-gencom-stone leading-snug">Grow every selected box to the {subjectLargest}.</span>
@@ -2615,7 +2615,7 @@ function MatchSizeDropdown({
             type="button"
             role="menuitem"
             onClick={(e) => { e.stopPropagation(); pick("smallest"); }}
-            className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition"
+            className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition"
           >
             <span className="block text-[13px] font-semibold text-gencom-ink">Match smallest</span>
             <span className="block text-[11px] text-gencom-stone leading-snug">Shrink every selected box to the {subjectSmallest}.</span>
@@ -2641,7 +2641,7 @@ function AlignButton({
         "h-7 w-7 grid place-items-center rounded transition " +
         (disabled
           ? "text-gencom-sand cursor-not-allowed"
-          : "text-gencom-ink hover:bg-emerald-50 hover:text-emerald-800")
+          : "text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green")
       }
     >
       {icon}
