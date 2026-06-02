@@ -718,7 +718,7 @@ function SuggestionsModal({
               <button
                 onClick={handleFixAll}
                 disabled={fixAllRunning || busyIdx !== null}
-                className="text-xs px-3 py-1 rounded bg-emerald-700 text-white font-semibold hover:bg-emerald-800 disabled:opacity-60"
+                className="text-xs px-3 py-1 rounded bg-gencom-green text-white font-semibold hover:bg-gencom-greendark disabled:opacity-60"
                 title="Apply every suggestion that has enough data to act on"
               >
                 {fixAllRunning ? "Fixing…" : `Fix all (${fixableCount})`}
@@ -751,7 +751,7 @@ function SuggestionsModal({
             </div>
           )}
           {!loading && !error && suggestions && suggestions.length === 0 && (
-            <div className="text-sm text-emerald-800 border border-emerald-300 bg-emerald-50 rounded p-3">
+            <div className="text-sm text-gencom-green border border-gencom-green/30 bg-gencom-greensoft rounded p-3">
               ✓ No suggestions — your scope looks complete and consistent for this property.
             </div>
           )}
@@ -769,7 +769,7 @@ function SuggestionsModal({
                             {KIND_ICONS[s.kind]} {KIND_LABELS[s.kind] ?? s.kind}
                           </span>
                           <span className="font-medium">{s.title}</span>
-                          {applied && <span className="text-[10px] uppercase tracking-wider text-emerald-800">✓ Applied</span>}
+                          {applied && <span className="text-[10px] uppercase tracking-wider text-gencom-green">✓ Applied</span>}
                         </div>
                         <div className="mt-1 text-gencom-ink/90">{s.detail}</div>
                         {(s.suggested_line_item || s.suggested_division || s.suggested_quantity) && (
@@ -788,7 +788,7 @@ function SuggestionsModal({
                           <button
                             onClick={() => handleFix(i)}
                             disabled={busyIdx === i || fixAllRunning}
-                            className="text-[11px] px-2 py-1 rounded bg-emerald-700 text-white font-semibold hover:bg-emerald-800 disabled:opacity-60"
+                            className="text-[11px] px-2 py-1 rounded bg-gencom-green text-white font-semibold hover:bg-gencom-greendark disabled:opacity-60"
                           >
                             {busyIdx === i ? "…" : FIX_LABELS[s.kind]}
                           </button>

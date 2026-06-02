@@ -268,7 +268,7 @@ export default function BudgetSummary() {
         </div>
       </div>
       {property.soft_costs_synced !== false && (
-        <div className="mb-4 text-xs text-emerald-800 bg-emerald-50 border border-emerald-600/40 rounded px-3 py-1.5">
+        <div className="mb-4 text-xs text-gencom-green bg-gencom-greensoft border border-gencom-green/40 rounded px-3 py-1.5">
           Soft costs are <b>synced</b> across Required Only / Required + Recommended / Full Scope. Any edit you make on one scenario updates the others. Uncheck the box above to edit each scenario independently.
         </div>
       )}
@@ -277,7 +277,7 @@ export default function BudgetSummary() {
         <div className="mb-3 text-xs text-gencom-stone">
           {hiddenScenarios.size} budget version{hiddenScenarios.size !== 1 ? "s" : ""} greyed out ·
           {" "}
-          <button onClick={() => setHiddenScenarios(new Set())} className="text-emerald-700 hover:underline">
+          <button onClick={() => setHiddenScenarios(new Set())} className="text-gencom-green hover:underline">
             reset all
           </button>
         </div>
@@ -409,13 +409,13 @@ export default function BudgetSummary() {
                       <div className="mt-2 flex gap-3 text-xs items-center relative">
                         <button
                           onClick={() => addBlankLine(s, group)}
-                          className="text-emerald-700 hover:underline"
+                          className="text-gencom-green hover:underline"
                         >
                           + Blank line
                         </button>
                         <button
                           onClick={() => setPresetMenuFor(presetMenuFor === `${s.id}:${group}` ? null : `${s.id}:${group}`)}
-                          className="text-emerald-700 hover:underline"
+                          className="text-gencom-green hover:underline"
                         >
                           + From presets
                         </button>
@@ -565,7 +565,7 @@ function SoftCostRow({
           <button
             type="button"
             onClick={onToggleBasis}
-            className={`flex-shrink-0 text-[10px] underline decoration-dotted ${basisOpen ? "text-emerald-700" : "text-gencom-stone hover:text-emerald-700"}`}
+            className={`flex-shrink-0 text-[10px] underline decoration-dotted ${basisOpen ? "text-gencom-green" : "text-gencom-stone hover:text-gencom-green"}`}
             title="Edit what this line is a percentage of"
           >
             basis
@@ -658,7 +658,7 @@ function SoftCostRow({
                       }}
                       className={`px-2 py-0.5 rounded-md border transition ${
                         on
-                          ? "border-emerald-700 bg-emerald-50 text-emerald-800"
+                          ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
                           : "border-gencom-sand bg-white hover:border-gencom-ink/40"
                       }`}
                     >
@@ -704,14 +704,14 @@ function SoftCostRow({
                 <div className="pl-5 flex gap-2 mt-1">
                   <button
                     type="button"
-                    className="text-emerald-700 hover:underline"
+                    className="text-gencom-green hover:underline"
                     onClick={() => onChange({ basis_divisions: allDivisions })}
                   >
                     all
                   </button>
                   <button
                     type="button"
-                    className="text-emerald-700 hover:underline"
+                    className="text-gencom-green hover:underline"
                     onClick={() => onChange({ basis_divisions: allDivisions.filter((d) => !d.toUpperCase().includes("DEFERRED")) })}
                   >
                     all ex-DM
@@ -755,7 +755,7 @@ function SoftCostRow({
               </div>
               <div className="flex gap-2 mt-1">
                 <button
-                  className="text-emerald-700 hover:underline"
+                  className="text-gencom-green hover:underline"
                   onClick={() => onChange({ basis_soft_lines: compoundableLines.map((l) => l.name) })}
                 >
                   select all
@@ -901,7 +901,7 @@ function PresetEditor({
             <button onClick={onClose} className="px-3 py-1.5 border border-gencom-sand rounded hover:bg-gencom-mist">
               Cancel
             </button>
-            <button onClick={save} className="px-3 py-1.5 bg-emerald-700 text-white rounded hover:bg-emerald-800">
+            <button onClick={save} className="px-3 py-1.5 bg-gencom-green text-white rounded hover:bg-gencom-greendark">
               Save
             </button>
           </div>
@@ -961,7 +961,7 @@ function PresetEditor({
           ))}
           <button
             onClick={addNew}
-            className="mt-2 w-full px-3 py-1.5 border border-dashed border-gencom-sand rounded text-emerald-700 hover:bg-gencom-mist"
+            className="mt-2 w-full px-3 py-1.5 border border-dashed border-gencom-sand rounded text-gencom-green hover:bg-gencom-mist"
           >
             + Add new preset
           </button>

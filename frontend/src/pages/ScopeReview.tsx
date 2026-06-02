@@ -249,8 +249,8 @@ export default function ScopeReview() {
       const el = document.getElementById(`item-${itemId}`);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.classList.add("ring-2", "ring-emerald-500");
-        setTimeout(() => el.classList.remove("ring-2", "ring-emerald-500"), 2500);
+        el.classList.add("ring-2", "ring-gencom-green");
+        setTimeout(() => el.classList.remove("ring-2", "ring-gencom-green"), 2500);
       }
     }, 150);
   }, [location.hash, items]);
@@ -575,7 +575,7 @@ export default function ScopeReview() {
         // the warnings.
         if (verdict.level === "ok" && flaggedCount === 0) return null;
         const styles = {
-          ok: "bg-emerald-50 border-emerald-600/40 text-emerald-900",
+          ok: "bg-gencom-greensoft border-gencom-green/40 text-gencom-green",
           info: "bg-gencom-mist/50 border-gencom-sand text-gencom-ink",
           warn: "bg-amber-50 border-amber-400 text-amber-900",
           alert: "bg-red-50 border-red-400 text-red-900",
@@ -711,8 +711,8 @@ export default function ScopeReview() {
                               const el = document.getElementById(`item-${it.id}`);
                               if (el) {
                                 el.scrollIntoView({ behavior: "smooth", block: "center" });
-                                el.classList.add("ring-2", "ring-emerald-500");
-                                setTimeout(() => el.classList.remove("ring-2", "ring-emerald-500"), 2500);
+                                el.classList.add("ring-2", "ring-gencom-green");
+                                setTimeout(() => el.classList.remove("ring-2", "ring-gencom-green"), 2500);
                               }
                             }, 100);
                           }}
@@ -723,7 +723,7 @@ export default function ScopeReview() {
                         </button>
                         <button
                           onClick={() => acknowledgeCostFlag(it.id)}
-                          className="text-[10px] px-1.5 py-0.5 rounded border border-emerald-600 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 whitespace-nowrap"
+                          className="text-[10px] px-1.5 py-0.5 rounded border border-gencom-green bg-gencom-greensoft text-gencom-green hover:bg-gencom-greensoft whitespace-nowrap"
                           title="Accept this cost — dismisses the warning but keeps the item unchanged. Stored per-device."
                         >
                           ✓ accept
@@ -758,7 +758,7 @@ export default function ScopeReview() {
 
       {/* Extraction result banner */}
       {extractState.result && !extractState.running && (
-        <div className="mb-4 bg-emerald-50 border border-emerald-600/40 rounded-md p-3 text-sm flex items-start justify-between gap-3">
+        <div className="mb-4 bg-gencom-greensoft border border-gencom-green/40 rounded-md p-3 text-sm flex items-start justify-between gap-3">
           <div>
             <div className="font-medium">
               ✓ Extraction complete · {extractState.result.duration_seconds.toFixed(1)}s
@@ -893,7 +893,7 @@ export default function ScopeReview() {
             </div>
             <button
               onClick={() => navigate(`/properties/${propertyId}/summary`)}
-              className="px-3 py-1.5 bg-emerald-700 text-white rounded-md font-semibold uppercase tracking-wider text-xs hover:bg-emerald-800"
+              className="px-3 py-1.5 bg-gencom-green text-white rounded-md font-semibold uppercase tracking-wider text-xs hover:bg-gencom-greendark"
             >Summary →</button>
             <button
               onClick={() => setActionsOpen((v) => !v)}
@@ -1063,7 +1063,7 @@ export default function ScopeReview() {
                       </div>
                       <button
                         onClick={() => acknowledgeCostFlag(selectedItem.id)}
-                        className="shrink-0 text-[10px] px-2 py-0.5 rounded border border-emerald-600 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 whitespace-nowrap self-start"
+                        className="shrink-0 text-[10px] px-2 py-0.5 rounded border border-gencom-green bg-gencom-greensoft text-gencom-green hover:bg-gencom-greensoft whitespace-nowrap self-start"
                         title="Accept this cost"
                       >✓ accept</button>
                     </div>
@@ -1419,7 +1419,7 @@ export default function ScopeReview() {
                                   {expanded && (
                                     <button
                                       onClick={(e) => { e.stopPropagation(); acknowledgeCostFlag(item.id); }}
-                                      className="text-[9px] leading-none px-1 py-[1px] border border-emerald-500 bg-emerald-50 text-emerald-700 rounded hover:bg-emerald-100"
+                                      className="text-[9px] leading-none px-1 py-[1px] border border-gencom-green bg-gencom-greensoft text-gencom-green rounded hover:bg-gencom-greensoft"
                                       title="Accept this cost — dismisses the warning on this row"
                                     >
                                       ✓
@@ -1650,7 +1650,7 @@ function BatchCostModal({
               <div className="flex gap-2 text-xs">
                 <button
                   onClick={() => setSelectedDivs(new Set(availableDivisions))}
-                  className="text-emerald-700 hover:underline"
+                  className="text-gencom-green hover:underline"
                 >
                   all
                 </button>
@@ -1708,7 +1708,7 @@ function BatchCostModal({
           </div>
 
           {result && (
-            <div className="p-3 bg-emerald-50 border border-emerald-600/40 rounded text-sm">
+            <div className="p-3 bg-gencom-greensoft border border-gencom-green/40 rounded text-sm">
               <div className="font-medium">✓ Updated {result.updated} of {result.total} items</div>
               {result.skipped > 0 && (
                 <div className="text-xs text-gencom-stone mt-0.5">{result.skipped} items couldn't be costed (no match and/or AI failed).</div>
@@ -1745,7 +1745,7 @@ function BatchCostModal({
               <button
                 onClick={run}
                 disabled={running || candidateCount === 0}
-                className="px-4 py-1.5 text-sm bg-emerald-700 text-white rounded font-semibold hover:bg-emerald-800 disabled:opacity-50"
+                className="px-4 py-1.5 text-sm bg-gencom-green text-white rounded font-semibold hover:bg-gencom-greendark disabled:opacity-50"
               >
                 {running ? "Running…" : `Auto-populate ${candidateCount}`}
               </button>
@@ -1753,7 +1753,7 @@ function BatchCostModal({
             {result && (
               <button
                 onClick={() => onDone()}
-                className="px-4 py-1.5 text-sm bg-emerald-700 text-white rounded font-semibold hover:bg-emerald-800"
+                className="px-4 py-1.5 text-sm bg-gencom-green text-white rounded font-semibold hover:bg-gencom-greendark"
               >
                 Done · reload scope
               </button>
@@ -1804,7 +1804,7 @@ function BreakdownModal({
                     <label
                       key={idx}
                       className={`flex items-start gap-3 p-3 border rounded-md cursor-pointer transition ${
-                        checked ? "border-emerald-700 bg-emerald-50/40" : "border-gencom-sand hover:border-gencom-stone/50"
+                        checked ? "border-gencom-green bg-gencom-greensoft/40" : "border-gencom-sand hover:border-gencom-stone/50"
                       }`}
                     >
                       <input
@@ -1849,7 +1849,7 @@ function BreakdownModal({
           <button
             onClick={onConfirm}
             disabled={state.loading || state.accepted.size === 0}
-            className="px-4 py-1.5 text-sm bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+            className="px-4 py-1.5 text-sm bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
           >
             Replace with {state.accepted.size} item{state.accepted.size !== 1 ? "s" : ""}
           </button>
@@ -1908,7 +1908,7 @@ function DivisionPicker({
       onClick={(e) => e.stopPropagation()}
       onChange={(e) => onSave(e.target.value)}
       title={`Category: ${value} — click to move this item to a different category`}
-      className="shrink-0 text-[9px] px-1 py-0.5 border rounded border-gencom-ink/30 bg-white uppercase tracking-tight cursor-pointer hover:border-emerald-700 max-w-[96px]"
+      className="shrink-0 text-[9px] px-1 py-0.5 border rounded border-gencom-ink/30 bg-white uppercase tracking-tight cursor-pointer hover:border-gencom-green max-w-[96px]"
     >
       {options.map((d) => (
         <option key={d} value={d}>{DIV_SHORT_LABELS[d] ?? d}</option>
@@ -1969,7 +1969,7 @@ function SubAreaPicker({
       title={value ? `Sub-area: ${value} — click to change` : "Sub-area — click to pick or type a custom value"}
       className={`shrink-0 text-[9px] px-1 py-0.5 border rounded cursor-pointer max-w-[96px] uppercase tracking-tight ${
         value
-          ? "border-emerald-700/60 bg-emerald-50/60 text-emerald-800"
+          ? "border-gencom-green/60 bg-gencom-greensoft/60 text-gencom-green"
           : "border-gencom-sand bg-white text-gencom-stone hover:border-gencom-stone/50"
       }`}
     >
@@ -2077,7 +2077,7 @@ function InlineSelect<T extends string>({
       value={value}
       onChange={(e) => onSave(e.target.value as T)}
       onClick={(e) => e.stopPropagation()}
-      className="w-full text-[10px] px-1 py-0.5 border rounded border-gencom-ink/30 bg-white uppercase tracking-tight cursor-pointer hover:border-emerald-700"
+      className="w-full text-[10px] px-1 py-0.5 border rounded border-gencom-ink/30 bg-white uppercase tracking-tight cursor-pointer hover:border-gencom-green"
       title={`Unit: ${value}`}
     >
       {options.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -2215,7 +2215,7 @@ function UnitCostCell({
                 <button
                   key={m.cost_db_item_id}
                   onClick={() => { onOverride(m.suggested_cost); setPopover(null); }}
-                  className="w-full text-left p-2 border border-gencom-sand rounded hover:border-emerald-700 hover:bg-emerald-50/40 transition"
+                  className="w-full text-left p-2 border border-gencom-sand rounded hover:border-gencom-green hover:bg-gencom-greensoft/40 transition"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs font-medium truncate">{m.item_name}</div>
@@ -2245,7 +2245,7 @@ function UnitCostCell({
               <div className="text-xs text-gencom-stone">{aiResult.explanation}</div>
               <button
                 onClick={() => { onOverride(aiResult.suggested_cost); setPopover(null); }}
-                className="w-full mt-1 px-3 py-1.5 bg-emerald-700 text-white rounded text-xs hover:bg-emerald-800"
+                className="w-full mt-1 px-3 py-1.5 bg-gencom-green text-white rounded text-xs hover:bg-gencom-greendark"
               >
                 Use this estimate
               </button>
@@ -2344,8 +2344,8 @@ function QuickAddPanel(props: {
                   onClick={() => setActiveArea(d)}
                   className={`px-3 py-1.5 text-xs rounded-md border transition ${
                     isActive
-                      ? "border-emerald-700 bg-emerald-700 text-white"
-                      : "border-gencom-sand bg-white hover:border-emerald-700/40"
+                      ? "border-gencom-green bg-gencom-green text-white"
+                      : "border-gencom-sand bg-white hover:border-gencom-green/40"
                   }`}
                 >
                   {d} <span className="opacity-60">({count})</span>
@@ -2407,7 +2407,7 @@ function QuickAddPanel(props: {
                           className={`group px-3 py-1.5 text-xs rounded-md border transition text-left ${
                             disabled
                               ? "border-gencom-sand/50 bg-gencom-mist/30 text-gencom-stone cursor-not-allowed"
-                              : "border-gencom-sand bg-white hover:border-emerald-700 hover:shadow-sm"
+                              : "border-gencom-sand bg-white hover:border-gencom-green hover:shadow-sm"
                           }`}
                         >
                           <div className="font-medium">{e.label}</div>
@@ -2726,7 +2726,7 @@ function PipGeneratorImportModal({
                             <span className="flex-1 leading-snug">
                               {c.label}
                               {c.catalog && (
-                                <span className="ml-1.5 text-[10px] uppercase tracking-wider text-emerald-700">
+                                <span className="ml-1.5 text-[10px] uppercase tracking-wider text-gencom-green">
                                   · catalog
                                 </span>
                               )}
@@ -2846,8 +2846,8 @@ function ResizableTh({
         title="Drag to resize column"
       >
         <span className="flex gap-[2px]">
-          <span className="block w-px h-3 bg-white/70 group-hover:bg-emerald-200" />
-          <span className="block w-px h-3 bg-white/70 group-hover:bg-emerald-200" />
+          <span className="block w-px h-3 bg-white/70 group-hover:bg-gencom-green/20" />
+          <span className="block w-px h-3 bg-white/70 group-hover:bg-gencom-green/20" />
         </span>
       </span>
     </th>
@@ -2871,7 +2871,7 @@ function CompactTable(props: CompactTableProps) {
         {/* Table fills the container at minimum (no right-side gap) and grows
             past it when the user widens columns beyond the container. */}
         <table className="text-xs border-collapse table-fixed w-full" style={{ minWidth: tableWidth }}>
-          <thead className="bg-emerald-800 text-white text-[10px] uppercase tracking-wider">
+          <thead className="bg-gencom-green text-white text-[10px] uppercase tracking-wider">
             <tr>
               <th className="px-1 py-1.5 w-6"></th>
               <ResizableTh width={colWidths.area} onResize={(w) => setColWidth("area", w)}>Area</ResizableTh>
@@ -2901,24 +2901,24 @@ function CompactTable(props: CompactTableProps) {
 
               return (
                 <Fragment key={division}>
-                  <tr className="bg-emerald-50 border-y border-emerald-200 text-[11px] uppercase tracking-wider text-emerald-900">
+                  <tr className="bg-gencom-greensoft border-y border-gencom-green/20 text-[11px] uppercase tracking-wider text-gencom-green">
                     <td className="px-1 py-1 align-middle">
                       <button
                         onClick={() => toggleDivision(division)}
-                        className="inline-flex items-center justify-center w-4 h-4 text-[11px] leading-none font-bold rounded border border-emerald-300 bg-white text-emerald-900 hover:bg-emerald-100"
+                        className="inline-flex items-center justify-center w-4 h-4 text-[11px] leading-none font-bold rounded border border-gencom-green/30 bg-white text-gencom-green hover:bg-gencom-greensoft"
                         aria-label={expanded ? "Collapse" : "Expand"}
                         title={expanded ? "Collapse division" : "Expand division"}
                       >{expanded ? "−" : "+"}</button>
                     </td>
                     <td className="px-2 py-1 font-semibold">
                       {division}
-                      <span className="ml-2 font-medium text-emerald-700">({allRows.length})</span>
+                      <span className="ml-2 font-medium text-gencom-green">({allRows.length})</span>
                     </td>
                     <td className="px-2 py-1 font-semibold">Item</td>
                     <td colSpan={6} className="px-2 py-1 text-right">
                       <button
                         onClick={() => addRow(division)}
-                        className="text-emerald-700 hover:text-emerald-900 underline"
+                        className="text-gencom-green hover:text-gencom-green underline"
                       >+ row</button>
                     </td>
                     <td className="px-2 py-1"></td>
@@ -2943,12 +2943,12 @@ function CompactTable(props: CompactTableProps) {
                   ))}
 
                   {expanded && (
-                    <tr className="bg-emerald-100/70 border-t border-emerald-300 font-bold text-emerald-900">
+                    <tr className="bg-gencom-greensoft/70 border-t border-gencom-green/30 font-bold text-gencom-green">
                       <td colSpan={7} className="px-2 py-1.5 text-right uppercase text-[10px] tracking-wider">
                         {division} Subtotal
                       </td>
                       <td className="px-2 py-1.5 text-right font-mono">{formatMoney(divTotal)}</td>
-                      <td colSpan={2} className="px-2 py-1.5 text-right text-[10px] italic text-emerald-700 font-medium">
+                      <td colSpan={2} className="px-2 py-1.5 text-right text-[10px] italic text-gencom-green font-medium">
                         {totalK > 0 ? `${formatMoney(perKey)}/Key` : ""}
                       </td>
                     </tr>
@@ -3001,7 +3001,7 @@ function CompactRow({
     item.priority === "optional" ? "bg-blue-500" :
     "bg-gray-300";
   const rowBg = isSelected
-    ? "bg-emerald-50/60"
+    ? "bg-gencom-greensoft/60"
     : altRow ? "bg-gencom-sand/15" : "bg-white";
 
   // No body-cell separators — the resize-handle grip on the green header
@@ -3010,7 +3010,7 @@ function CompactRow({
   return (
     <tr
       onClick={onSelect}
-      className={`border-b border-gencom-sand/30 hover:bg-emerald-50/40 cursor-pointer align-top ${rowBg} ${!item.included_in_budget ? "opacity-50" : ""}`}
+      className={`border-b border-gencom-sand/30 hover:bg-gencom-greensoft/40 cursor-pointer align-top ${rowBg} ${!item.included_in_budget ? "opacity-50" : ""}`}
     >
       <td className={`px-1 py-1 text-center ${cellSep}`} onClick={(e) => e.stopPropagation()}>
         <div className="flex flex-col items-center gap-0.5">

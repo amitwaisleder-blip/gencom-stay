@@ -434,7 +434,7 @@ function StepHeader({
         {Array.from({ length: total }).map((_, i) => {
           const n = i + 1;
           const cls = n < step
-            ? "bg-emerald-700"
+            ? "bg-gencom-green"
             : n === step
               ? "bg-gencom-gold"
               : "bg-gencom-sand";
@@ -520,7 +520,7 @@ function ArchiveButton({
                   <button
                     type="button"
                     onClick={() => { onLoad(a); setOpen(false); }}
-                    className="t-eyebrow px-2 py-1 border border-emerald-700 text-emerald-700 rounded hover:bg-emerald-50"
+                    className="t-eyebrow px-2 py-1 border border-gencom-green text-gencom-green rounded hover:bg-gencom-greensoft"
                     title="Load this project (replaces current inputs)"
                   >
                     Load
@@ -1856,7 +1856,7 @@ export default function FastBudget() {
                 <button
                   onClick={goNext}
                   disabled={paneIsBasics && !basicsDone}
-                  className="t-body font-semibold px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+                  className="t-body font-semibold px-4 py-2 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
                 >
                   {panes[n]?.kind === "review"
                     ? "Review →"
@@ -1931,8 +1931,8 @@ function OverrideMenu({
         onClick={() => onOpenChange(!open)}
         className={`t-eyebrow px-3 py-1 rounded-md border transition ${
           dirty
-            ? "border-emerald-700 bg-emerald-50 text-emerald-700"
-            : "border-gencom-sand hover:border-emerald-700 hover:bg-emerald-50"
+            ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
+            : "border-gencom-sand hover:border-gencom-green hover:bg-gencom-greensoft"
         }`}
         title="Override cost per scope level across every area"
       >
@@ -1968,7 +1968,7 @@ function OverrideMenu({
               <button
                 type="button"
                 onClick={apply}
-                className="t-eyebrow px-2 py-1 rounded-md border border-emerald-700 bg-emerald-700 text-white hover:bg-emerald-800"
+                className="t-eyebrow px-2 py-1 rounded-md border border-gencom-green bg-gencom-green text-white hover:bg-gencom-greendark"
               >
                 Apply
               </button>
@@ -2103,8 +2103,8 @@ function ManualMenu({
         onClick={() => onOpenChange(!open)}
         className={`t-eyebrow px-3 py-1 rounded-md border transition ${
           dirty
-            ? "border-emerald-700 bg-emerald-50 text-emerald-700"
-            : "border-gencom-sand hover:border-emerald-700 hover:bg-emerald-50"
+            ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
+            : "border-gencom-sand hover:border-gencom-green hover:bg-gencom-greensoft"
         }`}
         title="Enter a fixed $ amount for each scope level on this area only"
       >
@@ -2121,7 +2121,7 @@ function ManualMenu({
               type="checkbox"
               checked={autoLink}
               onChange={(e) => setAutoLink(e.target.checked)}
-              className="accent-emerald-700"
+              className="accent-gencom-green"
             />
             Auto-fill ±20% from the value I type
           </label>
@@ -2149,7 +2149,7 @@ function ManualMenu({
               <button
                 type="button"
                 onClick={apply}
-                className="t-eyebrow px-2 py-1 rounded-md border border-emerald-700 bg-emerald-700 text-white hover:bg-emerald-800"
+                className="t-eyebrow px-2 py-1 rounded-md border border-gencom-green bg-gencom-green text-white hover:bg-gencom-greendark"
               >
                 Apply
               </button>
@@ -2220,8 +2220,8 @@ function PerUnitOverrideMenu({
         onClick={() => onOpenChange(!open)}
         className={`t-eyebrow px-3 py-1 rounded-md border transition ${
           dirty
-            ? "border-emerald-700 bg-emerald-50 text-emerald-700"
-            : "border-gencom-sand hover:border-emerald-700 hover:bg-emerald-50"
+            ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
+            : "border-gencom-sand hover:border-gencom-green hover:bg-gencom-greensoft"
         }`}
         title={`Enter a single ${labelTitle.toLowerCase()}; Minor/Full auto-derive at ±20%`}
       >
@@ -2270,7 +2270,7 @@ function PerUnitOverrideMenu({
               <button
                 type="button"
                 onClick={apply}
-                className="t-eyebrow px-2 py-1 rounded-md border border-emerald-700 bg-emerald-700 text-white hover:bg-emerald-800"
+                className="t-eyebrow px-2 py-1 rounded-md border border-gencom-green bg-gencom-green text-white hover:bg-gencom-greendark"
               >
                 Apply
               </button>
@@ -2403,7 +2403,7 @@ function ScopePickerStep({
       <button
         type="button"
         onClick={onPutInNewSpace}
-        className="t-body font-semibold mt-2 px-4 py-2 border border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50"
+        className="t-body font-semibold mt-2 px-4 py-2 border border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft"
       >
         + Put in new space
       </button>
@@ -2420,14 +2420,14 @@ function ScopeTile({
       onClick={onClick}
       className={`text-left p-3 border rounded-md transition ${
         selected
-          ? "border-emerald-700 bg-emerald-50"
+          ? "border-gencom-green bg-gencom-greensoft"
           : "border-gencom-sand bg-white hover:border-gencom-stone/60 hover:bg-gencom-mist/40"
       }`}
     >
       <div className="flex items-start gap-2">
         <div
           className={`mt-0.5 w-4 h-4 shrink-0 rounded border-2 flex items-center justify-center text-[10px] font-bold ${
-            selected ? "border-emerald-700 bg-emerald-700 text-white" : "border-gencom-sand bg-white"
+            selected ? "border-gencom-green bg-gencom-green text-white" : "border-gencom-sand bg-white"
           }`}
         >
           {selected ? "✓" : ""}
@@ -2519,7 +2519,7 @@ function PropertyBasicsStep({
       </div>
 
       {enrichNote && (
-        <div className="mb-4 text-xs text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-md px-3 py-2">
+        <div className="mb-4 text-xs text-gencom-green bg-gencom-greensoft border border-gencom-green/30 rounded-md px-3 py-2">
           {enrichNote}
         </div>
       )}
@@ -2714,7 +2714,7 @@ function AreaStep({
               <button
                 key={s}
                 onClick={() => onApplyToAll(s)}
-                className="t-eyebrow px-3 py-1 rounded-md border border-gencom-sand hover:border-emerald-700 hover:bg-emerald-50"
+                className="t-eyebrow px-3 py-1 rounded-md border border-gencom-sand hover:border-gencom-green hover:bg-gencom-greensoft"
                 title={`Apply ${SCOPE_LEVEL_BUNDLES[s].title} scope to every area`}
               >
                 {SCOPE_LEVEL_BUNDLES[s].title}
@@ -2768,7 +2768,7 @@ function AreaStep({
             step={0.05}
             value={adj}
             onChange={(e) => setInput({ ...input, adjust: Number(e.target.value) })}
-            className="w-full accent-emerald-700"
+            className="w-full accent-gencom-green"
           />
           <div className="t-micro flex justify-between mt-0.5">
             <span>−50%</span>
@@ -2810,7 +2810,7 @@ function AreaStep({
                     }}
                     className={`flex flex-col text-left p-2.5 rounded-md border transition h-full ${
                       active
-                        ? "border-emerald-700 bg-emerald-50/40 ring-2 ring-emerald-700/20"
+                        ? "border-gencom-green bg-gencom-greensoft/40 ring-2 ring-gencom-green/20"
                         : "border-gencom-sand bg-white hover:border-gencom-stone/50"
                     }`}
                     title={desc}
@@ -2849,7 +2849,7 @@ function AreaStep({
           className={`t-eyebrow px-4 py-1.5 rounded-md border transition ${
             input.include
               ? "border-red-300 bg-red-50 text-red-700 hover:bg-red-100"
-              : "border-emerald-600 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+              : "border-gencom-green bg-gencom-greensoft text-gencom-green hover:bg-gencom-greensoft"
           }`}
         >
           {input.include ? "Remove Scope" : "Add Back to Scope"}
@@ -2923,7 +2923,7 @@ function CustomAreasStep({
         ))}
       </div>
       <button onClick={add}
-        className="t-body mt-4 px-3 py-1.5 border border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50">
+        className="t-body mt-4 px-3 py-1.5 border border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft">
         + Add custom area
       </button>
     </div>
@@ -3031,7 +3031,7 @@ function SoftCostsStep({
       <button
         type="button"
         onClick={addCustom}
-        className="t-body mt-3 px-3 py-1.5 border border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50"
+        className="t-body mt-3 px-3 py-1.5 border border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft"
       >
         + Add custom soft cost
       </button>
@@ -3412,14 +3412,14 @@ function ReviewStep({
         </button>
         <button
           onClick={() => onExportHtml(visible, { autoPrint: true })}
-          className="t-body font-semibold px-4 py-2 border border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50"
+          className="t-body font-semibold px-4 py-2 border border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft"
           title="Download a print-optimized HTML file and open the print/save-as-PDF dialog"
         >
           Export to PDF
         </button>
         <button
           onClick={onExport}
-          className="t-body font-semibold px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-800"
+          className="t-body font-semibold px-4 py-2 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark"
         >
           Export Excel
         </button>
@@ -3572,7 +3572,7 @@ function ScopeDescriptionStep({
         {sections.map((s) => (
           <div
             key={s.key}
-            className={`rounded-md border border-gencom-sand overflow-hidden ${s.highlight ? "bg-emerald-50/40" : "bg-white"}`}
+            className={`rounded-md border border-gencom-sand overflow-hidden ${s.highlight ? "bg-gencom-greensoft/40" : "bg-white"}`}
           >
             {/* Cost breakdown header */}
             <div className="p-4 border-b border-gencom-sand bg-gencom-mist/40">
@@ -3624,7 +3624,7 @@ function ScopeDescriptionStep({
           onClick={() => setEditing((v) => !v)}
           className={`t-body px-4 py-2 border rounded-md ${
             editing
-              ? "border-emerald-700 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+              ? "border-gencom-green bg-gencom-greensoft text-gencom-green hover:bg-gencom-greensoft"
               : "border-gencom-sand hover:bg-gencom-mist/60"
           }`}
         >
@@ -3641,7 +3641,7 @@ function ScopeDescriptionStep({
         <button
           type="button"
           onClick={() => onExportHtml({ low, mid, high }, { autoPrint: true })}
-          className="t-body font-semibold px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-800"
+          className="t-body font-semibold px-4 py-2 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark"
           title="Download a print-optimized HTML file and open the print/save-as-PDF dialog"
         >
           Export to PDF
@@ -3660,7 +3660,7 @@ function EstimateCheckbox({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="accent-emerald-700"
+        className="accent-gencom-green"
       />
       <span>{label}</span>
     </label>
@@ -3681,7 +3681,7 @@ function EstimateCard({
   return (
     <div
       className={`flex flex-col p-3 rounded-md border border-gencom-sand bg-gradient-to-br ${
-        highlight ? "from-emerald-50 to-emerald-100/40" : "from-white to-gencom-mist/50"
+        highlight ? "from-gencom-greensoft to-gencom-greensoft/40" : "from-white to-gencom-mist/50"
       }`}
     >
       <div className="t-eyebrow">{label}</div>
