@@ -68,13 +68,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div>
-      <div className="mb-3 text-sm text-gencom-stone">
+    <div className="max-w-6xl mx-auto animate-fade-in">
+      <div className="mb-1 text-sm text-gencom-stone">
         <Link to="/" className="hover:text-gencom-ink">Home</Link>
         {" / "}<span>Full Budget Generator</span>
       </div>
+      <h1 className="font-display text-2xl font-bold text-gencom-ink mb-5">Properties</h1>
       <div className="mb-6 flex items-center justify-between">
-        <div className="flex gap-1 rounded-lg bg-white p-1 shadow-sm border border-gencom-sand">
+        <div className="flex gap-1 rounded-xl bg-white p-1 shadow-card border border-gencom-sand">
           <button
             onClick={() => setTab("active")}
             className={`px-4 py-1.5 text-sm rounded-md transition ${
@@ -92,10 +93,7 @@ export default function Dashboard() {
             Archived
           </button>
         </div>
-        <button
-          onClick={handleNew}
-          className="bg-gencom-ink text-gencom-mist px-4 py-2 rounded-md text-sm font-medium hover:bg-gencom-ink/90"
-        >
+        <button onClick={handleNew} className="btn-primary px-4 py-2">
           + New Property
         </button>
       </div>
@@ -103,7 +101,7 @@ export default function Dashboard() {
       {loading ? (
         <div className="text-center text-gencom-stone py-20">Loading…</div>
       ) : cards.length === 0 ? (
-        <div className="text-center text-gencom-stone py-20 border border-dashed border-gencom-sand rounded-lg bg-white">
+        <div className="text-center text-gencom-stone py-20 border border-dashed border-gencom-sand rounded-2xl bg-white">
           {tab === "active" ? (
             <>
               <div className="mb-2 font-display text-xl text-gencom-ink">No active deals yet</div>
@@ -119,7 +117,7 @@ export default function Dashboard() {
             <div key={c.id} className="relative group">
               <Link
                 to={`/properties/${c.id}/setup`}
-                className={`block bg-white border border-gencom-sand rounded-lg overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition ${
+                className={`card card-hover block overflow-hidden ${
                   c.archived ? "opacity-60" : ""
                 }`}
               >
@@ -131,7 +129,7 @@ export default function Dashboard() {
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="absolute inset-0 grid place-items-center font-display text-3xl text-gencom-gold">
+                    <div className="absolute inset-0 grid place-items-center font-display text-3xl text-gencom-green">
                       {(c.name?.[0] ?? "?").toUpperCase()}
                     </div>
                   )}
@@ -250,7 +248,7 @@ export default function Dashboard() {
                 )}
               </div>
               {menuOpen === c.id && (
-                <div className="absolute top-10 right-2 bg-white border border-gencom-sand rounded-md shadow-lg z-10 min-w-[140px] py-1 text-sm">
+                <div className="absolute top-10 right-2 bg-white border border-gencom-sand rounded-xl shadow-lg z-10 min-w-[140px] py-1 text-sm">
                   {c.archived ? (
                     <button className="w-full text-left px-3 py-1.5 hover:bg-gencom-mist" onClick={() => handleRestore(c.id)}>
                       Restore
