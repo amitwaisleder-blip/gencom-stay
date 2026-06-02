@@ -462,7 +462,7 @@ export function BudgetTable({
                   <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
                     <button
                       onClick={() => setUploading(true)}
-                      className="text-xs px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+                      className="text-xs px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark"
                     >
                       📄 Upload budget
                     </button>
@@ -929,7 +929,7 @@ function EditMenu({
           onClick={() => setOpen((o) => !o)}
           className={`text-xs h-9 px-3 rounded-md border whitespace-nowrap inline-flex items-center gap-1.5 ${
             isActive
-              ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+              ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-greendark"
               : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
           }`}
           title="Edit cells, add a line, edit multiple, or upload"

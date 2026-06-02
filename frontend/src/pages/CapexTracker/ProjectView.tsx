@@ -533,7 +533,7 @@ function HotelEditModal({
             type="button"
             onClick={save}
             disabled={saving}
-            className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green disabled:opacity-50"
+            className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save"}
           </button>

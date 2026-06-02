@@ -362,7 +362,7 @@ export function InvoicesView({
           {onUploadInvoice && (
             <button
               onClick={onUploadInvoice}
-              className="mt-4 text-sm px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+              className="mt-4 text-sm px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark"
             >
               🧾 Upload invoice
             </button>
@@ -639,7 +639,7 @@ export function InvoicesView({
         {onUploadInvoice && (
           <button
             onClick={onUploadInvoice}
-            className="text-xs px-3 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green whitespace-nowrap"
+            className="text-xs px-3 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark whitespace-nowrap"
             title="Upload another invoice"
           >
             + Upload invoice
@@ -1237,7 +1237,7 @@ function InvoiceApplyPanel({
           type="button"
           onClick={save}
           disabled={saving}
-          className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green disabled:opacity-50"
+          className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark disabled:opacity-50"
         >
           {saving ? "Saving…" : "Save"}
         </button>

@@ -10,6 +10,7 @@ export default {
           sand: "#e7e2d6",     // hairline borders (lightened for a cleaner, modern edge)
           line: "#efece4",     // extra-subtle dividers
           green: "#4f6f55",    // primary brand accent (matches the logo)
+          greendark: "#3f5944",// darker green for hover/active on solid green buttons
           greensoft: "#e3ebe3",// tinted green for soft fills / focus rings
           gold: "#b89555",     // secondary accent (used sparingly)
           goldsoft: "#ece1c8", // tinted gold for soft fills

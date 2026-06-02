@@ -91,7 +91,7 @@ body {
            placeholder:text-gencom-stone/60
            focus:outline-none focus:border-gencom-green focus-visible:shadow-ring transition;
   }
-  .btn-green { @apply btn bg-gencom-green text-white hover:bg-gencom-green/90; }
+  .btn-green { @apply btn bg-gencom-green text-white hover:bg-gencom-greendark; }
 }
 
 

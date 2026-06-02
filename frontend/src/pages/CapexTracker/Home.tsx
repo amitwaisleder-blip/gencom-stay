@@ -71,7 +71,7 @@ export default function CapexTrackerHome() {
         </div>
         <button
           onClick={() => setPickerOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark shadow-sm"
         >
           <span className="text-lg leading-none">+</span> New
         </button>
@@ -127,7 +127,7 @@ function EmptyState({ onNew }: { onNew: () => void }) {
       </p>
       <button
         onClick={onNew}
-        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-greendark"
       >
         <span className="text-lg leading-none">+</span> New
       </button>

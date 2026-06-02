@@ -147,7 +147,7 @@ export function InvoiceEditModal({
               onClick={() => setPreviewOpen((v) => !v)}
               className={`text-xs px-3 py-1.5 rounded-md border whitespace-nowrap transition ${
                 previewOpen
-                  ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+                  ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-greendark"
                   : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green"
               }`}
               title={previewOpen ? "Hide inline preview" : "Preview the file inline below"}

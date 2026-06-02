@@ -189,7 +189,7 @@ export function PrimaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="px-5 py-2 rounded-md bg-gencom-green text-white font-semibold text-sm hover:bg-gencom-green disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
+      className="px-5 py-2 rounded-md bg-gencom-green text-white font-semibold text-sm hover:bg-gencom-greendark disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
     >
       {children}
     </button>
