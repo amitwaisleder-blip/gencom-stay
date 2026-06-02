@@ -38,11 +38,11 @@ export default function PortfolioList() {
   }, [backendProps]);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto animate-fade-in">
       <Header onAddHotel={() => setModalOpen(true)} />
 
       {!loaded ? (
-        <div className="mt-10 text-[13px] text-[#6b6f78]">Loading portfolio…</div>
+        <div className="mt-10 text-[13px] text-gencom-stone">Loading portfolio…</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {merged.map((p) => (
@@ -72,26 +72,18 @@ function Header({ onAddHotel }: { onAddHotel: () => void }) {
   return (
     <header className="flex items-start justify-between gap-4">
       <div>
-        <div className="text-[11px] uppercase tracking-[0.22em] text-[#b89555] font-semibold">
-          Gencom Stay
-        </div>
-        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-2 text-[#1a1d24]">
+        <div className="t-eyebrow text-gencom-green">Gencom Stay</div>
+        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-2 text-gencom-ink">
           The Portfolio
         </h1>
-        <p className="text-[15px] leading-relaxed text-[#6b6f78] max-w-xl mt-3">
+        <p className="text-[15px] leading-relaxed text-gencom-stone max-w-xl mt-3">
           A private directory of Gencom-owned and operated hotels. Select a
           property to review owner rates, blocked dates, and to request a
           stay for you or your family.
         </p>
-        <div className="mt-5 h-px w-16 bg-[#b89555]" />
+        <div className="mt-5 h-px w-16 bg-gencom-green" />
       </div>
-      <button
-        onClick={onAddHotel}
-        className="shrink-0 mt-1 inline-flex items-center gap-2 px-4 py-2 rounded-md text-[13px] font-semibold text-white transition"
-        style={{ background: "#1a1d24" }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = "#2a2e38")}
-        onMouseLeave={(e) => (e.currentTarget.style.background = "#1a1d24")}
-      >
+      <button onClick={onAddHotel} className="btn-primary shrink-0 mt-1">
         <span className="text-base leading-none">+</span>
         <span>Hotel</span>
       </button>
@@ -141,29 +133,29 @@ function PropertyCard({
   }
 
   return (
-    <div className="group relative block rounded-lg overflow-hidden bg-white border border-[#ece6d7] transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5">
+    <div className="group card card-hover relative block overflow-hidden">
       <Link to={`properties/${property.id}`} className="block">
         <HeroImage property={property} />
         <div className="p-5">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">
+          <div className="t-eyebrow text-gencom-green">
             {property.brand}
           </div>
-          <div className="font-serif-display text-[22px] leading-tight mt-1.5 text-[#1a1d24]">
+          <div className="font-serif-display text-[22px] leading-tight mt-1.5 text-gencom-ink">
             {property.name}
           </div>
-          <div className="text-[12px] text-[#6b6f78] mt-1 uppercase tracking-wider">
+          <div className="text-[12px] text-gencom-stone mt-1 uppercase tracking-wider">
             {property.location}
           </div>
           {property.tagline && (
-            <div className="text-[13px] leading-relaxed text-[#4a4d54] mt-3 italic">
+            <div className="text-[13px] leading-relaxed text-gencom-stone mt-3 italic">
               {property.tagline}
             </div>
           )}
-          <div className="mt-4 pt-3 border-t border-[#ece6d7] flex items-center justify-between">
-            <span className="text-[11px] uppercase tracking-[0.15em] text-[#6b6f78]">
+          <div className="mt-4 pt-3 border-t border-gencom-line flex items-center justify-between">
+            <span className="t-eyebrow text-gencom-stone">
               View property
             </span>
-            <span className="text-[#b89555] text-sm group-hover:translate-x-0.5 transition-transform">
+            <span className="text-gencom-green text-sm group-hover:translate-x-0.5 transition-transform">
               →
             </span>
           </div>
@@ -220,7 +212,7 @@ function CameraIcon() {
 function HeroImage({ property }: { property: Property }) {
   if (property.heroImage) {
     return (
-      <div className="relative aspect-[5/3] bg-[#ece6d7] overflow-hidden">
+      <div className="relative aspect-[5/3] bg-gencom-sand overflow-hidden">
         <img
           src={property.heroImage}
           alt={property.name}

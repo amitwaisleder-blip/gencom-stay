@@ -121,11 +121,11 @@ export default function RequestStay() {
     } catch { /* clipboard fallback still works */ }
   }
 
-  if (!loaded) return <div className="text-[13px] text-[#6b6f78]">Loading…</div>;
+  if (!loaded) return <div className="text-[13px] text-gencom-stone">Loading…</div>;
   if (!property) {
     return (
       <div>
-        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-[#b89555]">
+        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-gencom-green">
           ← Back to portfolio
         </Link>
         <div className="mt-6 font-serif-display text-2xl">Property not found.</div>
@@ -147,25 +147,25 @@ export default function RequestStay() {
   }
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto animate-fade-in">
       <div className="flex items-center justify-between">
-        <Link to={`/gencom-stay/properties/${property.id}`} className="text-[12px] uppercase tracking-[0.18em] text-[#b89555]">
+        <Link to={`/gencom-stay/properties/${property.id}`} className="text-[12px] uppercase tracking-[0.18em] text-gencom-green">
           ← Back to property
         </Link>
       </div>
 
       {/* Header */}
       <div className="mt-5">
-        <div className="text-[11px] uppercase tracking-[0.22em] text-[#b89555] font-semibold">
+        <div className="text-[11px] uppercase tracking-[0.22em] text-gencom-green font-semibold">
           Request a stay
         </div>
-        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-[#1a1d24]">
+        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-gencom-ink">
           {property.name}
         </h1>
-        <div className="text-[13px] uppercase tracking-wider text-[#6b6f78] mt-2">
+        <div className="text-[13px] uppercase tracking-wider text-gencom-stone mt-2">
           {property.location}
         </div>
-        <div className="mt-3 h-px w-12 bg-[#b89555]" />
+        <div className="mt-3 h-px w-12 bg-gencom-green" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10 mt-10">
@@ -188,9 +188,9 @@ export default function RequestStay() {
 
         <aside className="space-y-5">
           <Summary property={property} form={form} />
-          <div className="p-4 rounded-lg border border-[#ece6d7] bg-white">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">Routing</div>
-            <div className="mt-2 text-[13px] text-[#1a1d24]">
+          <div className="p-4 card">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">Routing</div>
+            <div className="mt-2 text-[13px] text-gencom-ink">
               Your request will route to <span className="font-semibold">{property.contact.name || "the property contact"}</span> at {property.name}, with <span className="font-semibold">{property.assetManager.name || "the Gencom asset manager"}</span> copied.
             </div>
           </div>
@@ -198,8 +198,8 @@ export default function RequestStay() {
       </div>
 
       {/* Submit bar */}
-      <div className="mt-10 pt-5 border-t border-[#ece6d7] flex items-center justify-between gap-3">
-        <div className="text-[12px] text-[#6b6f78]">
+      <div className="mt-10 pt-5 border-t border-gencom-sand flex items-center justify-between gap-3">
+        <div className="text-[12px] text-gencom-stone">
           {canSubmit
             ? "Ready. Clicking Send will open your email client with the request pre-filled."
             : attemptedSubmit && validation.errors.length > 0
@@ -209,17 +209,14 @@ export default function RequestStay() {
         <div className="flex gap-2">
           <button
             onClick={() => navigate(`/gencom-stay/properties/${property.id}`)}
-            className="px-4 py-2 rounded-md text-[13px] font-semibold border border-[#d9d4c8] text-[#1a1d24] bg-white hover:bg-[#faf7f1]"
+            className="btn-ghost px-4 py-2"
           >
             Cancel
           </button>
           <button
             onClick={onSubmit}
             disabled={!canSubmit}
-            className="px-5 py-2 rounded-md text-[13px] font-semibold text-white transition"
-            style={{ background: "#1a1d24", opacity: canSubmit ? 1 : 0.55, cursor: canSubmit ? "pointer" : "not-allowed" }}
-            onMouseEnter={(e) => { if (canSubmit) e.currentTarget.style.background = "#2a2e38"; }}
-            onMouseLeave={(e) => { if (canSubmit) e.currentTarget.style.background = "#1a1d24"; }}
+            className="btn-primary px-5 py-2"
           >
             Send request
           </button>
@@ -264,24 +261,24 @@ function Confirmation({
   }
 
   return (
-    <div>
-      <Link to={`/gencom-stay/properties/${property.id}`} className="text-[12px] uppercase tracking-[0.18em] text-[#b89555]">
+    <div className="max-w-6xl mx-auto animate-fade-in">
+      <Link to={`/gencom-stay/properties/${property.id}`} className="text-[12px] uppercase tracking-[0.18em] text-gencom-green">
         ← Back to property
       </Link>
 
       <div className="mt-5">
-        <div className="text-[11px] uppercase tracking-[0.22em] text-[#b89555] font-semibold">
+        <div className="text-[11px] uppercase tracking-[0.22em] text-gencom-green font-semibold">
           Request sent
         </div>
-        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-[#1a1d24]">
+        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-gencom-ink">
           Your email is on the way
         </h1>
-        <div className="mt-3 h-px w-12 bg-[#b89555]" />
+        <div className="mt-3 h-px w-12 bg-gencom-green" />
         <p className="text-[15px] leading-relaxed text-[#4a4d54] mt-5 max-w-2xl">
           Your default mail client should have opened with the request pre-filled.
           If nothing opened, use the copy button below and paste into a new email.
           {" "}
-          <span className="text-[#1a1d24] font-semibold">
+          <span className="text-gencom-ink font-semibold">
             {property.contact.name || "The property"} will respond directly to confirm availability.
           </span>
         </p>
@@ -289,8 +286,8 @@ function Confirmation({
 
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10 mt-10">
         <div className="space-y-6">
-          <div className="p-5 rounded-lg bg-white border border-[#ece6d7]">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">Email</div>
+          <div className="p-5 card">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">Email</div>
             <dl className="mt-3 text-[13px]">
               <EmailMetaRow label="To" value={composed.to} />
               {composed.cc && <EmailMetaRow label="Cc" value={composed.cc} />}
@@ -299,27 +296,26 @@ function Confirmation({
             <div className="mt-4 flex items-center gap-2">
               <a
                 href={composed.mailtoUrl}
-                className="px-4 py-2 rounded-md text-[13px] font-semibold text-white"
-                style={{ background: "#1a1d24" }}
+                className="btn-primary px-4 py-2"
               >
                 Re-open in mail client
               </a>
               <button
                 onClick={copy}
-                className="px-4 py-2 rounded-md text-[13px] font-semibold border border-[#d9d4c8] text-[#1a1d24] bg-white hover:bg-[#faf7f1]"
+                className="btn-ghost px-4 py-2"
               >
                 {copied ? "Copied" : "Copy email to clipboard"}
               </button>
               <button
                 onClick={() => setShowFullEmail((v) => !v)}
-                className="ml-auto text-[12px] uppercase tracking-[0.12em] font-semibold text-[#6b6f78] hover:text-[#1a1d24]"
+                className="ml-auto text-[12px] uppercase tracking-[0.12em] font-semibold text-gencom-stone hover:text-gencom-ink"
               >
                 {showFullEmail ? "Hide body" : "Show body"}
               </button>
             </div>
             {showFullEmail && (
               <pre
-                className="mt-4 p-3 rounded-md bg-[#faf7f1] border border-[#ece6d7] text-[12.5px] leading-snug whitespace-pre-wrap font-sans"
+                className="mt-4 p-3 rounded-xl bg-gencom-cloud border border-gencom-sand text-[12.5px] leading-snug whitespace-pre-wrap font-sans"
                 style={{ color: "#1a1d24" }}
               >
                 {composed.body}
@@ -327,8 +323,8 @@ function Confirmation({
             )}
           </div>
 
-          <div className="p-5 rounded-lg bg-white border border-[#ece6d7]">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">What you asked for</div>
+          <div className="p-5 card">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">What you asked for</div>
             <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-[13px]">
               <SummaryRow label="Property" value={property.name} />
               <SummaryRow label="Location" value={property.location} />
@@ -338,7 +334,7 @@ function Confirmation({
               <SummaryRow label="Room type" value={form.roomType} />
               <SummaryRow label="Purpose" value={purposeLabel(form.purpose, form.purposeOther)} />
             </div>
-            <div className="mt-4 text-[11px] uppercase tracking-[0.12em] text-[#6b6f78] font-semibold">
+            <div className="mt-4 text-[11px] uppercase tracking-[0.12em] text-gencom-stone font-semibold">
               Date preferences
             </div>
             <ul className="mt-2 text-[13px] space-y-1">
@@ -351,17 +347,17 @@ function Confirmation({
             </ul>
             {form.specialRequests.trim() && (
               <>
-                <div className="mt-4 text-[11px] uppercase tracking-[0.12em] text-[#6b6f78] font-semibold">Special requests</div>
-                <div className="mt-1 text-[13px] text-[#1a1d24] whitespace-pre-wrap">{form.specialRequests}</div>
+                <div className="mt-4 text-[11px] uppercase tracking-[0.12em] text-gencom-stone font-semibold">Special requests</div>
+                <div className="mt-1 text-[13px] text-gencom-ink whitespace-pre-wrap">{form.specialRequests}</div>
               </>
             )}
           </div>
         </div>
 
         <aside className="space-y-4">
-          <div className="p-4 rounded-lg bg-white border border-[#ece6d7]">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">What happens next</div>
-            <ol className="mt-2 text-[13px] text-[#1a1d24] list-decimal pl-5 space-y-1.5">
+          <div className="p-4 card">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">What happens next</div>
+            <ol className="mt-2 text-[13px] text-gencom-ink list-decimal pl-5 space-y-1.5">
               <li>{property.contact.name || "The property contact"} reviews availability.</li>
               <li>They reply directly to {form.requesterEmail || "you"} with confirmation or an alternate option.</li>
               <li>{property.assetManager.name || "Your asset manager"} is copied on every exchange.</li>
@@ -370,14 +366,13 @@ function Confirmation({
 
           <button
             onClick={onSendAnother}
-            className="w-full py-2 rounded-md text-[12px] font-semibold border border-[#d9d4c8] text-[#1a1d24] bg-white hover:bg-[#faf7f1]"
+            className="btn-ghost w-full py-2"
           >
             Edit and resend
           </button>
           <Link
             to="/gencom-stay"
-            className="block text-center w-full py-2 rounded-md text-[12px] font-semibold text-white"
-            style={{ background: "#1a1d24" }}
+            className="btn-primary w-full py-2"
           >
             Back to portfolio
           </Link>
@@ -391,8 +386,8 @@ function Confirmation({
 function EmailMetaRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-[60px_1fr] items-baseline py-0.5">
-      <dt className="text-[11px] uppercase tracking-[0.12em] text-[#6b6f78] font-semibold">{label}</dt>
-      <dd className="text-[13px] text-[#1a1d24] break-all">{value}</dd>
+      <dt className="text-[11px] uppercase tracking-[0.12em] text-gencom-stone font-semibold">{label}</dt>
+      <dd className="text-[13px] text-gencom-ink break-all">{value}</dd>
     </div>
   );
 }
@@ -400,8 +395,8 @@ function EmailMetaRow({ label, value }: { label: string; value: string }) {
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-[0.12em] text-[#6b6f78] font-semibold">{label}</div>
-      <div className="text-[13px] text-[#1a1d24]">{value || "—"}</div>
+      <div className="text-[10px] uppercase tracking-[0.12em] text-gencom-stone font-semibold">{label}</div>
+      <div className="text-[13px] text-gencom-ink">{value || "—"}</div>
     </div>
   );
 }
@@ -498,14 +493,14 @@ function DateRangeRow({
   errorOrder: boolean;
 }) {
   return (
-    <div className="p-4 rounded-md border border-[#ece6d7] bg-white">
+    <div className="p-4 rounded-xl border border-gencom-sand bg-white">
       <div className="flex items-baseline justify-between mb-2">
-        <div className="text-[11px] uppercase tracking-[0.15em] font-semibold text-[#1a1d24]">
-          {label}{required && <span className="text-[#b89555]"> *</span>}
-          {!required && <span className="text-[#6b6f78] normal-case tracking-normal font-normal"> — strongly encouraged</span>}
+        <div className="text-[11px] uppercase tracking-[0.15em] font-semibold text-gencom-ink">
+          {label}{required && <span className="text-gencom-green"> *</span>}
+          {!required && <span className="text-gencom-stone normal-case tracking-normal font-normal"> — strongly encouraged</span>}
         </div>
         {range.checkIn && range.checkOut && !errorOrder && (
-          <div className="text-[11px] text-[#6b6f78]">{nightsBetween(range)} nights</div>
+          <div className="text-[11px] text-gencom-stone">{nightsBetween(range)} nights</div>
         )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -554,7 +549,7 @@ function WhySection({
           <select
             value={form.purpose}
             onChange={(e) => set("purpose", e.target.value as RequestPurpose)}
-            className="w-full px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555]"
+            className="w-full px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green"
           >
             {PURPOSE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
@@ -571,7 +566,7 @@ function WhySection({
             <select
               value={form.roomType}
               onChange={(e) => set("roomType", e.target.value)}
-              className="w-full px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555]"
+              className="w-full px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green"
             >
               <option value="">Select a category…</option>
               {property.rates.map((r) => (
@@ -594,7 +589,7 @@ function WhySection({
             value={form.specialRequests}
             onChange={(e) => set("specialRequests", e.target.value)}
             placeholder="Dietary restrictions, accessibility needs, anniversary or birthday celebrations, anything the property should know."
-            className="w-full min-h-[90px] px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555]"
+            className="w-full min-h-[90px] px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green"
           />
         </Field>
       </div>
@@ -607,15 +602,15 @@ function AcknowledgmentSection({
 }: { acknowledged: boolean; onChange: (v: boolean) => void; attempted: boolean }) {
   const missing = attempted && !acknowledged;
   return (
-    <div className={`p-4 rounded-md border ${missing ? "border-[#c62828] bg-red-50" : "border-[#ece6d7] bg-white"}`}>
+    <div className={`p-4 rounded-xl border ${missing ? "border-[#c62828] bg-red-50" : "border-gencom-sand bg-white"}`}>
       <label className="flex items-start gap-3 cursor-pointer">
         <input
           type="checkbox"
           checked={acknowledged}
           onChange={(e) => onChange(e.target.checked)}
-          className="mt-1 accent-[#b89555]"
+          className="mt-1 accent-gencom-green"
         />
-        <div className="text-[13px] leading-relaxed text-[#1a1d24]">
+        <div className="text-[13px] leading-relaxed text-gencom-ink">
           I understand this is a request subject to availability and owner rate policy, and is not confirmed until the property responds.
         </div>
       </label>
@@ -626,18 +621,18 @@ function AcknowledgmentSection({
 function Summary({ property, form }: { property: Property; form: FormState }) {
   const first = form.dateRanges[0];
   return (
-    <div className="p-4 rounded-lg bg-white border border-[#ece6d7]">
-      <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">Summary</div>
+    <div className="p-4 card">
+      <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">Summary</div>
       <div className="mt-2 font-serif-display text-[20px] leading-tight">{property.name}</div>
-      <div className="text-[11px] uppercase tracking-wider text-[#6b6f78] mt-1">{property.location}</div>
-      <div className="mt-3 text-[13px] text-[#1a1d24] space-y-1">
-        <div>{form.requesterName || <span className="text-[#9b9b9b]">Requester name —</span>}</div>
-        <div>{form.roomType || <span className="text-[#9b9b9b]">Room type —</span>}</div>
-        <div>{form.adults + form.children > 0 ? `${form.adults} adult${form.adults === 1 ? "" : "s"}${form.children ? `, ${form.children} child${form.children === 1 ? "" : "ren"}` : ""}` : <span className="text-[#9b9b9b]">Guests —</span>}</div>
+      <div className="text-[11px] uppercase tracking-wider text-gencom-stone mt-1">{property.location}</div>
+      <div className="mt-3 text-[13px] text-gencom-ink space-y-1">
+        <div>{form.requesterName || <span className="text-gencom-stone/70">Requester name —</span>}</div>
+        <div>{form.roomType || <span className="text-gencom-stone/70">Room type —</span>}</div>
+        <div>{form.adults + form.children > 0 ? `${form.adults} adult${form.adults === 1 ? "" : "s"}${form.children ? `, ${form.children} child${form.children === 1 ? "" : "ren"}` : ""}` : <span className="text-gencom-stone/70">Guests —</span>}</div>
         <div>
           {first.checkIn && first.checkOut
             ? `${fmtDate(first.checkIn)} – ${fmtDate(first.checkOut)}`
-            : <span className="text-[#9b9b9b]">1st-choice dates —</span>}
+            : <span className="text-gencom-stone/70">1st-choice dates —</span>}
         </div>
       </div>
     </div>
@@ -709,8 +704,8 @@ function nightsBetween(r: DateRange): number {
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
     <section>
-      <div className="font-serif-display text-[26px] leading-tight text-[#1a1d24]">{title}</div>
-      {subtitle && <div className="text-[12px] text-[#6b6f78] mt-0.5 max-w-xl">{subtitle}</div>}
+      <div className="font-serif-display text-[26px] leading-tight text-gencom-ink">{title}</div>
+      {subtitle && <div className="text-[12px] text-gencom-stone mt-0.5 max-w-xl">{subtitle}</div>}
       <div className="mt-4">{children}</div>
     </section>
   );
@@ -721,7 +716,7 @@ function Field({
 }: { label: string; error?: boolean; className?: string; children: React.ReactNode }) {
   return (
     <label className={`block ${className ?? ""}`}>
-      <div className={`text-[11px] uppercase tracking-[0.12em] font-semibold mb-1 ${error ? "text-[#c62828]" : "text-[#6b6f78]"}`}>
+      <div className={`text-[11px] uppercase tracking-[0.12em] font-semibold mb-1 ${error ? "text-[#c62828]" : "text-gencom-stone"}`}>
         {label}
       </div>
       {children}
@@ -738,7 +733,7 @@ function LuxInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555] focus:ring-1 focus:ring-[#b89555]/30"
+      className="w-full px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green focus:ring-1 focus:ring-gencom-green/30"
     />
   );
 }
@@ -748,7 +743,7 @@ function InlineAlert({ tone, children }: { tone: "warn" | "error"; children: Rea
     ? { bg: "#fdf4e3", border: "#e6c36a", color: "#78551b" }
     : { bg: "#fdecec", border: "#e5a4a4", color: "#9b2226" };
   return (
-    <div className="mt-2 p-2.5 rounded-md text-[12px] leading-snug" style={{ background: style.bg, border: `1px solid ${style.border}`, color: style.color }}>
+    <div className="mt-2 p-2.5 rounded-xl text-[12px] leading-snug" style={{ background: style.bg, border: `1px solid ${style.border}`, color: style.color }}>
       {children}
     </div>
   );

@@ -29,19 +29,19 @@ export default function AddHotelModal({
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-[720px] max-h-[92vh] flex flex-col">
-        <div className="px-6 py-4 border-b border-[#ece6d7] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-gencom-sand flex items-center justify-between">
           <div>
-            <div className="text-[11px] uppercase tracking-[0.22em] text-[#b89555] font-semibold">
+            <div className="text-[11px] uppercase tracking-[0.22em] text-gencom-green font-semibold">
               Add a hotel
             </div>
-            <div className="font-serif-display text-[26px] leading-tight mt-0.5 text-[#1a1d24]">
+            <div className="font-serif-display text-[26px] leading-tight mt-0.5 text-gencom-ink">
               Portfolio entry
             </div>
           </div>
-          <button onClick={onClose} className="text-[#6b6f78] hover:text-[#1a1d24] text-lg leading-none">✕</button>
+          <button onClick={onClose} className="text-gencom-stone hover:text-gencom-ink text-lg leading-none">✕</button>
         </div>
 
-        <div className="px-6 pt-4 flex gap-1 border-b border-[#ece6d7]">
+        <div className="px-6 pt-4 flex gap-1 border-b border-gencom-sand">
           <TabButton active={mode === "manual"} onClick={() => setMode("manual")}>Manual entry</TabButton>
           <TabButton active={mode === "excel"} onClick={() => setMode("excel")}>Import from Excel</TabButton>
         </div>
@@ -166,11 +166,11 @@ function ManualForm({
       {error && <div className="mt-3 text-[12px] text-red-700">{error}</div>}
 
       <div className="mt-5 flex items-center justify-end gap-2">
-        <button disabled={busy} onClick={save} className="px-4 py-2 rounded-md text-[13px] font-semibold text-white" style={{ background: "#1a1d24", opacity: busy ? 0.6 : 1 }}>
+        <button disabled={busy} onClick={save} className="btn-primary px-4 py-2">
           {busy ? "Saving…" : "Save hotel"}
         </button>
       </div>
-      <div className="mt-2 text-[11px] text-[#6b6f78]">
+      <div className="mt-2 text-[11px] text-gencom-stone">
         Rates and blackout dates can be added from the property detail page after saving.
       </div>
     </div>
@@ -242,7 +242,7 @@ function ExcelImport({
         {" "}
         <button
           onClick={downloadTemplate}
-          className="underline underline-offset-2 text-[#b89555] hover:text-[#1a1d24]"
+          className="underline underline-offset-2 text-gencom-green hover:text-gencom-ink"
         >
           Download blank template
         </button>
@@ -259,18 +259,17 @@ function ExcelImport({
       <div className="mt-4 flex items-center gap-3">
         <button
           onClick={() => fileRef.current?.click()}
-          className="px-4 py-2 rounded-md text-[13px] font-semibold text-white"
-          style={{ background: "#1a1d24" }}
+          className="btn-primary px-4 py-2"
         >
           Choose file…
         </button>
-        {fileName && <div className="text-[12px] text-[#6b6f78]">{fileName} · {drafts.length} row{drafts.length === 1 ? "" : "s"}</div>}
+        {fileName && <div className="text-[12px] text-gencom-stone">{fileName} · {drafts.length} row{drafts.length === 1 ? "" : "s"}</div>}
       </div>
 
       {error && <div className="mt-3 text-[12px] text-red-700">{error}</div>}
 
       {drafts.length > 0 && (
-        <div className="mt-4 border border-[#ece6d7] rounded-md overflow-hidden">
+        <div className="mt-4 border border-gencom-sand rounded-xl overflow-hidden">
           <table className="w-full text-[12px]">
             <thead style={{ background: "#faf7f1" }}>
               <tr className="text-left">
@@ -283,7 +282,7 @@ function ExcelImport({
             </thead>
             <tbody>
               {drafts.map((d, i) => (
-                <tr key={i} className={`border-t border-[#ece6d7] ${d.__error ? "bg-red-50" : ""}`}>
+                <tr key={i} className={`border-t border-gencom-sand ${d.__error ? "bg-red-50" : ""}`}>
                   <td className="px-2 py-1"><input className={INPUT_SM} value={d.name} onChange={(e) => update(i, { name: e.target.value, __error: e.target.value ? undefined : d.__error })} /></td>
                   <td className="px-2 py-1"><input className={INPUT_SM} value={d.brand} onChange={(e) => update(i, { brand: e.target.value })} /></td>
                   <td className="px-2 py-1"><input className={INPUT_SM} value={d.location} onChange={(e) => update(i, { location: e.target.value })} /></td>
@@ -296,7 +295,7 @@ function ExcelImport({
             </tbody>
           </table>
           {drafts.some((d) => d.__error) && (
-            <div className="px-3 py-2 border-t border-[#ece6d7] bg-red-50 text-[11px] text-red-700">
+            <div className="px-3 py-2 border-t border-gencom-sand bg-red-50 text-[11px] text-red-700">
               {drafts.filter((d) => d.__error).length} row(s) have errors and will be skipped.
             </div>
           )}
@@ -307,8 +306,7 @@ function ExcelImport({
         <button
           disabled={busy || validCount === 0}
           onClick={saveAll}
-          className="px-4 py-2 rounded-md text-[13px] font-semibold text-white"
-          style={{ background: "#1a1d24", opacity: busy || validCount === 0 ? 0.5 : 1 }}
+          className="btn-primary px-4 py-2"
         >
           {busy ? "Saving…" : `Save ${validCount} hotel${validCount === 1 ? "" : "s"}`}
         </button>
@@ -397,17 +395,17 @@ function downloadTemplate() {
 // ------------------------------------------------------------
 // Shared bits
 // ------------------------------------------------------------
-const INPUT = "w-full px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555] focus:ring-1 focus:ring-[#b89555]/30";
-const INPUT_SM = "w-full px-2 py-1 text-[12px] border border-[#ece6d7] rounded bg-white focus:outline-none focus:border-[#b89555]";
+const INPUT = "w-full px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green focus:ring-1 focus:ring-gencom-green/30";
+const INPUT_SM = "w-full px-2 py-1 text-[12px] border border-gencom-sand rounded bg-white focus:outline-none focus:border-gencom-green";
 
 function FormRow({
   label, hint, className, children,
 }: { label: string; hint?: string; className?: string; children: React.ReactNode }) {
   return (
     <label className={`block ${className ?? ""}`}>
-      <div className="text-[11px] uppercase tracking-[0.12em] text-[#6b6f78] font-semibold mb-1">{label}</div>
+      <div className="text-[11px] uppercase tracking-[0.12em] text-gencom-stone font-semibold mb-1">{label}</div>
       {children}
-      {hint && <div className="text-[11px] text-[#6b6f78] mt-0.5">{hint}</div>}
+      {hint && <div className="text-[11px] text-gencom-stone mt-0.5">{hint}</div>}
     </label>
   );
 }
@@ -416,9 +414,9 @@ function Section({
   title, subtitle, children,
 }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <div className="mt-5 pt-4 border-t border-[#ece6d7]">
-      <div className="text-[11px] uppercase tracking-[0.18em] text-[#b89555] font-semibold">{title}</div>
-      {subtitle && <div className="text-[11px] text-[#6b6f78] mt-0.5">{subtitle}</div>}
+    <div className="mt-5 pt-4 border-t border-gencom-sand">
+      <div className="text-[11px] uppercase tracking-[0.18em] text-gencom-green font-semibold">{title}</div>
+      {subtitle && <div className="text-[11px] text-gencom-stone mt-0.5">{subtitle}</div>}
       <div className="mt-2">{children}</div>
     </div>
   );

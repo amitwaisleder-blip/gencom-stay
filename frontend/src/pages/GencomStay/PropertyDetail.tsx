@@ -72,12 +72,12 @@ export default function PropertyDetail() {
     }
   }
 
-  if (!loaded) return <div className="text-[13px] text-[#6b6f78]">Loading property…</div>;
+  if (!loaded) return <div className="text-[13px] text-gencom-stone">Loading property…</div>;
 
   if (!property) {
     return (
       <div>
-        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-[#b89555]">
+        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-gencom-green">
           ← Back to portfolio
         </Link>
         <div className="mt-6 font-serif-display text-2xl">Property not found.</div>
@@ -86,12 +86,12 @@ export default function PropertyDetail() {
   }
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto animate-fade-in">
       <div className="flex items-center justify-between">
-        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-[#b89555]">
+        <Link to="/gencom-stay" className="text-[12px] uppercase tracking-[0.18em] text-gencom-green">
           ← Back to portfolio
         </Link>
-        <div className="text-[11px] text-[#6b6f78] h-4">{saving && "Saving…"}</div>
+        <div className="text-[11px] text-gencom-stone h-4">{saving && "Saving…"}</div>
       </div>
 
       <Hero property={property} onUploadPhoto={onUploadPhoto} />
@@ -117,24 +117,21 @@ export default function PropertyDetail() {
             compact
           />
 
-          <div className="pt-4 border-t border-[#ece6d7]">
+          <div className="pt-4 border-t border-gencom-sand">
             <button
               onClick={() => navigate(`/gencom-stay/properties/${property.id}/request`)}
-              className="w-full py-3 rounded-md text-[13px] font-semibold text-white transition"
-              style={{ background: "#1a1d24" }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#2a2e38")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#1a1d24")}
+              className="btn-primary w-full py-3"
             >
               Request a Stay
             </button>
-            <div className="text-[11px] text-[#6b6f78] text-center mt-1.5">
+            <div className="text-[11px] text-gencom-stone text-center mt-1.5">
               Sends to {property.contact.name || "the property"}, CC {property.assetManager.name || "your asset manager"}.
             </div>
           </div>
 
           <button
             onClick={onDelete}
-            className="w-full py-2 rounded-md text-[12px] font-semibold border"
+            className="w-full py-2 rounded-xl text-[12px] font-semibold border"
             style={{ borderColor: "#e4bcbc", color: "#9b2226", background: "#fff" }}
           >
             Delete hotel
@@ -153,19 +150,19 @@ function Hero({ property, onUploadPhoto }: { property: Property; onUploadPhoto: 
   return (
     <div className="mt-5 grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 items-start">
       <div>
-        <div className="text-[11px] uppercase tracking-[0.22em] text-[#b89555] font-semibold">
+        <div className="text-[11px] uppercase tracking-[0.22em] text-gencom-green font-semibold">
           {property.brand}
         </div>
-        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-[#1a1d24]">
+        <h1 className="font-serif-display text-4xl md:text-5xl leading-tight mt-1 text-gencom-ink">
           {property.name}
         </h1>
-        <div className="text-[13px] uppercase tracking-wider text-[#6b6f78] mt-2">
+        <div className="text-[13px] uppercase tracking-wider text-gencom-stone mt-2">
           {property.location}
         </div>
         {property.address && (
           <div className="text-[13px] text-[#4a4d54] mt-1">{property.address}</div>
         )}
-        <div className="mt-3 h-px w-12 bg-[#b89555]" />
+        <div className="mt-3 h-px w-12 bg-gencom-green" />
         {property.tagline && (
           <p className="text-[15px] italic text-[#4a4d54] mt-5 max-w-xl">
             {property.tagline}
@@ -173,14 +170,14 @@ function Hero({ property, onUploadPhoto }: { property: Property; onUploadPhoto: 
         )}
       </div>
 
-      <div className="relative rounded-lg overflow-hidden border border-[#ece6d7]">
+      <div className="relative rounded-2xl overflow-hidden border border-gencom-sand shadow-card">
         {property.heroImage ? (
-          <div className="relative aspect-[5/3] bg-[#ece6d7]">
+          <div className="relative aspect-[5/3] bg-gencom-sand">
             <img src={property.heroImage} alt={property.name} className="absolute inset-0 w-full h-full object-cover" />
           </div>
         ) : (
           <div className="relative aspect-[5/3] flex items-center justify-center" style={{ background: "linear-gradient(135deg, #2a2e38 0%, #3c4150 50%, #1a1d24 100%)" }}>
-            <div className="font-serif-display text-[64px] text-[#b89555] leading-none">{initials(property.name)}</div>
+            <div className="font-serif-display text-[64px] text-gencom-green leading-none">{initials(property.name)}</div>
           </div>
         )}
         <input
@@ -229,13 +226,13 @@ function ContactCard({
   }
 
   return (
-    <div className="p-4 rounded-lg bg-white border border-[#ece6d7]">
+    <div className="card p-4">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[#b89555] font-semibold">{title}</div>
-          <div className="text-[11px] text-[#6b6f78] mt-0.5">{subtitle}</div>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-gencom-green font-semibold">{title}</div>
+          <div className="text-[11px] text-gencom-stone mt-0.5">{subtitle}</div>
         </div>
-        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-[#6b6f78] hover:text-[#1a1d24]">
+        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-gencom-stone hover:text-gencom-ink">
           {editing ? "Save" : "Edit"}
         </button>
       </div>
@@ -249,9 +246,9 @@ function ContactCard({
           </>
         ) : (
           <>
-            <div className="text-[15px] font-semibold text-[#1a1d24]">{contact.name || <em className="text-[#6b6f78] not-italic">Not set</em>}</div>
-            {!compact && contact.title && <div className="text-[12px] text-[#6b6f78]">{contact.title}</div>}
-            {contact.email && <a href={`mailto:${contact.email}`} className="block text-[13px] text-[#b89555] hover:underline">{contact.email}</a>}
+            <div className="text-[15px] font-semibold text-gencom-ink">{contact.name || <em className="text-gencom-stone not-italic">Not set</em>}</div>
+            {!compact && contact.title && <div className="text-[12px] text-gencom-stone">{contact.title}</div>}
+            {contact.email && <a href={`mailto:${contact.email}`} className="block text-[13px] text-gencom-green hover:underline">{contact.email}</a>}
             {!compact && contact.phone && <a href={`tel:${contact.phone}`} className="block text-[13px] text-[#4a4d54]">{contact.phone}</a>}
           </>
         )}
@@ -279,12 +276,12 @@ function RateSection({ property, update }: { property: Property; update: (patch:
   return (
     <Section title="Owner / friends & family rates" subtitle="Per-night rates for Gencom team stays.">
       <div className="flex justify-end mb-2 -mt-6">
-        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-[#6b6f78] hover:text-[#1a1d24]">
+        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-gencom-stone hover:text-gencom-ink">
           {editing ? "Save rates" : "Edit rates"}
         </button>
       </div>
       {editing ? (
-        <div className="border border-[#ece6d7] rounded-md overflow-hidden">
+        <div className="border border-gencom-sand rounded-xl overflow-hidden">
           <table className="w-full text-[13px]">
             <thead style={{ background: "#faf7f1" }}>
               <tr className="text-left">
@@ -296,7 +293,7 @@ function RateSection({ property, update }: { property: Property; update: (patch:
             </thead>
             <tbody>
               {draft.map((r, i) => (
-                <tr key={i} className="border-t border-[#ece6d7]">
+                <tr key={i} className="border-t border-gencom-sand">
                   <td className="px-3 py-1.5"><LuxInput value={r.category} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, category: v } : x))} placeholder="Deluxe King" /></td>
                   <td className="px-3 py-1.5"><LuxInput type="number" value={String(r.friendsAndFamilyRate)} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, friendsAndFamilyRate: Number(v) || 0 } : x))} /></td>
                   <td className="px-3 py-1.5"><LuxInput value={r.notes ?? ""} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, notes: v } : x))} placeholder="Optional — lounge access, view, etc." /></td>
@@ -307,32 +304,32 @@ function RateSection({ property, update }: { property: Property; update: (patch:
               ))}
             </tbody>
           </table>
-          <div className="px-3 py-2 border-t border-[#ece6d7] text-right">
-            <button onClick={() => setDraft([...draft, { category: "", friendsAndFamilyRate: 0 }])} className="text-[12px] uppercase tracking-[0.12em] font-semibold text-[#b89555] hover:text-[#1a1d24]">
+          <div className="px-3 py-2 border-t border-gencom-sand text-right">
+            <button onClick={() => setDraft([...draft, { category: "", friendsAndFamilyRate: 0 }])} className="text-[12px] uppercase tracking-[0.12em] font-semibold text-gencom-green hover:text-gencom-ink">
               + Add rate
             </button>
           </div>
         </div>
       ) : property.rates.length === 0 ? (
-        <div className="text-[13px] text-[#6b6f78] italic">No rates entered yet. Click "Edit rates" to add the first row.</div>
+        <div className="text-[13px] text-gencom-stone italic">No rates entered yet. Click "Edit rates" to add the first row.</div>
       ) : (
-        <div className="border border-[#ece6d7] rounded-md overflow-hidden bg-white">
+        <div className="border border-gencom-sand rounded-xl overflow-hidden bg-white">
           <table className="w-full text-[14px]">
             <thead style={{ background: "#faf7f1" }}>
               <tr className="text-left">
-                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-[#6b6f78]">Category</th>
-                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-[#6b6f78] text-right">Nightly rate</th>
-                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-[#6b6f78]">Notes</th>
+                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-gencom-stone">Category</th>
+                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-gencom-stone text-right">Nightly rate</th>
+                <th className="px-4 py-2.5 text-[11px] uppercase tracking-[0.12em] text-gencom-stone">Notes</th>
               </tr>
             </thead>
             <tbody>
               {property.rates.map((r, i) => (
-                <tr key={i} className="border-t border-[#ece6d7]">
-                  <td className="px-4 py-2.5 font-semibold text-[#1a1d24]">{r.category}</td>
-                  <td className="px-4 py-2.5 text-right font-mono tabular-nums text-[#1a1d24]">
+                <tr key={i} className="border-t border-gencom-sand">
+                  <td className="px-4 py-2.5 font-semibold text-gencom-ink">{r.category}</td>
+                  <td className="px-4 py-2.5 text-right font-mono tabular-nums text-gencom-ink">
                     {r.friendsAndFamilyRate === 0 ? <span className="text-[#248A3D] font-semibold">Complimentary</span> : `$${r.friendsAndFamilyRate.toLocaleString()}`}
                   </td>
-                  <td className="px-4 py-2.5 text-[#6b6f78]">{r.notes ?? "—"}</td>
+                  <td className="px-4 py-2.5 text-gencom-stone">{r.notes ?? "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -381,7 +378,7 @@ function BlackoutSection({ property, update }: { property: Property; update: (pa
   return (
     <Section title="Blackout & blocked dates" subtitle="Compression periods, citywide events, and sold-out windows when owner stays are not permitted.">
       <div className="flex justify-end mb-2 -mt-6">
-        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-[#6b6f78] hover:text-[#1a1d24]">
+        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-gencom-stone hover:text-gencom-ink">
           {editing ? "Save dates" : "Edit dates"}
         </button>
       </div>
@@ -393,10 +390,10 @@ function BlackoutSection({ property, update }: { property: Property; update: (pa
 
       {/* List */}
       {editing ? (
-        <div className="border border-[#ece6d7] rounded-md bg-white">
-          {draft.length === 0 && <div className="px-3 py-3 text-[12px] text-[#6b6f78] italic">No blackout ranges yet.</div>}
+        <div className="border border-gencom-sand rounded-xl bg-white">
+          {draft.length === 0 && <div className="px-3 py-3 text-[12px] text-gencom-stone italic">No blackout ranges yet.</div>}
           {draft.map((r, i) => (
-            <div key={i} className="px-3 py-2 border-b border-[#ece6d7] last:border-b-0 grid grid-cols-1 md:grid-cols-[120px_120px_1fr_auto] gap-2 items-center">
+            <div key={i} className="px-3 py-2 border-b border-gencom-sand last:border-b-0 grid grid-cols-1 md:grid-cols-[120px_120px_1fr_auto] gap-2 items-center">
               <LuxInput type="date" value={r.start} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, start: v } : x))} />
               <LuxInput type="date" value={r.end} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, end: v } : x))} />
               <LuxInput value={r.reason ?? ""} onChange={(v) => setDraft(draft.map((x, k) => k === i ? { ...x, reason: v } : x))} placeholder="Reason (e.g. Jazz Fest)" />
@@ -404,21 +401,21 @@ function BlackoutSection({ property, update }: { property: Property; update: (pa
             </div>
           ))}
           <div className="px-3 py-2 text-right">
-            <button onClick={() => setDraft([...draft, { start: iso(new Date()), end: iso(new Date()) }])} className="text-[12px] uppercase tracking-[0.12em] font-semibold text-[#b89555] hover:text-[#1a1d24]">
+            <button onClick={() => setDraft([...draft, { start: iso(new Date()), end: iso(new Date()) }])} className="text-[12px] uppercase tracking-[0.12em] font-semibold text-gencom-green hover:text-gencom-ink">
               + Add blackout range
             </button>
           </div>
         </div>
       ) : property.blackoutRanges.length === 0 ? (
-        <div className="text-[13px] text-[#6b6f78] italic">No blackout dates recorded.</div>
+        <div className="text-[13px] text-gencom-stone italic">No blackout dates recorded.</div>
       ) : (
-        <ul className="border border-[#ece6d7] rounded-md bg-white divide-y divide-[#ece6d7]">
+        <ul className="border border-gencom-sand rounded-xl bg-white divide-y divide-gencom-sand">
           {property.blackoutRanges.map((r, i) => (
             <li key={i} className="px-4 py-2.5 flex items-center justify-between">
               <div className="text-[13px] font-mono tabular-nums">
                 {fmtDate(r.start)} – {fmtDate(r.end)}
               </div>
-              <div className="text-[13px] text-[#6b6f78] italic">{r.reason ?? ""}</div>
+              <div className="text-[13px] text-gencom-stone italic">{r.reason ?? ""}</div>
             </li>
           ))}
         </ul>
@@ -445,9 +442,9 @@ function MiniMonth({ anchor, blocked }: { anchor: Date; blocked: Set<string> }) 
   }
 
   return (
-    <div className="rounded-md border border-[#ece6d7] bg-white p-3">
-      <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#1a1d24] mb-2">{label}</div>
-      <div className="grid grid-cols-7 gap-0.5 text-center text-[9px] uppercase tracking-wider text-[#6b6f78] mb-1">
+    <div className="rounded-xl border border-gencom-sand bg-white p-3">
+      <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-gencom-ink mb-2">{label}</div>
+      <div className="grid grid-cols-7 gap-0.5 text-center text-[9px] uppercase tracking-wider text-gencom-stone mb-1">
         {["S","M","T","W","T","F","S"].map((l, i) => <div key={i}>{l}</div>)}
       </div>
       <div className="grid grid-cols-7 gap-0.5">
@@ -491,24 +488,24 @@ function NotesSection({ property, update }: { property: Property; update: (patch
   return (
     <Section title="Property notes" subtitle="Resort fees, parking, breakfast, minimum notice — whatever matters for this hotel.">
       <div className="flex justify-end mb-2 -mt-6">
-        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-[#6b6f78] hover:text-[#1a1d24]">
+        <button onClick={() => editing ? save() : setEditing(true)} className="text-[11px] uppercase tracking-[0.12em] font-semibold text-gencom-stone hover:text-gencom-ink">
           {editing ? "Save notes" : "Edit notes"}
         </button>
       </div>
       {editing ? (
         <textarea
-          className="w-full min-h-[120px] px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555] focus:ring-1 focus:ring-[#b89555]/30"
+          className="w-full min-h-[120px] px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green focus:ring-1 focus:ring-gencom-green/30"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={"Resort fee waived for owner rates.\nValet parking $29/night.\n14-day advance notice required."}
         />
       ) : property.notes.length === 0 ? (
-        <div className="text-[13px] text-[#6b6f78] italic">No property notes yet.</div>
+        <div className="text-[13px] text-gencom-stone italic">No property notes yet.</div>
       ) : (
-        <ul className="space-y-2 text-[14px] text-[#1a1d24] leading-relaxed">
+        <ul className="space-y-2 text-[14px] text-gencom-ink leading-relaxed">
           {property.notes.map((n, i) => (
             <li key={i} className="flex gap-3">
-              <span className="text-[#b89555] mt-1.5 shrink-0">•</span>
+              <span className="text-gencom-green mt-1.5 shrink-0">•</span>
               <span>{n}</span>
             </li>
           ))}
@@ -526,8 +523,8 @@ function Section({ title, subtitle, children }: { title: string; subtitle?: stri
     <section className="mb-10">
       <div className="flex items-baseline justify-between">
         <div>
-          <div className="font-serif-display text-[26px] leading-tight text-[#1a1d24]">{title}</div>
-          {subtitle && <div className="text-[12px] text-[#6b6f78] mt-0.5">{subtitle}</div>}
+          <div className="font-serif-display text-[26px] leading-tight text-gencom-ink">{title}</div>
+          {subtitle && <div className="text-[12px] text-gencom-stone mt-0.5">{subtitle}</div>}
         </div>
       </div>
       <div className="mt-4">{children}</div>
@@ -544,7 +541,7 @@ function LuxInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-3 py-2 text-[13px] border border-[#d9d4c8] rounded-md bg-white focus:outline-none focus:border-[#b89555] focus:ring-1 focus:ring-[#b89555]/30"
+      className="w-full px-3 py-2 text-[13px] border border-gencom-sand rounded-xl bg-white focus:outline-none focus:border-gencom-green focus:ring-1 focus:ring-gencom-green/30"
     />
   );
 }
