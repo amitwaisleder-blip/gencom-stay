@@ -91,10 +91,10 @@ export default function PricingMethodology() {
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`px-5 py-3 text-sm uppercase tracking-wider whitespace-nowrap rounded-md font-semibold transition shadow-sm ${
+              className={`px-4 py-2 text-xs uppercase tracking-wider whitespace-nowrap rounded-xl font-semibold transition ${
                 active
-                  ? "bg-emerald-700 text-white ring-2 ring-emerald-700/30"
-                  : "bg-emerald-600 text-white hover:bg-emerald-700"
+                  ? "bg-gencom-green text-white shadow-card"
+                  : "bg-white border border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:bg-gencom-cloud"
               }`}
             >
               {t.label}
@@ -119,7 +119,7 @@ export default function PricingMethodology() {
             </li>
             <li>
               <b>Cross-tier match</b> — if nothing in the target tier, borrow from an adjacent tier and
-              apply a multiplier (see <button onClick={() => setTab("tier_mult")} className="text-emerald-700 hover:underline">Tier multipliers</button>).
+              apply a multiplier (see <button onClick={() => setTab("tier_mult")} className="text-gencom-green font-semibold hover:underline">Tier multipliers</button>).
               <span className="text-xs text-gencom-stone"> — Confidence: Low</span>
             </li>
             <li>
@@ -153,7 +153,7 @@ export default function PricingMethodology() {
             </select>
             <button
               onClick={() => addItem(tab === "benchmarks" ? "benchmark" : tab === "actual" ? "actual_project" : "user_seeded")}
-              className="px-3 py-1.5 bg-emerald-700 text-white rounded-md hover:bg-emerald-800"
+              className="btn-primary px-3 py-1.5"
             >
               + Add
             </button>
