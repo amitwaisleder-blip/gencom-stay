@@ -147,6 +147,9 @@ export default function PropertyDetail() {
 // ------------------------------------------------------------
 function Hero({ property, onUploadPhoto }: { property: Property; onUploadPhoto: (f: File) => void }) {
   const fileRef = useRef<HTMLInputElement | null>(null);
+  const [imgFailed, setImgFailed] = useState(false);
+  // Resolution order: uploaded URL → bundled /gencom-stay/photos/<id>.jpg → monogram.
+  const heroSrc = property.heroImage ?? `/gencom-stay/photos/${property.id}.jpg`;
   return (
     <div className="mt-5 grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-6 items-start">
       <div>
@@ -171,13 +174,13 @@ function Hero({ property, onUploadPhoto }: { property: Property; onUploadPhoto: 
       </div>
 
       <div className="relative rounded-2xl overflow-hidden border border-gencom-sand shadow-card">
-        {property.heroImage ? (
+        {!imgFailed ? (
           <div className="relative aspect-[5/3] bg-gencom-sand">
-            <img src={property.heroImage} alt={property.name} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={heroSrc} alt={property.name} onError={() => setImgFailed(true)} className="absolute inset-0 w-full h-full object-cover" />
           </div>
         ) : (
           <div className="relative aspect-[5/3] flex items-center justify-center" style={{ background: "linear-gradient(135deg, #2a2e38 0%, #3c4150 50%, #1a1d24 100%)" }}>
-            <div className="font-serif-display text-[64px] text-gencom-green leading-none">{initials(property.name)}</div>
+            <div className="font-serif-display text-[64px] text-[#b89555] leading-none">{initials(property.name)}</div>
           </div>
         )}
         <input

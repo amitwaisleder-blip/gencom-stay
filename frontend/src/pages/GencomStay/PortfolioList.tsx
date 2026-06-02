@@ -205,17 +205,24 @@ function CameraIcon() {
 }
 
 // ------------------------------------------------------------
-// Hero image — uses the provided URL if present, otherwise renders a
-// restrained monogram placeholder (property initials on a warm gradient
-// with the Gencom gold accent).
+// Hero image — resolution order:
+//   1. an explicit heroImage URL (e.g. a photo uploaded via the UI)
+//   2. a bundled file at /gencom-stay/photos/<id>.jpg (drop one in to
+//      give a property a permanent, version-controlled photo)
+//   3. a restrained monogram placeholder (property initials on a warm
+//      gradient) — shown whenever no image loads.
 // ------------------------------------------------------------
 function HeroImage({ property }: { property: Property }) {
-  if (property.heroImage) {
+  const [failed, setFailed] = useState(false);
+  const src = property.heroImage ?? bundledPhotoPath(property.id);
+
+  if (!failed) {
     return (
       <div className="relative aspect-[5/3] bg-gencom-sand overflow-hidden">
         <img
-          src={property.heroImage}
+          src={src}
           alt={property.name}
+          onError={() => setFailed(true)}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           loading="lazy"
         />
@@ -242,6 +249,13 @@ function HeroImage({ property }: { property: Property }) {
       </div>
     </div>
   );
+}
+
+// Conventional location for a bundled, version-controlled property photo.
+// Drop a file named "<property-id>.jpg" into frontend/public/gencom-stay/photos/
+// and it shows automatically; absent that, the monogram renders.
+export function bundledPhotoPath(id: string): string {
+  return `/gencom-stay/photos/${id}.jpg`;
 }
 
 function monogramInitials(name: string): string {
