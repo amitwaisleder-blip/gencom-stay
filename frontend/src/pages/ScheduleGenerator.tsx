@@ -616,7 +616,7 @@ export default function ScheduleGenerator() {
               {` · Step ${resumeOffer.step}`}
             </span>
           </div>
-          <button onClick={acceptResume} className="t-eyebrow px-3 py-1.5 bg-emerald-700 text-white rounded-md hover:bg-emerald-800">Resume</button>
+          <button onClick={acceptResume} className="t-eyebrow px-3 py-1.5 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark">Resume</button>
           <button onClick={dismissResume} className="t-eyebrow px-3 py-1.5 border border-gencom-sand bg-white rounded-md hover:bg-gencom-mist/60">Dismiss</button>
         </div>
       )}
@@ -780,7 +780,7 @@ export default function ScheduleGenerator() {
               type="button"
               onClick={goNext}
               disabled={!canAdvance()}
-              className="t-body font-semibold px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+              className="t-body font-semibold px-4 py-2 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
             >
               Next →
             </button>
@@ -814,7 +814,7 @@ function StepHeader({
         {Array.from({ length: total }).map((_, i) => {
           const n = i + 1;
           const cls = n < step
-            ? "bg-emerald-700"
+            ? "bg-gencom-green"
             : n === step
               ? "bg-gencom-gold"
               : "bg-gencom-sand";
@@ -856,12 +856,12 @@ function ChoiceCard({
       onClick={onClick}
       className={`text-left w-full p-4 rounded-lg border-2 transition ${
         selected
-          ? "border-emerald-700 bg-emerald-50"
-          : "border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50"
+          ? "border-gencom-green bg-gencom-greensoft"
+          : "border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft"
       }`}
     >
       <div className="flex items-center gap-2">
-        <div className={`t-body font-semibold ${selected ? "text-emerald-700" : "text-gencom-ink"}`}>
+        <div className={`t-body font-semibold ${selected ? "text-gencom-green" : "text-gencom-ink"}`}>
           {label}
         </div>
         {badge && (
@@ -883,7 +883,7 @@ function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700 ${props.className ?? ""}`}
+      className={`w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green ${props.className ?? ""}`}
     />
   );
 }
@@ -1057,8 +1057,8 @@ function ProjectSourcePane({
             onClick={() => onChange({ kind: "project", projectName: "Quick ROM (no source)" })}
             className={`px-4 py-2 rounded-md border-2 ${
               source.kind === "project"
-                ? "border-emerald-700 bg-emerald-50 text-emerald-700"
-                : "border-gencom-sand hover:border-emerald-700"
+                ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
+                : "border-gencom-sand hover:border-gencom-green"
             }`}
           >
             Continue without a source
@@ -1086,7 +1086,7 @@ function ProjectSourcePane({
             if (f) handleFileDrop(f);
           }}
           className={`p-6 border-2 border-dashed rounded-md text-center mb-4 transition ${
-            extracting ? "border-emerald-700 bg-emerald-50" : "border-gencom-sand hover:border-emerald-700 hover:bg-emerald-50/40"
+            extracting ? "border-gencom-green bg-gencom-greensoft" : "border-gencom-sand hover:border-gencom-green hover:bg-gencom-greensoft/40"
           }`}
         >
           <div className="t-body mb-2">
@@ -1107,14 +1107,14 @@ function ProjectSourcePane({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={extracting}
-            className="t-body font-semibold px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+            className="t-body font-semibold px-4 py-2 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
           >
             Browse files
           </button>
           <div className="t-micro mt-2">PDF · DOCX · XLSX · TXT</div>
         </div>
         {extractNote && (
-          <div className="mb-4 p-3 border border-emerald-300 bg-emerald-50 text-emerald-800 t-body rounded-md">
+          <div className="mb-4 p-3 border border-gencom-green/30 bg-gencom-greensoft text-gencom-green t-body rounded-md">
             ✓ {extractNote}
           </div>
         )}
@@ -1157,8 +1157,8 @@ function ProjectSourcePane({
                 onClick={() => onLoadArchive(a)}
                 className={`text-left p-3 rounded-md border-2 ${
                   source.kind === "project" && source.projectId === a.id
-                    ? "border-emerald-700 bg-emerald-50"
-                    : "border-gencom-sand hover:border-emerald-700"
+                    ? "border-gencom-green bg-gencom-greensoft"
+                    : "border-gencom-sand hover:border-gencom-green"
                 }`}
               >
                 <div className="t-body font-semibold">{a.name}</div>
@@ -1213,7 +1213,7 @@ function ProjectList({
             type="button"
             onClick={() => onPick(p)}
             className={`text-left p-3 rounded-md border-2 ${
-              sel ? "border-emerald-700 bg-emerald-50" : "border-gencom-sand hover:border-emerald-700"
+              sel ? "border-gencom-green bg-gencom-greensoft" : "border-gencom-sand hover:border-gencom-green"
             }`}
           >
             <div className="t-body font-semibold truncate">{p.name || "Untitled"}</div>
@@ -1312,7 +1312,7 @@ function PropertyContextPane({
             </button>
           </div>
           {aiNote && (
-            <div className="mt-2 t-micro text-emerald-800">{aiNote}</div>
+            <div className="mt-2 t-micro text-gencom-green">{aiNote}</div>
           )}
           {aiError && (
             <div className="mt-2 t-micro text-red-700">{aiError}</div>
@@ -1394,12 +1394,12 @@ function ScopeSelectionPane({
               onClick={() => toggle(label)}
               className={`text-left flex items-center gap-2 px-3 py-2 rounded-md border-2 ${
                 sel
-                  ? "border-emerald-700 bg-emerald-50"
-                  : "border-gencom-sand bg-white hover:border-emerald-700"
+                  ? "border-gencom-green bg-gencom-greensoft"
+                  : "border-gencom-sand bg-white hover:border-gencom-green"
               }`}
             >
               <span className={`inline-block w-4 h-4 rounded border-2 flex items-center justify-center text-white text-[10px] ${
-                sel ? "border-emerald-700 bg-emerald-700" : "border-gencom-sand bg-white"
+                sel ? "border-gencom-green bg-gencom-green" : "border-gencom-sand bg-white"
               }`}>{sel ? "✓" : ""}</span>
               <span className="t-body">{label}</span>
             </button>
@@ -1516,7 +1516,7 @@ function DateRangePane({
       <button
         type="button"
         onClick={add}
-        className="t-body font-semibold mt-3 px-4 py-2 border border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50"
+        className="t-body font-semibold mt-3 px-4 py-2 border border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft"
       >
         + Add range
       </button>
@@ -1681,7 +1681,7 @@ function DesignProcessPane({
                   onClick={() => set("brandApprovalPhases", { ...value.brandApprovalPhases, [p]: !value.brandApprovalPhases[p] })}
                   className={`px-3 py-1.5 rounded-md border-2 t-body ${
                     value.brandApprovalPhases[p]
-                      ? "border-emerald-700 bg-emerald-50 text-emerald-700"
+                      ? "border-gencom-green bg-gencom-greensoft text-gencom-green"
                       : "border-gencom-sand"
                   }`}
                 >
@@ -2028,11 +2028,11 @@ function RecertQuestionsPane({
                   type="button"
                   onClick={() => toggleFocus(k)}
                   className={`text-left flex items-center gap-2 px-3 py-2 rounded-md border-2 ${
-                    sel ? "border-emerald-700 bg-emerald-50" : "border-gencom-sand hover:border-emerald-700"
+                    sel ? "border-gencom-green bg-gencom-greensoft" : "border-gencom-sand hover:border-gencom-green"
                   }`}
                 >
                   <span className={`inline-block w-4 h-4 rounded border-2 flex items-center justify-center text-white text-[10px] ${
-                    sel ? "border-emerald-700 bg-emerald-700" : "border-gencom-sand bg-white"
+                    sel ? "border-gencom-green bg-gencom-green" : "border-gencom-sand bg-white"
                   }`}>{sel ? "✓" : ""}</span>
                   <span className="t-body">{label}</span>
                 </button>
@@ -2070,11 +2070,11 @@ function RecertQuestionsPane({
                   type="button"
                   onClick={() => toggleFiling(k)}
                   className={`text-left flex items-center gap-2 px-3 py-2 rounded-md border-2 ${
-                    sel ? "border-emerald-700 bg-emerald-50" : "border-gencom-sand hover:border-emerald-700"
+                    sel ? "border-gencom-green bg-gencom-greensoft" : "border-gencom-sand hover:border-gencom-green"
                   }`}
                 >
                   <span className={`inline-block w-4 h-4 rounded border-2 flex items-center justify-center text-white text-[10px] ${
-                    sel ? "border-emerald-700 bg-emerald-700" : "border-gencom-sand bg-white"
+                    sel ? "border-gencom-green bg-gencom-green" : "border-gencom-sand bg-white"
                   }`}>{sel ? "✓" : ""}</span>
                   <span className="t-body">{label}</span>
                 </button>
@@ -2234,7 +2234,7 @@ function GeneratePane({ state }: { state: WizardState }) {
           type="button"
           onClick={generate}
           disabled={loading}
-          className="t-body font-semibold px-5 py-2.5 bg-emerald-700 text-white rounded-md hover:bg-emerald-800 disabled:opacity-50"
+          className="t-body font-semibold px-5 py-2.5 bg-gencom-green text-white rounded-md hover:bg-gencom-greendark disabled:opacity-50"
         >
           {loading ? "Generating…" : preview ? "Regenerate" : "Generate Schedule"}
         </button>
@@ -2242,7 +2242,7 @@ function GeneratePane({ state }: { state: WizardState }) {
           type="button"
           onClick={() => download("xlsx")}
           disabled={exporting}
-          className="t-body font-semibold px-5 py-2.5 border-2 border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50 disabled:opacity-50"
+          className="t-body font-semibold px-5 py-2.5 border-2 border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft disabled:opacity-50"
         >
           {exporting ? "Exporting…" : "↓ Download Excel"}
         </button>
@@ -2250,7 +2250,7 @@ function GeneratePane({ state }: { state: WizardState }) {
           type="button"
           onClick={() => download("pdf")}
           disabled={exporting}
-          className="t-body font-semibold px-5 py-2.5 border-2 border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50 disabled:opacity-50"
+          className="t-body font-semibold px-5 py-2.5 border-2 border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft disabled:opacity-50"
         >
           {exporting ? "Exporting…" : "↓ Download PDF"}
         </button>
@@ -2258,7 +2258,7 @@ function GeneratePane({ state }: { state: WizardState }) {
           type="button"
           onClick={() => download("pptx")}
           disabled={exporting}
-          className="t-body font-semibold px-5 py-2.5 border-2 border-emerald-700 text-emerald-700 rounded-md hover:bg-emerald-50 disabled:opacity-50"
+          className="t-body font-semibold px-5 py-2.5 border-2 border-gencom-green text-gencom-green rounded-md hover:bg-gencom-greensoft disabled:opacity-50"
         >
           {exporting ? "Exporting…" : "↓ Download PowerPoint"}
         </button>
@@ -2308,12 +2308,12 @@ function SchedulePreviewBlock({ preview }: { preview: SchedulePreview }) {
           <button
             type="button"
             onClick={() => setView("gantt")}
-            className={`t-eyebrow px-3 py-1 ${view === "gantt" ? "bg-emerald-700 text-white" : "bg-white text-gencom-ink hover:bg-gencom-mist/60"}`}
+            className={`t-eyebrow px-3 py-1 ${view === "gantt" ? "bg-gencom-green text-white" : "bg-white text-gencom-ink hover:bg-gencom-mist/60"}`}
           >Gantt</button>
           <button
             type="button"
             onClick={() => setView("table")}
-            className={`t-eyebrow px-3 py-1 ${view === "table" ? "bg-emerald-700 text-white" : "bg-white text-gencom-ink hover:bg-gencom-mist/60"}`}
+            className={`t-eyebrow px-3 py-1 ${view === "table" ? "bg-gencom-green text-white" : "bg-white text-gencom-ink hover:bg-gencom-mist/60"}`}
           >Table</button>
         </div>
       </div>
@@ -2351,7 +2351,7 @@ function TablePreview({ preview }: { preview: SchedulePreview }) {
   return (
     <div className="border border-gencom-sand rounded-md overflow-hidden">
       <table className="w-full t-body">
-        <thead className="bg-emerald-700 text-white">
+        <thead className="bg-gencom-green text-white">
           <tr>
             <th className="text-left px-3 py-2 t-eyebrow">Task</th>
             <th className="text-left px-3 py-2 t-eyebrow">Type</th>
