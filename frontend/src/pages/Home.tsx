@@ -156,10 +156,18 @@ const TILES: Tile[] = [
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-      {TILES.map((t) => (
-        <HomeTile key={t.to} tile={t} />
-      ))}
+    <div className="mx-auto max-w-6xl">
+      <div className="mb-8 text-center animate-fade-in">
+        <div className="t-eyebrow text-gencom-gold">Gencom Group · Internal Tools</div>
+        <p className="mt-1.5 text-sm text-gencom-stone">
+          Select a tool to get started.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {TILES.map((t) => (
+          <HomeTile key={t.to} tile={t} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -195,31 +203,32 @@ function HomeTile({ tile: t }: { tile: Tile }) {
   }
 
   const tileClass =
-    "group relative flex flex-col bg-white border border-gencom-sand rounded-xl p-5 pr-14 shadow-sm " +
-    "transition-all duration-300 ease-out hover:shadow-2xl hover:-translate-y-1 hover:border-gencom-stone/40 " +
-    (dwelling ? "scale-[1.04] [transition-duration:2500ms]" : "");
+    "group card card-hover relative flex flex-col p-5 " +
+    (dwelling ? "scale-[1.03] [transition-duration:2500ms]" : "");
 
   const body = (
     <>
-      {/* Corner emoji — grayscale by default, lights up + grows on hover. */}
-      <span
-        className="absolute top-3 right-3 text-2xl leading-none grayscale opacity-50 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 group-hover:drop-shadow-[0_0_8px_rgba(184,149,85,0.55)]"
-        aria-hidden="true"
-      >
-        {t.icon}
-      </span>
-      <div className="t-eyebrow">{t.subtitle}</div>
-      <div className={`mt-2 font-display text-xl font-bold tracking-wide text-gencom-ink leading-tight ${t.noUppercase ? "" : "uppercase"}`}>
+      {/* Header row: eyebrow label + icon chip. */}
+      <div className="flex items-start justify-between gap-3">
+        <div className="t-eyebrow pt-1.5">{t.subtitle}</div>
+        <span
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-gencom-sand bg-gencom-cloud text-lg leading-none transition-all duration-300 group-hover:border-gencom-gold/50 group-hover:bg-gencom-goldsoft/40 group-hover:scale-105"
+          aria-hidden="true"
+        >
+          {t.icon}
+        </span>
+      </div>
+      <div className={`mt-2 font-display text-lg font-bold tracking-wide text-gencom-ink leading-tight ${t.noUppercase ? "" : "uppercase"}`}>
         {t.title}
       </div>
       <div className="mt-2 text-[13px] text-gencom-stone leading-snug">
         {t.blurb}
       </div>
-      <div className="mt-auto pt-3 flex items-center justify-between">
-        <span className="t-eyebrow text-gencom-stone">
+      <div className="mt-auto flex items-center justify-between border-t border-gencom-line pt-3">
+        <span className="t-eyebrow text-gencom-stone group-hover:text-gencom-ink transition-colors">
           {t.external ? "Open in new window" : "Open"}
         </span>
-        <span className="text-gencom-stone text-sm group-hover:translate-x-0.5 group-hover:text-gencom-ink transition">
+        <span className="text-gencom-stone text-sm group-hover:translate-x-0.5 group-hover:text-gencom-gold transition">
           {t.external ? "↗" : "→"}
         </span>
       </div>

@@ -13,6 +13,16 @@ body {
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
+  /* Crisper type rendering across the app. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Very soft warm wash so flat white cards have something to sit on,
+     without reading as a heavy gradient. */
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgba(184, 149, 85, 0.05), transparent 60%),
+    radial-gradient(1000px 500px at -10% 0%, rgba(26, 29, 36, 0.025), transparent 55%);
+  background-attachment: fixed;
 }
 
 /* ---- Typography hierarchy ----------------------------------------------
@@ -38,6 +48,49 @@ body {
   .t-meta    { @apply font-sans text-xs  text-gencom-stone; }
   .t-micro   { @apply font-sans text-[11px] text-gencom-stone; }
   .t-mono    { @apply font-mono text-sm  tabular-nums text-gencom-ink; }
+}
+
+
+/* ---- Shared surface & control primitives -------------------------------
+   Reusable component classes for a consistent, modern look across every
+   module. Adopt these instead of re-deriving card/button styles per page.
+
+     .card        — white elevated surface, soft shadow, rounded
+     .card-hover  — add lift + shadow bloom on hover (pair with .card)
+     .btn         — base button (sizing, radius, focus ring)
+     .btn-primary — solid ink button (primary action)
+     .btn-gold    — gold accent button
+     .btn-ghost   — bordered/quiet button
+     .chip        — small pill (status, tags, eyebrow counts)
+     .field       — text input / select baseline
+*/
+@layer components {
+  .card {
+    @apply bg-white border border-gencom-sand rounded-2xl shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:shadow-card-hover hover:-translate-y-0.5 hover:border-gencom-stone/30;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold
+           transition-colors duration-200 select-none
+           focus:outline-none focus-visible:shadow-ring disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary { @apply btn bg-gencom-ink text-white hover:bg-gencom-ink/90; }
+  .btn-gold    { @apply btn bg-gencom-gold text-gencom-ink hover:bg-gencom-gold/85; }
+  .btn-ghost   { @apply btn border border-gencom-sand bg-white text-gencom-stone hover:text-gencom-ink hover:bg-gencom-cloud; }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-gencom-sand bg-gencom-cloud
+           px-2.5 py-0.5 text-[11px] font-semibold text-gencom-stone;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-gencom-sand bg-white px-3 py-2 text-sm text-gencom-ink
+           placeholder:text-gencom-stone/60
+           focus:outline-none focus:border-gencom-gold focus-visible:shadow-ring transition;
+  }
 }
 
 

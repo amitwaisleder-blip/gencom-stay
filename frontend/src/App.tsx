@@ -104,14 +104,8 @@ function CenteredPageTitle() {
   if (loc.pathname === "/") {
     return (
       <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center pointer-events-none">
-        <div
-          className="font-display text-3xl font-extrabold uppercase tracking-[0.22em] text-gencom-ink whitespace-nowrap"
-          style={{
-            textShadow:
-              "0 1px 0 rgba(184,149,85,0.25), 0 3px 10px rgba(26,29,36,0.18), 0 0 1px rgba(26,29,36,0.35)",
-          }}
-        >
-          Gencom Dashboard
+        <div className="font-display text-[22px] font-extrabold uppercase tracking-[0.3em] text-gencom-ink whitespace-nowrap">
+          Gencom <span className="text-gencom-gold">Dashboard</span>
         </div>
       </div>
     );
@@ -219,18 +213,18 @@ export default function App() {
   return (
     <ChatContextProvider>
     <div className="min-h-screen">
-      <header className="sticky top-0 z-40 border-b border-gencom-sand bg-white shadow-sm">
+      <header className="sticky top-0 z-40 border-b border-gencom-sand/70 bg-white/85 backdrop-blur-md shadow-header">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-3 relative">
           <div className="flex-shrink-0 min-w-0">
             <HeaderBrand />
             <PropertyNameBadge />
           </div>
           <CenteredPageTitle />
-          <nav className="flex gap-3 text-xs uppercase tracking-wider font-semibold text-gencom-stone items-center flex-shrink-0">
-            <Link to="/" className="hover:text-gencom-ink">Home</Link>
-            <Link to="/projects" className="hover:text-gencom-ink">Projects</Link>
-            <Link to="/cost-db" className="hover:text-gencom-ink">Cost DB</Link>
-            <Link to="/template" className="hover:text-gencom-ink">Template</Link>
+          <nav className="flex gap-1 text-xs uppercase tracking-wider font-semibold text-gencom-stone items-center flex-shrink-0">
+            <Link to="/" className="rounded-lg px-2.5 py-1.5 hover:bg-gencom-cloud hover:text-gencom-ink transition-colors">Home</Link>
+            <Link to="/projects" className="rounded-lg px-2.5 py-1.5 hover:bg-gencom-cloud hover:text-gencom-ink transition-colors">Projects</Link>
+            <Link to="/cost-db" className="rounded-lg px-2.5 py-1.5 hover:bg-gencom-cloud hover:text-gencom-ink transition-colors">Cost DB</Link>
+            <Link to="/template" className="rounded-lg px-2.5 py-1.5 hover:bg-gencom-cloud hover:text-gencom-ink transition-colors">Template</Link>
             <IssuesBell />
             <PropertyHeaderActions onOpenChat={() => setChatOpen(true)} />
           </nav>
