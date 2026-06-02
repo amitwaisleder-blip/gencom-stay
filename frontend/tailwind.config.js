@@ -5,11 +5,14 @@ export default {
     extend: {
       colors: {
         gencom: {
-          ink: "#1a1d24",
-          stone: "#6b6f78",
-          sand: "#d9d4c8",
-          gold: "#b89555",
-          mist: "#f5f3ee",
+          ink: "#1a1d24",      // primary text / near-black
+          stone: "#6b6f78",    // secondary text / muted
+          sand: "#e7e2d6",     // hairline borders (lightened for a cleaner, modern edge)
+          line: "#efece4",     // extra-subtle dividers
+          gold: "#b89555",     // brand accent
+          goldsoft: "#ece1c8", // tinted gold for soft fills / focus rings
+          mist: "#f7f5f0",     // app background (cleaner off-white)
+          cloud: "#fcfbf8",    // elevated surface tint between white and mist
         },
         // ---- Intern Program tokens (HSL CSS vars in src/styles/intern.css) ----
         // Scoped via .intern-module class on the wrapper so they don't bleed
@@ -61,6 +64,15 @@ export default {
         // Cormorant Garamond — reserved for Gencom Stay property names and
         // luxury-hospitality display type. Imported from Google Fonts in index.html.
         "serif-display": ["'Cormorant Garamond'", "Cormorant", "Georgia", "serif"],
+      },
+      boxShadow: {
+        // Modern, soft elevation scale — layered low-opacity shadows read
+        // cleaner than a single hard drop shadow. Used by the shared .card
+        // component class and the global header/nav.
+        card: "0 1px 2px rgba(26,29,36,0.04), 0 1px 3px rgba(26,29,36,0.05)",
+        "card-hover": "0 12px 32px -12px rgba(26,29,36,0.20), 0 2px 6px rgba(26,29,36,0.06)",
+        header: "0 1px 0 rgba(26,29,36,0.05), 0 6px 20px -16px rgba(26,29,36,0.25)",
+        ring: "0 0 0 3px rgba(184,149,85,0.30)",
       },
       keyframes: {
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
