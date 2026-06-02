@@ -362,7 +362,7 @@ export function InvoicesView({
           {onUploadInvoice && (
             <button
               onClick={onUploadInvoice}
-              className="mt-4 text-sm px-4 py-2 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
+              className="mt-4 text-sm px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
             >
               🧾 Upload invoice
             </button>
@@ -435,7 +435,7 @@ export function InvoicesView({
                   value={invoiceNumQuery}
                   onChange={(e) => setInvoiceNumQuery(e.target.value)}
                   placeholder="Search invoice #"
-                  className="w-full text-xs px-2 py-1.5 border border-gencom-sand rounded bg-white focus:outline-none focus:border-emerald-700"
+                  className="w-full text-xs px-2 py-1.5 border border-gencom-sand rounded bg-white focus:outline-none focus:border-gencom-green"
                 />
                 <div className="text-[10px] uppercase tracking-wider text-gencom-stone mb-1 mt-3">
                   Status
@@ -447,7 +447,7 @@ export function InvoicesView({
                       onClick={() => setStatusFilter(s)}
                       className={`px-3 py-1 transition ${
                         statusFilter === s
-                          ? "bg-emerald-700 text-white font-semibold"
+                          ? "bg-gencom-green text-white font-semibold"
                           : "text-gencom-stone hover:text-gencom-ink"
                       }`}
                     >
@@ -485,7 +485,7 @@ export function InvoicesView({
                         onClick={() => toggleHiddenColumn(c.id)}
                         className={`text-[11px] px-2 py-1 rounded-full border ${
                           visible
-                            ? "bg-emerald-700 text-white border-emerald-700"
+                            ? "bg-gencom-green text-white border-gencom-green"
                             : "border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
                         }`}
                       >
@@ -606,7 +606,7 @@ export function InvoicesView({
                     setExportMenuOpen(false);
                     downloadTracking();
                   }}
-                  className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3 rounded"
+                  className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3 rounded"
                 >
                   <span className="text-lg leading-none mt-0.5">📊</span>
                   <span className="flex-1 min-w-0">
@@ -639,7 +639,7 @@ export function InvoicesView({
         {onUploadInvoice && (
           <button
             onClick={onUploadInvoice}
-            className="text-xs px-3 py-1.5 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800 whitespace-nowrap"
+            className="text-xs px-3 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green whitespace-nowrap"
             title="Upload another invoice"
           >
             + Upload invoice
@@ -650,7 +650,7 @@ export function InvoicesView({
 
       <div className="grid grid-cols-3 gap-3">
         <Stat label="Invoices" value={`${totalCount}`} muted />
-        <Stat label="Paid" value={fmtMoney(paidAmount)} className="text-emerald-700" />
+        <Stat label="Paid" value={fmtMoney(paidAmount)} className="text-gencom-green" />
         <Stat label="Outstanding" value={fmtMoney(unpaidAmount)} className="text-gencom-gold" />
       </div>
 
@@ -934,7 +934,7 @@ function InvoiceRow({
               <button
                 onClick={() => commitDate(draft || null)}
                 disabled={saving}
-                className="text-[10px] uppercase tracking-wider text-emerald-700 hover:text-emerald-900 font-semibold disabled:opacity-50"
+                className="text-[10px] uppercase tracking-wider text-gencom-green hover:text-gencom-green font-semibold disabled:opacity-50"
               >
                 Save
               </button>
@@ -958,7 +958,7 @@ function InvoiceRow({
         {colVisible("status") && (
         <td className="px-3 py-2 align-top whitespace-nowrap truncate overflow-hidden" onClick={toggleExpand}>
           {isPaid ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] uppercase tracking-wider font-semibold border border-emerald-200">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gencom-greensoft text-gencom-green text-[10px] uppercase tracking-wider font-semibold border border-gencom-green/20">
               ● Paid
             </span>
           ) : (
@@ -1137,8 +1137,8 @@ function InvoiceApplyPanel({
             onClick={() => setSplitMode(false)}
             className={`px-3 py-1 transition ${
               !splitMode
-                ? "bg-emerald-700 text-white"
-                : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                ? "bg-gencom-green text-white"
+                : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
             }`}
           >
             Single line
@@ -1148,8 +1148,8 @@ function InvoiceApplyPanel({
             onClick={() => setSplitMode(true)}
             className={`px-3 py-1 border-l-2 border-gencom-sand transition ${
               splitMode
-                ? "bg-emerald-700 text-white"
-                : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                ? "bg-gencom-green text-white"
+                : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
             }`}
           >
             Split across lines{splits.length > 0 && (
@@ -1174,7 +1174,7 @@ function InvoiceApplyPanel({
           <select
             value={lineId ?? ""}
             onChange={(e) => setLineId(e.target.value || null)}
-            className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-emerald-700"
+            className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-gencom-green"
           >
             <option value="">— unassigned —</option>
             {allLines.map((l) => (
@@ -1190,7 +1190,7 @@ function InvoiceApplyPanel({
               <select
                 value={appliedYear ?? ""}
                 onChange={(e) => setAppliedYear(e.target.value ? Number(e.target.value) : null)}
-                className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-emerald-700"
+                className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-gencom-green"
               >
                 <option value="">—</option>
                 {years.map((y) => (
@@ -1205,7 +1205,7 @@ function InvoiceApplyPanel({
               <select
                 value={appliedMonth ?? ""}
                 onChange={(e) => setAppliedMonth(e.target.value ? Number(e.target.value) : null)}
-                className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-emerald-700"
+                className="w-full px-3 py-2 border border-gencom-sand rounded-md text-xs bg-white focus:outline-none focus:border-gencom-green"
               >
                 <option value="">—</option>
                 {MONTHS_SHORT.map((m, idx) => (
@@ -1237,7 +1237,7 @@ function InvoiceApplyPanel({
           type="button"
           onClick={save}
           disabled={saving}
-          className="text-xs px-4 py-1.5 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800 disabled:opacity-50"
+          className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green disabled:opacity-50"
         >
           {saving ? "Saving…" : "Save"}
         </button>

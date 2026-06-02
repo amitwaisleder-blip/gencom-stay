@@ -607,7 +607,7 @@ function ReviewStage({
             onClick={() => setApplyMode("new")}
             className={`px-3 py-1.5 text-xs uppercase tracking-wider transition ${
               applyMode === "new"
-                ? "bg-emerald-700 text-white font-semibold"
+                ? "bg-gencom-green text-white font-semibold"
                 : "bg-white text-gencom-stone hover:text-gencom-ink"
             }`}
           >
@@ -619,7 +619,7 @@ function ReviewStage({
             disabled={existingLines.length === 0}
             className={`px-3 py-1.5 text-xs uppercase tracking-wider transition border-l-2 border-gencom-sand ${
               applyMode === "merge"
-                ? "bg-emerald-700 text-white font-semibold"
+                ? "bg-gencom-green text-white font-semibold"
                 : "bg-white text-gencom-stone hover:text-gencom-ink disabled:opacity-40 disabled:cursor-not-allowed"
             }`}
             title={
@@ -636,7 +636,7 @@ function ReviewStage({
             disabled={existingLines.length === 0}
             className={`px-3 py-1.5 text-xs uppercase tracking-wider transition border-l-2 border-gencom-sand ${
               applyMode === "existing"
-                ? "bg-emerald-700 text-white font-semibold"
+                ? "bg-gencom-green text-white font-semibold"
                 : "bg-white text-gencom-stone hover:text-gencom-ink disabled:opacity-40 disabled:cursor-not-allowed"
             }`}
             title={
@@ -729,7 +729,7 @@ function ReviewStage({
               <span className="text-gencom-stone">
                 Auto-matched:
               </span>
-              <span className="text-emerald-800 font-semibold">
+              <span className="text-gencom-green font-semibold">
                 {drafts.filter((d) => d.included && d.action === "update").length} update
               </span>
               <span className="text-gencom-stone">·</span>
@@ -811,7 +811,7 @@ function ReviewStage({
           <div className="text-[10px] uppercase tracking-wider text-gencom-stone">AI confidence</div>
           <div className="text-sm font-semibold">
             {extract.confidence === "high" ? (
-              <span className="text-emerald-700">high</span>
+              <span className="text-gencom-green">high</span>
             ) : extract.confidence === "medium" ? (
               <span className="text-gencom-gold">medium</span>
             ) : extract.confidence === "low" ? (
@@ -1032,7 +1032,7 @@ function RowActionSelector({
         }}
         className={`w-full px-1.5 py-0.5 border rounded text-[11px] bg-white ${
           d.action === "update"
-            ? "border-emerald-400 text-emerald-900"
+            ? "border-gencom-green/40 text-gencom-green"
             : d.action === "skip"
             ? "border-gencom-sand text-gencom-stone"
             : "border-gencom-gold/60 text-gencom-ink"
@@ -1056,7 +1056,7 @@ function RowActionSelector({
         )}
       </select>
       {d.action === "update" && matched && (
-        <div className="text-[10px] text-emerald-700 truncate" title={matched.project_name ?? ""}>
+        <div className="text-[10px] text-gencom-green truncate" title={matched.project_name ?? ""}>
           → {matched.code ? `${matched.code} · ` : ""}
           {matched.project_name ?? matched.description ?? "(unnamed)"}
         </div>

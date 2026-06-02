@@ -121,7 +121,7 @@ export function HotelDetailsForm({
             <span
               className={
                 conf === "high"
-                  ? "text-emerald-700 font-semibold"
+                  ? "text-gencom-green font-semibold"
                   : conf === "medium"
                   ? "text-gencom-gold font-semibold"
                   : "text-red-700 font-semibold"

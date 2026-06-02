@@ -339,7 +339,7 @@ function PortfolioHotelList({ project }: { project: CapexProject }) {
             <Link
               key={h.id}
               to={`/capex-tracker/projects/${project.id}/hotels/${h.id}`}
-              className="group relative flex flex-col bg-white border-2 border-gencom-sand rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-emerald-700 transition w-[260px]"
+              className="group relative flex flex-col bg-white border-2 border-gencom-sand rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-gencom-green transition w-[260px]"
             >
               {/* Hover-only edit affordance pinned top-right. Stops propagation
                   so clicking it doesn't follow the tile link. */}
@@ -350,7 +350,7 @@ function PortfolioHotelList({ project }: { project: CapexProject }) {
                   e.stopPropagation();
                   setEditingHotel(h);
                 }}
-                className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 border border-gencom-sand text-[10px] uppercase tracking-wider font-semibold text-gencom-ink shadow-sm opacity-0 group-hover:opacity-100 transition hover:border-emerald-700 hover:text-emerald-700"
+                className="absolute top-2 right-2 z-10 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 border border-gencom-sand text-[10px] uppercase tracking-wider font-semibold text-gencom-ink shadow-sm opacity-0 group-hover:opacity-100 transition hover:border-gencom-green hover:text-gencom-green"
                 title="Edit hotel details"
               >
                 ✎ Edit
@@ -533,7 +533,7 @@ function HotelEditModal({
             type="button"
             onClick={save}
             disabled={saving}
-            className="text-xs px-4 py-1.5 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800 disabled:opacity-50"
+            className="text-xs px-4 py-1.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save"}
           </button>

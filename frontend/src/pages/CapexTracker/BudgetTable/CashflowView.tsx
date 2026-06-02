@@ -222,7 +222,7 @@ export function CashflowView({
                 onClick={() => setSelectedYear(y)}
                 className={`text-[11px] px-2 py-1 rounded-md border transition tabular-nums ${
                   selectedYear === y
-                    ? "border-emerald-700 bg-emerald-700 text-white font-semibold"
+                    ? "border-gencom-green bg-gencom-green text-white font-semibold"
                     : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
                 }`}
               >
@@ -258,7 +258,7 @@ export function CashflowView({
                             onClick={() => toggleMeta(c.id)}
                             className={`text-[11px] px-2 py-1 rounded-full border ${
                               visible
-                                ? "bg-emerald-700 text-white border-emerald-700"
+                                ? "bg-gencom-green text-white border-gencom-green"
                                 : "border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
                             }`}
                           >
@@ -710,7 +710,7 @@ function ImportCashflowModal({
 
           {result && (
             <div className="space-y-2 text-xs">
-              <div className="rounded-md border border-emerald-300 bg-emerald-50 px-3 py-2 text-emerald-800">
+              <div className="rounded-md border border-gencom-green/30 bg-gencom-greensoft px-3 py-2 text-gencom-green">
                 Updated <span className="font-semibold">{result.matched_count}</span> line
                 {result.matched_count === 1 ? "" : "s"}.
               </div>

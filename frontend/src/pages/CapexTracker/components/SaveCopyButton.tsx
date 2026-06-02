@@ -104,7 +104,7 @@ export function SaveCopyButton({
         {busy ? "Saving…" : savedAs ? "Saved ✓" : "Save a copy"}
       </button>
       {savedAs && (
-        <div className="mt-1 text-[11px] text-emerald-700 truncate" title={savedAs}>
+        <div className="mt-1 text-[11px] text-gencom-green truncate" title={savedAs}>
           Saved as {savedAs}
         </div>
       )}

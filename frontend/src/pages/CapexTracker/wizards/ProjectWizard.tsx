@@ -201,11 +201,11 @@ function SourceCard({
       onClick={disabled ? undefined : onClick}
       className={`text-left p-4 rounded-lg border-2 transition ${
         active
-          ? "border-emerald-700 bg-emerald-50"
-          : "border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50"
+          ? "border-gencom-green bg-gencom-greensoft"
+          : "border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft"
       } ${disabled ? "opacity-60 cursor-not-allowed hover:border-gencom-sand hover:bg-white" : "cursor-pointer"}`}
     >
-      <div className={`t-body font-semibold ${active ? "text-emerald-700" : ""}`}>{title}</div>
+      <div className={`t-body font-semibold ${active ? "text-gencom-green" : ""}`}>{title}</div>
       <div className="t-micro mt-1 leading-snug">{blurb}</div>
       {disabled && (
         <div className="mt-2 t-eyebrow text-gencom-gold">Round B/C</div>

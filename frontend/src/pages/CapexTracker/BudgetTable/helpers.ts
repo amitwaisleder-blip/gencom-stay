@@ -7,7 +7,7 @@ import type { CapexLine, CapexLineStatus } from "../lib/types";
 export function statusPillClasses(status: CapexLineStatus | null | undefined): string {
   switch (status) {
     case "approved":
-      return "bg-emerald-50 border-emerald-200 text-emerald-700";
+      return "bg-gencom-greensoft border-gencom-green/20 text-gencom-green";
     case "in-progress":
       return "bg-blue-50 border-blue-200 text-blue-700";
     case "completed":

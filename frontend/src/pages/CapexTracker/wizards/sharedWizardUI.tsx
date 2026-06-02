@@ -64,7 +64,7 @@ export function TextInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700"
+      className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green"
     />
   );
 }
@@ -189,7 +189,7 @@ export function PrimaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="px-5 py-2 rounded-md bg-emerald-700 text-white font-semibold text-sm hover:bg-emerald-800 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
+      className="px-5 py-2 rounded-md bg-gencom-green text-white font-semibold text-sm hover:bg-gencom-green disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
     >
       {children}
     </button>

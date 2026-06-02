@@ -462,7 +462,7 @@ export function BudgetTable({
                   <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
                     <button
                       onClick={() => setUploading(true)}
-                      className="text-xs px-4 py-2 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
+                      className="text-xs px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
                     >
                       📄 Upload budget
                     </button>
@@ -726,8 +726,8 @@ export function ViewTabs({
           onClick={() => setView(v.id)}
           className={`w-28 py-1.5 text-center transition uppercase tracking-wider ${i > 0 ? "border-l-2 border-gencom-sand" : ""} ${
             view === v.id
-              ? "bg-emerald-700 text-white"
-              : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+              ? "bg-gencom-green text-white"
+              : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
           }`}
         >
           {v.label}
@@ -929,7 +929,7 @@ function EditMenu({
           onClick={() => setOpen((o) => !o)}
           className={`text-xs h-9 px-3 rounded-md border whitespace-nowrap inline-flex items-center gap-1.5 ${
             isActive
-              ? "border-emerald-700 bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
+              ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-green"
               : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
           }`}
           title="Edit cells, add a line, edit multiple, or upload"
@@ -945,7 +945,7 @@ function EditMenu({
                   setOpen(false);
                   toggleEditMode();
                 }}
-                className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+                className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
               >
                 <span className="text-lg leading-none mt-0.5">{editMode ? "✓" : "✎"}</span>
                 <span className="flex-1 min-w-0">
@@ -962,7 +962,7 @@ function EditMenu({
                   setOpen(false);
                   onAdd();
                 }}
-                className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+                className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
               >
                 <span className="text-lg leading-none mt-0.5">＋</span>
                 <span className="flex-1 min-w-0">
@@ -977,7 +977,7 @@ function EditMenu({
                   setOpen(false);
                   onToggleSelectionMode();
                 }}
-                className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+                className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
               >
                 <span className="text-lg leading-none mt-0.5">{selectionMode ? "✕" : "☑"}</span>
                 <span className="flex-1 min-w-0">
@@ -995,7 +995,7 @@ function EditMenu({
                   setOpen(false);
                   setChooserOpen(true);
                 }}
-                className="w-full text-left px-3 py-2 hover:bg-emerald-50 transition flex items-start gap-3"
+                className="w-full text-left px-3 py-2 hover:bg-gencom-greensoft transition flex items-start gap-3"
               >
                 <span className="text-lg leading-none mt-0.5">📤</span>
                 <span className="flex-1 min-w-0">
@@ -1198,8 +1198,8 @@ function UploadChoiceTile({
         (disabled
           ? "border-gencom-sand bg-gencom-mist/20 text-gencom-stone/50 cursor-not-allowed"
           : dragOver
-          ? "border-emerald-700 bg-emerald-50"
-          : "border-dashed border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50/40")
+          ? "border-gencom-green bg-gencom-greensoft"
+          : "border-dashed border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft/40")
       }
     >
       <div className="flex items-start gap-3">
@@ -1258,7 +1258,7 @@ function BulkActionBar({
   saving: boolean;
 }) {
   return (
-    <div className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2 flex items-center gap-3 flex-wrap">
+    <div className="rounded-md border border-gencom-green/20 bg-gencom-greensoft px-4 py-2 flex items-center gap-3 flex-wrap">
       <label className="inline-flex items-center gap-2 text-xs cursor-pointer select-none">
         <input
           type="checkbox"
@@ -1283,7 +1283,7 @@ function BulkActionBar({
           key={s}
           onClick={() => onApplyStatus(s)}
           disabled={selectedCount === 0 || saving}
-          className="text-xs h-8 px-3 rounded-md border border-emerald-300 bg-white text-gencom-ink hover:bg-emerald-100 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+          className="text-xs h-8 px-3 rounded-md border border-gencom-green/30 bg-white text-gencom-ink hover:bg-gencom-greensoft disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {s === "in-progress"
             ? "In-Progress"
@@ -1345,7 +1345,7 @@ function FilterMenu({
               onClick={() => toggleGroupFilter(g)}
               className={`text-[11px] px-2 py-1 rounded-full border ${
                 groupFilter.has(g)
-                  ? "bg-emerald-700 text-white border-emerald-700"
+                  ? "bg-gencom-green text-white border-gencom-green"
                   : "border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
               }`}
             >
@@ -1361,7 +1361,7 @@ function FilterMenu({
               onClick={() => toggleCategoryFilter(c)}
               className={`text-[11px] px-2 py-1 rounded-full border ${
                 categoryFilter.has(c)
-                  ? "bg-emerald-700 text-white border-emerald-700"
+                  ? "bg-gencom-green text-white border-gencom-green"
                   : "border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
               }`}
             >
@@ -1400,7 +1400,7 @@ function ColumnsMenu({
                 onClick={() => toggleHidden(c.id)}
                 className={`text-[11px] px-2 py-1 rounded-full border ${
                   visible
-                    ? "bg-emerald-700 text-white border-emerald-700"
+                    ? "bg-gencom-green text-white border-gencom-green"
                     : "border-gencom-sand text-gencom-stone hover:text-gencom-ink hover:border-gencom-stone"
                 }`}
               >
@@ -1557,7 +1557,7 @@ function LineRow({
     <>
       <tr
         className={`border-t border-gencom-sand/60 group transition cursor-pointer ${
-          expanded ? "bg-gencom-mist/40" : selected ? "bg-emerald-50/60" : "hover:bg-gencom-mist/20"
+          expanded ? "bg-gencom-mist/40" : selected ? "bg-gencom-greensoft/60" : "hover:bg-gencom-mist/20"
         } ${isCompleted ? "text-gencom-stone/60" : ""}`}
         onClick={handleRowClick}
       >

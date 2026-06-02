@@ -381,7 +381,7 @@ function ReviewStage({
           <div className="text-[10px] uppercase tracking-wider text-gencom-stone">AI confidence</div>
           <div className="text-sm font-semibold">
             {parsed.confidence === "high" ? (
-              <span className="text-emerald-700">high</span>
+              <span className="text-gencom-green">high</span>
             ) : parsed.confidence === "medium" ? (
               <span className="text-gencom-gold">medium</span>
             ) : parsed.confidence === "low" ? (
@@ -407,11 +407,11 @@ function ReviewStage({
               }}
               className={`px-3 py-2 rounded-lg border-2 text-sm transition text-left ${
                 docType === t
-                  ? "border-emerald-700 bg-emerald-50"
-                  : "border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50"
+                  ? "border-gencom-green bg-gencom-greensoft"
+                  : "border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft"
               }`}
             >
-              <div className={`font-semibold capitalize ${docType === t ? "text-emerald-700" : "text-gencom-ink"}`}>
+              <div className={`font-semibold capitalize ${docType === t ? "text-gencom-green" : "text-gencom-ink"}`}>
                 {t}
               </div>
               <div className="text-[10px] text-gencom-stone mt-0.5 line-clamp-2 leading-tight">
@@ -530,11 +530,11 @@ function ForecastChoice({
       onClick={disabled ? undefined : onClick}
       className={`w-full text-left px-3 py-2 rounded-lg border-2 transition ${
         active
-          ? "border-emerald-700 bg-emerald-50"
-          : "border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50"
+          ? "border-gencom-green bg-gencom-greensoft"
+          : "border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft"
       } ${disabled ? "opacity-40 cursor-not-allowed hover:border-gencom-sand hover:bg-white" : "cursor-pointer"}`}
     >
-      <div className={`t-body font-semibold ${active ? "text-emerald-700" : ""}`}>{title}</div>
+      <div className={`t-body font-semibold ${active ? "text-gencom-green" : ""}`}>{title}</div>
       <div className="t-micro mt-0.5 leading-snug">{blurb}</div>
     </button>
   );

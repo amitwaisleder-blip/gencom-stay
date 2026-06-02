@@ -347,8 +347,8 @@ export function RowEditModal({
                 onClick={() => setPeriodMode("year")}
                 className={`px-3 py-1 transition ${
                   periodMode === "year"
-                    ? "bg-emerald-700 text-white"
-                    : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                    ? "bg-gencom-green text-white"
+                    : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
                 }`}
               >
                 Year
@@ -358,8 +358,8 @@ export function RowEditModal({
                 onClick={() => setPeriodMode("month")}
                 className={`px-3 py-1 border-l-2 border-gencom-sand transition ${
                   periodMode === "month"
-                    ? "bg-emerald-700 text-white"
-                    : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                    ? "bg-gencom-green text-white"
+                    : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
                 }`}
               >
                 Month
@@ -481,8 +481,8 @@ export function RowEditModal({
                 onClick={() => setEditingBreakdown((v) => !v)}
                 className={`text-xs px-3 py-1 rounded-md border whitespace-nowrap transition ${
                   editingBreakdown
-                    ? "border-emerald-700 bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
-                    : "border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700"
+                    ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+                    : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green"
                 }`}
                 title={
                   editingBreakdown
@@ -629,7 +629,7 @@ export function RowEditModal({
                 <button
                   type="button"
                   onClick={addBreakdownItem}
-                  className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700"
+                  className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green"
                 >
                   + Add item
                 </button>
@@ -653,7 +653,7 @@ export function RowEditModal({
                 setEditingBreakdown(true);
                 addBreakdownItem();
               }}
-              className="text-xs px-3 py-1.5 rounded-md border border-dashed border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700"
+              className="text-xs px-3 py-1.5 rounded-md border border-dashed border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green"
             >
               + Add first cost-breakdown item
             </button>
@@ -666,7 +666,7 @@ export function RowEditModal({
             <button
               type="button"
               onClick={() => setInvoiceUploadOpen(true)}
-              className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700 inline-flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green inline-flex items-center gap-1.5"
               title="Upload a vendor invoice — pre-targeted to this line"
             >
               <span aria-hidden>🧾</span> Upload invoice
@@ -674,7 +674,7 @@ export function RowEditModal({
             <button
               type="button"
               onClick={() => setBudgetUploadOpen(true)}
-              className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700 inline-flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-md border border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green inline-flex items-center gap-1.5"
               title="Upload a budget / proposal — sub-items roll into this line"
             >
               <span aria-hidden>📄</span> Upload budget / proposal
@@ -699,7 +699,7 @@ export function RowEditModal({
                       <span
                         className={`text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded font-semibold ${
                           d.doc_type === "contract"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                            ? "bg-gencom-greensoft text-gencom-green border border-gencom-green/20"
                             : d.doc_type === "agreement"
                             ? "bg-gencom-sand/40 text-gencom-stone border border-gencom-sand"
                             : "bg-gencom-gold/10 text-gencom-gold border border-gencom-gold/40"
@@ -1014,7 +1014,7 @@ function VendorCombobox({
                 onChange(s);
                 setOpen(false);
               }}
-              className="block w-full text-left px-3 py-1.5 text-sm text-gencom-ink hover:bg-emerald-50 hover:text-emerald-700"
+              className="block w-full text-left px-3 py-1.5 text-sm text-gencom-ink hover:bg-gencom-greensoft hover:text-gencom-green"
             >
               {s}
             </button>

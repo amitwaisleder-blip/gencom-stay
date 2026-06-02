@@ -147,8 +147,8 @@ export function InvoiceEditModal({
               onClick={() => setPreviewOpen((v) => !v)}
               className={`text-xs px-3 py-1.5 rounded-md border whitespace-nowrap transition ${
                 previewOpen
-                  ? "border-emerald-700 bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
-                  : "border-gencom-sand bg-white text-gencom-stone hover:text-emerald-700 hover:border-emerald-700"
+                  ? "border-gencom-green bg-gencom-green text-white font-semibold hover:bg-gencom-green"
+                  : "border-gencom-sand bg-white text-gencom-stone hover:text-gencom-green hover:border-gencom-green"
               }`}
               title={previewOpen ? "Hide inline preview" : "Preview the file inline below"}
             >
@@ -214,8 +214,8 @@ export function InvoiceEditModal({
               onClick={() => setSplitMode(false)}
               className={`px-4 py-1.5 transition ${
                 !splitMode
-                  ? "bg-emerald-700 text-white"
-                  : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                  ? "bg-gencom-green text-white"
+                  : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
               }`}
             >
               Single line
@@ -225,8 +225,8 @@ export function InvoiceEditModal({
               onClick={() => setSplitMode(true)}
               className={`px-4 py-1.5 border-l-2 border-gencom-sand transition ${
                 splitMode
-                  ? "bg-emerald-700 text-white"
-                  : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+                  ? "bg-gencom-green text-white"
+                  : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
               }`}
             >
               Split across lines{" "}
@@ -251,7 +251,7 @@ export function InvoiceEditModal({
               <select
                 value={draft.line_id ?? ""}
                 onChange={(e) => patch({ line_id: e.target.value || null })}
-                className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700"
+                className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green"
               >
                 <option value="">— unassigned —</option>
                 {allLines.map((l) => (
@@ -267,7 +267,7 @@ export function InvoiceEditModal({
                   <select
                     value={draft.applied_year ?? ""}
                     onChange={(e) => patch({ applied_year: e.target.value ? Number(e.target.value) : null })}
-                    className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700"
+                    className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green"
                   >
                     <option value="">—</option>
                     {years.map((y) => (
@@ -282,7 +282,7 @@ export function InvoiceEditModal({
                   <select
                     value={draft.applied_month ?? ""}
                     onChange={(e) => patch({ applied_month: e.target.value ? Number(e.target.value) : null })}
-                    className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700"
+                    className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green"
                   >
                     <option value="">—</option>
                     {MONTHS.map((m, idx) => (
@@ -304,10 +304,10 @@ export function InvoiceEditModal({
               type="date"
               value={draft.date_paid ?? ""}
               onChange={(e) => patch({ date_paid: e.target.value || null })}
-              className="px-2 py-1 border border-gencom-sand rounded text-sm focus:outline-none focus:border-emerald-700"
+              className="px-2 py-1 border border-gencom-sand rounded text-sm focus:outline-none focus:border-gencom-green"
             />
             {isPaid ? (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] uppercase tracking-wider font-semibold border border-emerald-200">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gencom-greensoft text-gencom-green text-[10px] uppercase tracking-wider font-semibold border border-gencom-green/20">
                 ● Paid
               </span>
             ) : (
@@ -331,7 +331,7 @@ export function InvoiceEditModal({
               value={draft.payment_notes ?? ""}
               onChange={(e) => patch({ payment_notes: e.target.value || null })}
               rows={2}
-              className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-emerald-700"
+              className="w-full px-3 py-2 border border-gencom-sand rounded-md t-body bg-white focus:outline-none focus:border-gencom-green"
             />
           </div>
         </div>

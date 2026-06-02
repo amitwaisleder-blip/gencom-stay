@@ -51,7 +51,7 @@ export function EditableCell({
         }
       }}
       onClick={(e) => e.stopPropagation()}
-      className={`w-full px-1.5 py-0.5 border border-transparent hover:border-gencom-sand focus:border-emerald-700 focus:bg-white rounded text-xs ${
+      className={`w-full px-1.5 py-0.5 border border-transparent hover:border-gencom-sand focus:border-gencom-green focus:bg-white rounded text-xs ${
         align === "right" ? "text-right" : "text-left"
       } ${fontMono ? "font-mono" : ""} bg-transparent outline-none`}
     />

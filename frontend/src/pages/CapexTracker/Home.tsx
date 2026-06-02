@@ -71,7 +71,7 @@ export default function CapexTrackerHome() {
         </div>
         <button
           onClick={() => setPickerOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800 shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green shadow-sm"
         >
           <span className="text-lg leading-none">+</span> New
         </button>
@@ -127,7 +127,7 @@ function EmptyState({ onNew }: { onNew: () => void }) {
       </p>
       <button
         onClick={onNew}
-        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800"
+        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-gencom-green text-white font-semibold hover:bg-gencom-green"
       >
         <span className="text-lg leading-none">+</span> New
       </button>
@@ -150,7 +150,7 @@ function ProjectTile({
   return (
     <Link
       to={`/capex-tracker/projects/${card.id}`}
-      className="group flex flex-col bg-white border-2 border-gencom-sand rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-emerald-700 w-[260px]"
+      className="group flex flex-col bg-white border-2 border-gencom-sand rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-gencom-green w-[260px]"
     >
       <div className="relative aspect-[16/10] bg-gencom-mist border-b border-gencom-sand overflow-hidden">
         {card.image_path ? (
@@ -174,7 +174,7 @@ function ProjectTile({
             e.stopPropagation();
             onEdit();
           }}
-          className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 border border-gencom-sand text-[11px] uppercase tracking-wider font-semibold text-gencom-stone shadow opacity-0 group-hover:opacity-100 transition hover:text-emerald-700 hover:border-emerald-700"
+          className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/95 border border-gencom-sand text-[11px] uppercase tracking-wider font-semibold text-gencom-stone shadow opacity-0 group-hover:opacity-100 transition hover:text-gencom-green hover:border-gencom-green"
           title="Edit project details"
           aria-label="Edit project details"
         >
@@ -225,7 +225,7 @@ function ProjectTile({
 
 const KIND_BADGE_COLOR: Record<CapexKind, string> = {
   single: "text-gencom-ink",
-  portfolio: "text-emerald-700",
+  portfolio: "text-gencom-green",
   project: "text-gencom-gold",
 };
 
@@ -300,14 +300,14 @@ function PickerCard({
   return (
     <button
       onClick={onClick}
-      className="group text-left bg-white border-2 border-gencom-sand rounded-lg p-5 transition hover:border-emerald-700 hover:bg-emerald-50"
+      className="group text-left bg-white border-2 border-gencom-sand rounded-lg p-5 transition hover:border-gencom-green hover:bg-gencom-greensoft"
     >
       <div className="text-3xl mb-3">{icon}</div>
-      <div className="t-h3 font-display uppercase tracking-wide group-hover:text-emerald-700">
+      <div className="t-h3 font-display uppercase tracking-wide group-hover:text-gencom-green">
         {title}
       </div>
       <div className="t-micro mt-2 leading-snug">{blurb}</div>
-      <div className="mt-3 t-eyebrow group-hover:text-emerald-700">
+      <div className="mt-3 t-eyebrow group-hover:text-gencom-green">
         Start →
       </div>
     </button>

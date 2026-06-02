@@ -512,7 +512,7 @@ function ReviewStage({
 }) {
   const matchBadge =
     parsed.above_threshold ? (
-      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] uppercase tracking-wider font-semibold border border-emerald-200">
+      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-gencom-greensoft text-gencom-green text-[10px] uppercase tracking-wider font-semibold border border-gencom-green/20">
         ● High-confidence match
       </span>
     ) : (
@@ -575,8 +575,8 @@ function ReviewStage({
           onClick={() => setSplitMode(false)}
           className={`px-4 py-1.5 transition ${
             !splitMode
-              ? "bg-emerald-700 text-white"
-              : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+              ? "bg-gencom-green text-white"
+              : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
           }`}
         >
           Single line
@@ -586,8 +586,8 @@ function ReviewStage({
           onClick={() => setSplitMode(true)}
           className={`px-4 py-1.5 border-l-2 border-gencom-sand transition ${
             splitMode
-              ? "bg-emerald-700 text-white"
-              : "text-gencom-stone hover:text-emerald-700 hover:bg-emerald-50"
+              ? "bg-gencom-green text-white"
+              : "text-gencom-stone hover:text-gencom-green hover:bg-gencom-greensoft"
           }`}
         >
           Split across lines{" "}
@@ -633,7 +633,7 @@ function ReviewStage({
             <select
               value={selectedLineId}
               onChange={(e) => setSelectedLineId(e.target.value)}
-              className="w-full px-3 py-2 border border-gencom-sand rounded-md text-sm focus:outline-none focus:border-emerald-700"
+              className="w-full px-3 py-2 border border-gencom-sand rounded-md text-sm focus:outline-none focus:border-gencom-green"
             >
               <option value="">— select a line —</option>
               {allLines.map((l) => (
@@ -696,7 +696,7 @@ function MatchRow({
   const conf = Math.round(match.confidence * 100);
   const confColor =
     match.confidence >= 0.75
-      ? "text-emerald-700"
+      ? "text-gencom-green"
       : match.confidence >= 0.5
       ? "text-gencom-gold"
       : "text-red-700";
@@ -706,8 +706,8 @@ function MatchRow({
       onClick={onSelect}
       className={`w-full text-left px-3 py-2 rounded-lg border-2 transition ${
         selected
-          ? "border-emerald-700 bg-emerald-50"
-          : "border-gencom-sand bg-white hover:border-emerald-700 hover:bg-emerald-50"
+          ? "border-gencom-green bg-gencom-greensoft"
+          : "border-gencom-sand bg-white hover:border-gencom-green hover:bg-gencom-greensoft"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -795,7 +795,7 @@ export function SplitsEditor({
           <span
             className={`font-semibold tabular-nums ${
               Math.abs(diff) < 1
-                ? "text-emerald-700"
+                ? "text-gencom-green"
                 : "text-amber-700"
             }`}
           >
@@ -832,7 +832,7 @@ export function SplitsEditor({
       <button
         type="button"
         onClick={add}
-        className="text-xs uppercase tracking-wider font-semibold text-gencom-stone hover:text-emerald-700"
+        className="text-xs uppercase tracking-wider font-semibold text-gencom-stone hover:text-gencom-green"
       >
         + Add split
       </button>
@@ -860,7 +860,7 @@ function SplitRow({
           <select
             value={split.line_id ?? ""}
             onChange={(e) => onChange({ line_id: e.target.value || null })}
-            className="w-full px-2 py-1.5 border border-gencom-sand rounded-md text-xs focus:outline-none focus:border-emerald-700"
+            className="w-full px-2 py-1.5 border border-gencom-sand rounded-md text-xs focus:outline-none focus:border-gencom-green"
           >
             <option value="">— select a line —</option>
             {allLines.map((l) => (
@@ -876,7 +876,7 @@ function SplitRow({
             type="number"
             value={split.amount}
             onChange={(e) => onChange({ amount: Number(e.target.value) || 0 })}
-            className="w-full px-2 py-1.5 border border-gencom-sand rounded-md text-xs text-right font-mono focus:outline-none focus:border-emerald-700"
+            className="w-full px-2 py-1.5 border border-gencom-sand rounded-md text-xs text-right font-mono focus:outline-none focus:border-gencom-green"
           />
         </div>
         <button
