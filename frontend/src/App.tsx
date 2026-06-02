@@ -105,7 +105,7 @@ function CenteredPageTitle() {
     return (
       <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center pointer-events-none">
         <div className="font-display text-[22px] font-extrabold uppercase tracking-[0.3em] text-gencom-ink whitespace-nowrap">
-          Gencom <span className="text-gencom-gold">Dashboard</span>
+          Gencom <span className="text-gencom-green">Dashboard</span>
         </div>
       </div>
     );

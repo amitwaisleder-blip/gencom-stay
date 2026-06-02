@@ -9,8 +9,10 @@ export default {
           stone: "#6b6f78",    // secondary text / muted
           sand: "#e7e2d6",     // hairline borders (lightened for a cleaner, modern edge)
           line: "#efece4",     // extra-subtle dividers
-          gold: "#b89555",     // brand accent
-          goldsoft: "#ece1c8", // tinted gold for soft fills / focus rings
+          green: "#4f6f55",    // primary brand accent (matches the logo)
+          greensoft: "#e3ebe3",// tinted green for soft fills / focus rings
+          gold: "#b89555",     // secondary accent (used sparingly)
+          goldsoft: "#ece1c8", // tinted gold for soft fills
           mist: "#f7f5f0",     // app background (cleaner off-white)
           cloud: "#fcfbf8",    // elevated surface tint between white and mist
         },
@@ -72,7 +74,7 @@ export default {
         card: "0 1px 2px rgba(26,29,36,0.04), 0 1px 3px rgba(26,29,36,0.05)",
         "card-hover": "0 12px 32px -12px rgba(26,29,36,0.20), 0 2px 6px rgba(26,29,36,0.06)",
         header: "0 1px 0 rgba(26,29,36,0.05), 0 6px 20px -16px rgba(26,29,36,0.25)",
-        ring: "0 0 0 3px rgba(184,149,85,0.30)",
+        ring: "0 0 0 3px rgba(79,111,85,0.28)",
       },
       keyframes: {
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },

@@ -158,7 +158,7 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-6xl">
       <div className="mb-8 text-center animate-fade-in">
-        <div className="t-eyebrow text-gencom-gold">Gencom Group · Internal Tools</div>
+        <div className="t-eyebrow text-gencom-green">Gencom Group · Internal Tools</div>
         <p className="mt-1.5 text-sm text-gencom-stone">
           Select a tool to get started.
         </p>
@@ -212,7 +212,7 @@ function HomeTile({ tile: t }: { tile: Tile }) {
       <div className="flex items-start justify-between gap-3">
         <div className="t-eyebrow pt-1.5">{t.subtitle}</div>
         <span
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-gencom-sand bg-gencom-cloud text-lg leading-none transition-all duration-300 group-hover:border-gencom-gold/50 group-hover:bg-gencom-goldsoft/40 group-hover:scale-105"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-gencom-sand bg-gencom-cloud text-lg leading-none transition-all duration-300 group-hover:border-gencom-green/40 group-hover:bg-gencom-greensoft group-hover:scale-105"
           aria-hidden="true"
         >
           {t.icon}
@@ -228,7 +228,7 @@ function HomeTile({ tile: t }: { tile: Tile }) {
         <span className="t-eyebrow text-gencom-stone group-hover:text-gencom-ink transition-colors">
           {t.external ? "Open in new window" : "Open"}
         </span>
-        <span className="text-gencom-stone text-sm group-hover:translate-x-0.5 group-hover:text-gencom-gold transition">
+        <span className="text-gencom-stone text-sm group-hover:translate-x-0.5 group-hover:text-gencom-green transition">
           {t.external ? "↗" : "→"}
         </span>
       </div>

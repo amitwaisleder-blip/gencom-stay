@@ -20,8 +20,8 @@ body {
   /* Very soft warm wash so flat white cards have something to sit on,
      without reading as a heavy gradient. */
   background-image:
-    radial-gradient(1200px 600px at 85% -10%, rgba(184, 149, 85, 0.05), transparent 60%),
-    radial-gradient(1000px 500px at -10% 0%, rgba(26, 29, 36, 0.025), transparent 55%);
+    radial-gradient(1200px 600px at 85% -10%, rgba(79, 111, 85, 0.06), transparent 60%),
+    radial-gradient(1000px 500px at -10% 0%, rgba(184, 149, 85, 0.035), transparent 55%);
   background-attachment: fixed;
 }
 
@@ -89,8 +89,9 @@ body {
   .field {
     @apply w-full rounded-xl border border-gencom-sand bg-white px-3 py-2 text-sm text-gencom-ink
            placeholder:text-gencom-stone/60
-           focus:outline-none focus:border-gencom-gold focus-visible:shadow-ring transition;
+           focus:outline-none focus:border-gencom-green focus-visible:shadow-ring transition;
   }
+  .btn-green { @apply btn bg-gencom-green text-white hover:bg-gencom-green/90; }
 }
 
 
