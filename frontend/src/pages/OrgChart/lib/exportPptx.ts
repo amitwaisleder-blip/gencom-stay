@@ -237,6 +237,11 @@ function renderConnector(
   // recovers the box connections, even though PPT will draw the
   // line via the custGeom path.
   const obstacles = chart.boxes.filter((bb) => bb.id !== from.id && bb.id !== to.id);
+  // Endpoint reference points (box centers). Used as fallbacks when the
+  // computed path has too few points to derive a bbox (empty) or a
+  // midpoint (< 2 points).
+  const a = { x: from.x + from.width / 2, y: from.y + from.height / 2 };
+  const b = { x: to.x + to.width / 2, y: to.y + to.height / 2 };
   // Resolve T-junction toAnchor through the parent's current trunk
   // (mirrors the live render's parentConnId re-snap).
   let liveToAnchor = c.toAnchor;

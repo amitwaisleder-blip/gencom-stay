@@ -3156,6 +3156,7 @@ function ReviewStep({
     hard_plus_softs_no_dev: "Hard + prior softs",
     ffe_only: "FF&E only",
     hard_minus_ffe: "Hard cost excl. FF&E",
+    flat: "Flat $ amount",
   };
 
   return (

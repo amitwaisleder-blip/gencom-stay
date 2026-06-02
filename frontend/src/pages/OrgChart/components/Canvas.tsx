@@ -58,7 +58,7 @@ export const Canvas = forwardRef<CanvasHandle, {
     delta: { dx: number; dy: number },
     ids: string[],
     origins: Map<string, { x: number; y: number }>,
-    connectorOrigins?: Map<string, { elbowX?: number; elbowY?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }>,
+    connectorOrigins?: Map<string, { elbowX?: number; elbowY?: number; step1?: number; step2?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }>,
   ) => void;
   onClearSelection: () => void;
   /** True for ~400ms after Auto-arrange — enables the box position
@@ -195,7 +195,7 @@ export const Canvas = forwardRef<CanvasHandle, {
   const dragRef = useRef<{ kind: "pan"; sx: number; sy: number; vx: number; vy: number }
     | { kind: "box"; id: string; ox: number; oy: number; bx: number; by: number;
         multiIds?: string[]; multiOrigins?: Map<string, { x: number; y: number }>;
-        connectorOrigins?: Map<string, { elbowX?: number; elbowY?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }>;
+        connectorOrigins?: Map<string, { elbowX?: number; elbowY?: number; step1?: number; step2?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }>;
         shiftAtStart: boolean; moved: boolean }
     | { kind: "link"; fromId: string }
     | { kind: "resize"; id: string; handle: ResizeHandle; ox: number; oy: number; bx: number; by: number; bw: number; bh: number }
@@ -936,7 +936,7 @@ export const Canvas = forwardRef<CanvasHandle, {
     // the move — both gestures share the same pointerdown.
     let multiIds: string[] | undefined;
     let multiOrigins: Map<string, { x: number; y: number }> | undefined;
-    let connectorOrigins: Map<string, { elbowX?: number; elbowY?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }> | undefined;
+    let connectorOrigins: Map<string, { elbowX?: number; elbowY?: number; step1?: number; step2?: number; toAnchor?: { x: number; y: number }; waypoints?: { x: number; y: number }[] }> | undefined;
     const groupBoxIds = selection.kind === "boxes" && selection.ids.includes(box.id)
       ? selection.ids
       : selection.kind === "mixed" && selection.boxIds.includes(box.id)
@@ -1998,7 +1998,7 @@ function ConnectorView({
           // so the user can edit text/color/font without changing
           // the line. Click on the line itself still selects the
           // connector via the wide hit-test path.
-          isSelected={isSelected || isLabelSelected}
+          isSelected={isSelected || !!isLabelSelected}
           onSelect={onLabelSelect ? () => onLabelSelect("mid") : onSelect}
           onEdit={onUpdate ? () => setEditing("mid") : undefined}
           onDelete={onUpdate ? () => onUpdate({ labelMid: "", label: undefined }) : undefined}
@@ -2042,9 +2042,7 @@ function ConnectorView({
             fontPx={lblFontPx}
             stroke={stroke}
             isSelected={isThisLabelSelected}
-            isLabelSelected={isThisLabelSelected}
             onSelect={onLabelSelect ? () => onLabelSelect(lbl.id) : onSelect}
-            onLabelSelect={onLabelSelect ? () => onLabelSelect(lbl.id) : undefined}
             onEdit={onUpdate ? () => {
               const next = prompt("Edit label text", lbl.text) ?? lbl.text;
               const updated = (connector.labels ?? []).map((x) => x.id === lbl.id ? { ...x, text: next } : x);
