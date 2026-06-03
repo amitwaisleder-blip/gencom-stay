@@ -152,6 +152,14 @@ const TILES: Tile[] = [
       "Reference and edit the pricing database that powers every budget. Pricing methodology sits on top, searchable DB below.",
     icon: "💲",
   },
+  {
+    to: "/meeting-scheduler",
+    title: "Meeting Scheduler",
+    subtitle: "Find the best time to meet",
+    blurb:
+      "Overlap availability across attendees to land on the best meeting time, then send invites and drop the event straight onto Google or Outlook calendars.",
+    icon: "📆",
+  },
 ];
 
 export default function Home() {

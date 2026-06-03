@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Overlap · Gencom Meeting Scheduler</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    /* Gencom brand palette */
+    --bg: #f6f3ea;          /* warm cream */
+    --panel: #ffffff;        /* white cards */
+    --panel-2: #f1eee2;      /* warm inputs / empty cells */
+    --line: #e3ddcc;         /* warm border */
+    --text: #2c2f24;         /* dark olive-charcoal */
+    --muted: #84826f;        /* warm gray */
+    --accent: #4d5d33;       /* Gencom green */
+    --accent-dark: #3c4a28;
+    --accent-soft: #6f8049;  /* lighter green */
+    --cream: #f4f1e6;        /* logo cream */
+    --good: #4d5d33;         /* deep green for tallies */
+    --gold: #b8932f;         /* warm gold accent */
+    --danger: #a23b2f;
+    --radius: 12px;
+    --shadow: 0 8px 28px rgba(60, 74, 40, .10);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1100px 520px at 85% -8%, #fffdf6 0%, var(--bg) 60%);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 24px 64px; }
+
+  header.app { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  header.app h1 { font-family: var(--serif); font-size: 30px; margin: 0; letter-spacing: -0.01em; color: var(--accent-dark); }
+  header.app .logo { display: inline-flex; align-self: center; filter: drop-shadow(0 3px 8px rgba(60,74,40,.18)); }
+  header.app .logo svg { display: block; }
+  header.app p { color: var(--muted); margin: 0 0 0 2px; font-size: 14px; align-self: center; }
+  header.app .brandtag {
+    align-self: center; font-family: var(--serif); font-size: 13px; color: var(--accent);
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; background: var(--panel);
+  }
+
+  /* Meeting bar */
+  .meetingbar {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 12px 16px; box-shadow: var(--shadow); margin-bottom: 22px;
+  }
+  .meetingbar .mb-label { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .meetingbar select {
+    font-size: 15px; font-weight: 600; color: var(--text); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 9px; padding: 8px 12px; max-width: 280px; cursor: pointer;
+  }
+  .meetingbar .spacer { flex: 1; }
+  .meetingbar .tz-note {
+    font-size: 12.5px; color: var(--accent-dark); background: rgba(77,93,51,.08);
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; white-space: nowrap;
+  }
+  .meetingbar .tz-note b { font-weight: 700; }
+
+  .layout { display: grid; grid-template-columns: 320px 1fr; gap: 22px; align-items: start; }
+  @media (max-width: 920px) { .layout { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow);
+  }
+  .card + .card { margin-top: 18px; }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
+
+  /* Inputs & buttons */
+  .add-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .add-row .names { display: flex; gap: 8px; }
+  input[type="text"], input[type="email"] {
+    flex: 1; min-width: 0; background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+    border-radius: 9px; padding: 10px 12px; font-size: 14px; outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(77,93,51,.18); }
+  button {
+    border: 0; cursor: pointer; font-size: 14px; font-weight: 600; border-radius: 9px; padding: 10px 14px;
+    background: var(--accent); color: white; transition: filter .15s, transform .05s;
+  }
+  button:hover { filter: brightness(1.06); }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: .55; cursor: default; filter: none; transform: none; }
+  button.ghost { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); }
+  button.icon { padding: 6px 9px; background: transparent; color: var(--muted); font-size: 13px; }
+  button.icon:hover { color: var(--text); }
+  button.sm { padding: 7px 11px; font-size: 13px; }
+
+  .people { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .person {
+    display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px;
+    border: 1px solid transparent; background: var(--panel-2); cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .person:hover { border-color: var(--line); }
+  .person.active { border-color: var(--accent); background: rgba(77,93,51,.10); }
+  .swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+  .person .meta { flex: 1; min-width: 0; }
+  .person .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: 14px; }
+  .person .email { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; color: var(--muted); }
+  .person .email.missing { color: var(--danger); }
+  .person .count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .person .del { opacity: 0; }
+  .person:hover .del { opacity: 1; }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 2px; }
+
+  .hint {
+    margin-top: 14px; font-size: 12.5px; color: var(--muted); padding: 10px 12px;
+    background: var(--panel-2); border-radius: 9px; border: 1px solid var(--line);
+  }
+  .hint b { color: var(--text); }
+
+  /* Grid */
+  .grid-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; gap: 12px; flex-wrap: wrap; }
+  .grid-head .editing { font-size: 13px; color: var(--muted); }
+  .grid-head .editing b { color: var(--accent); }
+  .grid-sub { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+
+  .schedule { width: 100%; border-collapse: separate; border-spacing: 0; user-select: none; }
+  .schedule th { font-size: 12px; color: var(--muted); font-weight: 600; padding: 6px 4px; text-align: center; }
+  .schedule th.time-col { width: 64px; text-align: right; padding-right: 10px; }
+  .schedule td.time-label { font-size: 11.5px; color: var(--muted); text-align: right; padding-right: 10px; white-space: nowrap; vertical-align: middle; }
+  .schedule td.time-label.half { font-size: 10px; opacity: .5; }
+
+  .cell {
+    height: 26px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel-2);
+    cursor: pointer; position: relative; transition: background .12s, border-color .12s, transform .05s;
+    text-align: center; vertical-align: middle;
+  }
+  td.cellwrap { padding: 2px; }
+  .cell:hover { border-color: var(--accent); }
+  .cell .num { font-size: 12px; font-weight: 700; color: inherit; pointer-events: none; }
+  .cell.mine { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .cell.mine::after {
+    content: "✓"; position: absolute; top: 2px; right: 5px; font-size: 10px; color: var(--accent-dark); font-weight: 700;
+  }
+  .cell.best { box-shadow: 0 0 0 2px var(--gold) inset; }
+  .cell.chosen { box-shadow: 0 0 0 3px var(--gold) inset; }
+  .cell.chosen::before {
+    content: "★"; position: absolute; top: 1px; left: 4px; font-size: 11px; color: var(--gold);
+  }
+
+  .legend { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 12px; color: var(--muted); }
+  .legend .scale { display: flex; height: 12px; border-radius: 6px; overflow: hidden; width: 160px; border: 1px solid var(--line); }
+  .legend .scale span { flex: 1; }
+
+  /* Best times */
+  .best-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .best-item {
+    display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px;
+    background: var(--panel-2); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .best-item:hover { border-color: var(--accent-soft); }
+  .best-item.chosen { border-color: var(--gold); background: rgba(184,147,47,.10); }
+  .best-item .rank {
+    width: 26px; height: 26px; flex: none; border-radius: 7px; display: grid; place-items: center;
+    font-weight: 700; font-size: 13px; background: var(--accent); color: white;
+  }
+  .best-item.top .rank { background: var(--gold); }
+  .best-item .mid { flex: 1; min-width: 0; }
+  .best-item .when { font-weight: 600; font-size: 14px; }
+  .best-item .who { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .best-item .tally { font-size: 13px; font-weight: 700; color: var(--good); white-space: nowrap; }
+  .best-item .pick { font-size: 11px; color: var(--gold); font-weight: 700; white-space: nowrap; }
+  .best-empty { color: var(--muted); font-size: 13px; }
+
+  /* Reminder card */
+  .chosen-box { font-size: 14px; padding: 11px 12px; border-radius: 10px; background: var(--panel-2); border: 1px solid var(--line); margin-bottom: 12px; }
+  .chosen-box.set { border-color: var(--gold); background: rgba(184,147,47,.10); }
+  .chosen-box .ttl { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .chosen-box .val { font-weight: 700; font-family: var(--serif); font-size: 17px; color: var(--accent-dark); }
+  .chosen-box .val .tz { font-family: inherit; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .send-row { display: flex; gap: 8px; align-items: center; }
+  .send-status { font-size: 12.5px; color: var(--muted); margin-top: 10px; min-height: 16px; }
+  .send-status.ok { color: var(--accent); }
+  .send-status.err { color: var(--danger); }
+
+  details.email-setup { margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 12px; }
+  details.email-setup summary { cursor: pointer; font-size: 12.5px; color: var(--muted); font-weight: 600; list-style: none; }
+  details.email-setup summary::-webkit-details-marker { display: none; }
+  details.email-setup summary::before { content: "⚙ "; }
+  .cfg-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .cfg-grid label { font-size: 11.5px; color: var(--muted); font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
+  .cfg-test { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .cfg-help { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  .cfg-help a { color: var(--accent); }
+  .cfg-help code { background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-size: 11px; }
+
+  footer { margin-top: 26px; color: var(--muted); font-size: 12px; text-align: center; }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <span class="logo" aria-label="Gencom">
+      <svg width="40" height="40" viewBox="0 0 40 40" role="img">
+        <circle cx="20" cy="20" r="20" fill="#4d5d33"/>
+        <text x="20" y="21" text-anchor="middle" dominant-baseline="central"
+              font-family="Iowan Old Style, Palatino Linotype, Palatino, Georgia, Times New Roman, serif"
+              font-size="27" font-style="italic" fill="#f4f1e6">g</text>
+      </svg>
+    </span>
+    <h1>Overlap</h1>
+    <span class="brandtag">by Gencom</span>
+    <p>Find the time that works for everyone.</p>
+  </header>
+
+  <!-- Meeting selector -->
+  <div class="meetingbar">
+    <span class="mb-label">Meeting</span>
+    <select id="meeting-select" title="Switch meeting"></select>
+    <button class="ghost sm" id="rename-meeting" title="Rename this meeting">Rename</button>
+    <button class="ghost sm" id="new-meeting" title="Create a new meeting">+ New</button>
+    <button class="icon" id="delete-meeting" title="Delete this meeting">🗑</button>
+    <span class="spacer"></span>
+    <span class="tz-note">🕒 Times shown in <b>Eastern Time (ET)</b></span>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT -->
+    <div>
+      <div class="card">
+        <h2>People</h2>
+        <form id="add-form" class="add-row" autocomplete="off">
+          <div class="names">
+            <input type="text" id="name-input" placeholder="Name" maxlength="40" />
+          </div>
+          <div class="names">
+            <input type="email" id="email-input" placeholder="Email (for reminders)" maxlength="120" />
+            <button type="submit">Add</button>
+          </div>
+        </form>
+        <ul class="people" id="people-list"></ul>
+        <div class="hint" id="hint">
+          Click <b>your name</b> (or add it with your email), then click or drag across the
+          grid to mark when you're free. Use <b>🔗 Share link</b> to pass the meeting around —
+          each person opens it, clicks their name, adds their times, and re-shares.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Schedule &amp; remind</h2>
+        <div class="chosen-box" id="chosen-box">
+          <div class="ttl">Selected meeting time</div>
+          <div class="val" id="chosen-val">— pick one from the list below —</div>
+        </div>
+        <div class="send-row">
+          <button id="send-btn">✉ Send email reminder</button>
+          <button class="ghost sm" id="ics-btn" title="Download a calendar invite">Add to calendar</button>
+        </div>
+        <div class="send-status" id="send-status"></div>
+
+        <details class="email-setup" id="email-setup">
+          <summary>Email setup (EmailJS)</summary>
+          <div class="cfg-grid">
+            <label>Service ID <input type="text" id="cfg-service" placeholder="service_xxxxxxx" /></label>
+            <label>Template ID <input type="text" id="cfg-template" placeholder="template_xxxxxxx" /></label>
+            <label>Public key <input type="text" id="cfg-key" placeholder="xxxxxxxxxxxxxxxx" /></label>
+            <button class="sm" id="cfg-save">Save keys</button>
+          </div>
+          <div class="cfg-test">
+            <label style="font-size:11.5px;color:var(--muted);font-weight:600;">Test the setup</label>
+            <div class="names" style="display:flex;gap:8px;margin-top:4px;">
+              <input type="email" id="cfg-test-email" placeholder="your@email.com" maxlength="120" />
+              <button class="ghost sm" id="cfg-test-btn">Send test</button>
+            </div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:6px;">Sends one sample reminder to this address so you can check the template.</div>
+          </div>
+          <div class="cfg-help">
+            Create a free account at <a href="https://www.emailjs.com" target="_blank" rel="noopener">emailjs.com</a>,
+            add an email service and a template, then paste the three IDs above (stored only in your browser).
+            Your template should use these variables:
+            <code>{{to_email}}</code> <code>{{to_name}}</code> <code>{{meeting_name}}</code>
+            <code>{{meeting_time}}</code> <code>{{attendees}}</code>, plus
+            <code>{{outlook_link}}</code> and <code>{{google_link}}</code> for the “add to calendar”
+            buttons, and set the template's “To email” field to <code>{{to_email}}</code>.
+          </div>
+        </details>
+      </div>
+
+      <div class="card">
+        <h2>Best times to meet</h2>
+        <ul class="best-list" id="best-list"></ul>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <div class="grid-head">
+        <div class="editing" id="editing-label">Add or select a person to edit availability</div>
+        <div style="display:flex; gap:8px;">
+          <button id="share-btn" title="Copy a link that carries this meeting's availability">🔗 Share link</button>
+          <button class="ghost" id="clear-btn" title="Remove everyone in this meeting">Reset people</button>
+        </div>
+      </div>
+      <p class="grid-sub">Click a slot to toggle availability · all times Eastern (ET)</p>
+      <table class="schedule" id="schedule"></table>
+      <div class="legend">
+        <span>Fewer free</span>
+        <div class="scale" id="legend-scale"></div>
+        <span>Everyone free</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    A Gencom tool · All data stays in your browser (localStorage). · <a href="#" id="export-link">Copy summary</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- Configuration ----------------------------------------------------
+  var DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  var START_MIN = 7 * 60;    // 7:00am
+  var END_MIN = 20 * 60;     // 8:00pm (last slot starts 7:30pm)
+  var STEP_MIN = 30;         // half-hour slots
+  var TZ_LABEL = "Eastern Time (ET)";
+  var TZ_SHORT = "ET";
+  var STORAGE_KEY = "overlap.scheduler.v3";
+  var LEGACY_V2 = "overlap.scheduler.v2";
+  var LEGACY_KEY = "overlap.scheduler.v1";
+  var PALETTE = [
+    "#4d5d33", "#b8932f", "#7d9b5c", "#a0522d", "#5b8a8a",
+    "#8a6d3b", "#9a6a9a", "#6f8049", "#c2773f", "#557a6b",
+    "#967a4a", "#7a8b4d"
+  ];
+
+  // ---- State ------------------------------------------------------------
+  // state = { meetings: [Meeting], currentId, email:{serviceId,templateId,publicKey} }
+  // Meeting = { id, name, people:[{id,name,email,color}], avail:{pid:{slot:true}}, activeId, chosen }
+  var state = load() || freshState();
+
+  function freshState() {
+    var m = newMeeting("Untitled meeting");
+    return { meetings: [m], currentId: m.id, email: { serviceId: "", templateId: "", publicKey: "" } };
+  }
+  function newMeeting(name) {
+    return { id: uid(), name: name, people: [], avail: {}, activeId: null, chosen: null };
+  }
+
+  // ---- Persistence ------------------------------------------------------
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  // Rewrite any legacy hourly slot keys ("Wed-10") to minute keys ("Wed-600").
+  // Idempotent: minute keys (>= 60) are left unchanged.
+  function migrateState(data) {
+    (data.meetings || []).forEach(function (mt) {
+      var fixed = {};
+      Object.keys(mt.avail || {}).forEach(function (pid) {
+        var bag = mt.avail[pid] || {}, nb = {};
+        Object.keys(bag).forEach(function (k) { nb[migrateKey(k)] = true; });
+        fixed[pid] = nb;
+      });
+      mt.avail = fixed;
+      if (mt.chosen) mt.chosen = migrateKey(mt.chosen);
+    });
+    data.email = data.email || { serviceId: "", templateId: "", publicKey: "" };
+    return data;
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_V2);
+      if (raw) {
+        var data = JSON.parse(raw);
+        if (data && Array.isArray(data.meetings) && data.meetings.length) return migrateState(data);
+      }
+      // One-time migration from the single-meeting v1 format.
+      var legacy = localStorage.getItem(LEGACY_KEY);
+      if (legacy) {
+        var old = JSON.parse(legacy);
+        if (old && Array.isArray(old.people)) {
+          var m = newMeeting("Imported meeting");
+          m.people = old.people.map(function (p) {
+            return { id: p.id || uid(), name: p.name, email: p.email || "", color: p.color };
+          });
+          m.avail = old.avail || {};
+          m.activeId = old.activeId || null;
+          return migrateState({ meetings: [m], currentId: m.id, email: { serviceId: "", templateId: "", publicKey: "" } });
+        }
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  // ---- Helpers ----------------------------------------------------------
+  function uid() { return "p" + Math.random().toString(36).slice(2, 9); }
+  function slotKey(day, min) { return day + "-" + min; }
+  function parseKey(key) { var i = key.lastIndexOf("-"); return { day: key.slice(0, i), min: parseInt(key.slice(i + 1), 10) }; }
+  // Convert a legacy hourly key ("Wed-10") to the minute-based key ("Wed-600").
+  function migrateKey(key) { var p = parseKey(key); return p.min < 60 ? slotKey(p.day, p.min * 60) : key; }
+  function currentMeeting() {
+    return state.meetings.find(function (m) { return m.id === state.currentId; }) || state.meetings[0];
+  }
+  function nextColor(m) {
+    var used = m.people.map(function (p) { return p.color; });
+    for (var i = 0; i < PALETTE.length; i++) if (used.indexOf(PALETTE[i]) === -1) return PALETTE[i];
+    return PALETTE[m.people.length % PALETTE.length];
+  }
+  function fmtTime(min) {
+    var h = Math.floor(min / 60), m = min % 60, ap = h < 12 ? "am" : "pm", hr = h % 12;
+    if (hr === 0) hr = 12;
+    return m === 0 ? (hr + ap) : (hr + ":" + (m < 10 ? "0" : "") + m + ap);
+  }
+  function slotLabel(day, min) { return day + " " + fmtTime(min) + "–" + fmtTime(min + STEP_MIN); }
+  function labelFromKey(key) { var p = parseKey(key); return slotLabel(p.day, p.min); }
+  function activePerson(m) { return m.people.find(function (p) { return p.id === m.activeId; }) || null; }
+  function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((e || "").trim()); }
+
+  function tallyForSlot(m, day, min) {
+    var key = slotKey(day, min), names = [];
+    m.people.forEach(function (p) { if (m.avail[p.id] && m.avail[p.id][key]) names.push(p.name); });
+    return names;
+  }
+
+  // ---- Heatmap color ----------------------------------------------------
+  function heatColor(count, total) {
+    if (count === 0 || total === 0) return "";
+    var t = count / total;
+    var r = Math.round(222 + (77 - 222) * t);
+    var g = Math.round(228 + (93 - 228) * t);
+    var b = Math.round(200 + (51 - 200) * t);
+    return "rgb(" + r + "," + g + "," + b + ")";
+  }
+  function heatText(count, total) {
+    if (count === 0 || total === 0) return "var(--text)";
+    return (count / total) > 0.55 ? "#f4f1e6" : "#2c2f24";
+  }
+
+  // ---- Share-link encoding (one meeting per link) -----------------------
+  function b64urlEncode(s) {
+    return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function b64urlDecode(s) {
+    s = s.replace(/-/g, "+").replace(/_/g, "/");
+    while (s.length % 4) s += "=";
+    return decodeURIComponent(escape(atob(s)));
+  }
+  function encodeMeeting(m) {
+    var compact = {
+      m: m.name,
+      p: m.people.map(function (p) { return { n: p.name, e: p.email || "", c: p.color }; }),
+      a: m.people.map(function (p) {
+        var bag = m.avail[p.id] || {};
+        return Object.keys(bag).map(function (k) { var x = parseKey(k); return DAYS.indexOf(x.day) * 10000 + x.min; });
+      })
+    };
+    return b64urlEncode(JSON.stringify(compact));
+  }
+  function decodeMeeting(str) {
+    var c = JSON.parse(b64urlDecode(str));
+    var people = [], avail = {};
+    (c.p || []).forEach(function (pp, i) {
+      var id = uid();
+      people.push({ id: id, name: pp.n, email: pp.e || "", color: pp.c || PALETTE[i % PALETTE.length] });
+      var bag = {};
+      (c.a[i] || []).forEach(function (n) {
+        var di, min;
+        if (n < 1000) { di = Math.floor(n / 100); min = (n % 100) * 60; } // legacy hourly encoding
+        else { di = Math.floor(n / 10000); min = n % 10000; }
+        if (DAYS[di]) bag[slotKey(DAYS[di], min)] = true;
+      });
+      avail[id] = bag;
+    });
+    return { name: c.m || "Shared meeting", people: people, avail: avail };
+  }
+  function mergeIncoming(incoming) {
+    // Land in a meeting with the same name, else create one.
+    var target = state.meetings.find(function (m) { return m.name.toLowerCase() === incoming.name.toLowerCase(); });
+    if (!target) { target = newMeeting(incoming.name); state.meetings.push(target); }
+    incoming.people.forEach(function (ip) {
+      var slots = incoming.avail[ip.id] || {};
+      var match = target.people.find(function (p) {
+        return (ip.email && p.email && p.email.toLowerCase() === ip.email.toLowerCase()) ||
+               p.name.toLowerCase() === ip.name.toLowerCase();
+      });
+      if (match) {
+        if (!match.email && ip.email) match.email = ip.email;
+        var bag = target.avail[match.id] || (target.avail[match.id] = {});
+        Object.keys(slots).forEach(function (k) { bag[k] = true; });
+      } else {
+        var np = { id: uid(), name: ip.name, email: ip.email || "", color: nextColor(target) };
+        target.people.push(np);
+        target.avail[np.id] = Object.assign({}, slots);
+      }
+    });
+    state.currentId = target.id;
+  }
+  function shareUrl() { return location.origin + location.pathname + "#s=" + encodeMeeting(currentMeeting()); }
+
+  // ---- DOM refs ---------------------------------------------------------
+  var peopleList = document.getElementById("people-list");
+  var scheduleEl = document.getElementById("schedule");
+  var bestListEl = document.getElementById("best-list");
+  var editingLabel = document.getElementById("editing-label");
+  var nameInput = document.getElementById("name-input");
+  var emailInput = document.getElementById("email-input");
+  var meetingSelect = document.getElementById("meeting-select");
+  var chosenBox = document.getElementById("chosen-box");
+  var chosenVal = document.getElementById("chosen-val");
+  var sendStatus = document.getElementById("send-status");
+
+  // ---- Render -----------------------------------------------------------
+  function renderMeetingBar() {
+    meetingSelect.innerHTML = "";
+    state.meetings.forEach(function (m) {
+      var opt = document.createElement("option");
+      opt.value = m.id; opt.textContent = m.name || "(untitled)";
+      if (m.id === state.currentId) opt.selected = true;
+      meetingSelect.appendChild(opt);
+    });
+  }
+
+  function renderPeople() {
+    var m = currentMeeting();
+    peopleList.innerHTML = "";
+    if (m.people.length === 0) {
+      var li = document.createElement("li");
+      li.className = "empty";
+      li.textContent = "No one yet — add the first person above.";
+      peopleList.appendChild(li);
+      return;
+    }
+    m.people.forEach(function (p) {
+      var count = Object.keys(m.avail[p.id] || {}).length;
+      var li = document.createElement("li");
+      li.className = "person" + (p.id === m.activeId ? " active" : "");
+
+      var sw = document.createElement("span"); sw.className = "swatch"; sw.style.background = p.color;
+
+      var meta = document.createElement("div"); meta.className = "meta";
+      var nm = document.createElement("div"); nm.className = "name"; nm.textContent = p.name;
+      var em = document.createElement("div");
+      em.className = "email" + (validEmail(p.email) ? "" : " missing");
+      em.textContent = validEmail(p.email) ? p.email : "no email — won't get reminders";
+      meta.appendChild(nm); meta.appendChild(em);
+
+      var cnt = document.createElement("span"); cnt.className = "count"; cnt.textContent = count + (count === 1 ? " slot" : " slots");
+
+      var del = document.createElement("button");
+      del.className = "icon del"; del.title = "Remove " + p.name; del.textContent = "✕";
+      del.addEventListener("click", function (e) { e.stopPropagation(); removePerson(p.id); });
+
+      li.appendChild(sw); li.appendChild(meta); li.appendChild(cnt); li.appendChild(del);
+      li.addEventListener("click", function () { setActive(p.id); });
+      peopleList.appendChild(li);
+    });
+  }
+
+  function renderGrid() {
+    var m = currentMeeting();
+    var total = m.people.length;
+    var active = activePerson(m);
+    editingLabel.innerHTML = active
+      ? "Editing availability for <b>" + escapeHtml(active.name) + "</b>"
+      : "Add or select a person to edit availability";
+
+    var maxCount = 0;
+    for (var d = 0; d < DAYS.length; d++)
+      for (var t = START_MIN; t < END_MIN; t += STEP_MIN)
+        maxCount = Math.max(maxCount, tallyForSlot(m, DAYS[d], t).length);
+
+    var html = "<thead><tr><th class='time-col'></th>";
+    DAYS.forEach(function (day) { html += "<th>" + day + "</th>"; });
+    html += "</tr></thead><tbody>";
+
+    for (var min = START_MIN; min < END_MIN; min += STEP_MIN) {
+      var onHour = (min % 60 === 0);
+      html += "<tr><td class='time-label" + (onHour ? "" : " half") + "'>" + fmtTime(min) + "</td>";
+      for (var di = 0; di < DAYS.length; di++) {
+        var day = DAYS[di], key = slotKey(day, min);
+        var names = tallyForSlot(m, day, min), count = names.length;
+        var mine = active && m.avail[active.id] && m.avail[active.id][key];
+        var isBest = maxCount > 1 && count === maxCount;
+        var isChosen = m.chosen === key;
+        var classes = "cell" + (mine ? " mine" : "") + (isBest ? " best" : "") + (isChosen ? " chosen" : "");
+        var bg = heatColor(count, total);
+        var style = bg ? " style='background:" + bg + ";color:" + heatText(count, total) + "'" : "";
+        var title = fmtTime(min) + " · " + count + " of " + total + " free" + (names.length ? " — " + names.join(", ") : "");
+        html += "<td class='cellwrap'><div class='" + classes + "' data-day='" + day + "' data-min='" + min +
+                "'" + style + " title='" + escapeHtml(title) + "'>" +
+                (count > 0 ? "<span class='num'>" + count + "</span>" : "") + "</div></td>";
+      }
+      html += "</tr>";
+    }
+    scheduleEl.innerHTML = html + "</tbody>";
+  }
+
+  function rankedSlots(m) {
+    var slots = [];
+    for (var di = 0; di < DAYS.length; di++)
+      for (var t = START_MIN; t < END_MIN; t += STEP_MIN) {
+        var names = tallyForSlot(m, DAYS[di], t);
+        if (names.length) slots.push({ key: slotKey(DAYS[di], t), day: DAYS[di], dayIdx: di, min: t, names: names, count: names.length });
+      }
+    slots.sort(function (a, b) {
+      if (b.count !== a.count) return b.count - a.count;
+      if (a.dayIdx !== b.dayIdx) return a.dayIdx - b.dayIdx;
+      return a.min - b.min;
+    });
+    return slots;
+  }
+
+  function renderBest() {
+    var m = currentMeeting(), total = m.people.length;
+    var slots = rankedSlots(m);
+    bestListEl.innerHTML = "";
+    if (slots.length === 0) {
+      var li = document.createElement("li");
+      li.className = "best-empty";
+      li.textContent = total === 0 ? "Add people and mark availability to see the best meeting times." : "No availability marked yet.";
+      bestListEl.appendChild(li);
+      return;
+    }
+    var topCount = slots[0].count;
+    slots.slice(0, 6).forEach(function (s, i) {
+      var li = document.createElement("li");
+      var isChosen = m.chosen === s.key;
+      li.className = "best-item" + (s.count === topCount ? " top" : "") + (isChosen ? " chosen" : "");
+
+      var rank = document.createElement("span"); rank.className = "rank"; rank.textContent = i + 1;
+      var mid = document.createElement("div"); mid.className = "mid";
+      var when = document.createElement("div"); when.className = "when"; when.textContent = slotLabel(s.day, s.min);
+      var who = document.createElement("div"); who.className = "who"; who.textContent = s.names.join(", ");
+      mid.appendChild(when); mid.appendChild(who);
+      var tally = document.createElement("span"); tally.className = "tally"; tally.textContent = s.count + "/" + total;
+      if (isChosen) { var pk = document.createElement("span"); pk.className = "pick"; pk.textContent = "★ chosen"; mid.appendChild(pk); }
+
+      li.appendChild(rank); li.appendChild(mid); li.appendChild(tally);
+      li.title = "Click to choose this as the meeting time";
+      li.addEventListener("click", function () { setChosen(isChosen ? null : s.key); });
+      bestListEl.appendChild(li);
+    });
+  }
+
+  function renderReminder() {
+    var m = currentMeeting();
+    if (m.chosen) {
+      chosenBox.classList.add("set");
+      chosenVal.innerHTML = escapeHtml(labelFromKey(m.chosen)) + " <span class='tz'>" + TZ_SHORT + "</span>";
+    } else {
+      chosenBox.classList.remove("set");
+      chosenVal.textContent = "— pick one from the list below —";
+    }
+  }
+
+  function renderAll() {
+    renderMeetingBar();
+    renderPeople();
+    renderGrid();
+    renderBest();
+    renderReminder();
+    save();
+  }
+
+  // ---- Actions ----------------------------------------------------------
+  function addPerson(name, email) {
+    var m = currentMeeting();
+    name = (name || "").trim();
+    if (!name) return;
+    var person = { id: uid(), name: name, email: (email || "").trim(), color: nextColor(m) };
+    m.people.push(person);
+    m.avail[person.id] = m.avail[person.id] || {};
+    m.activeId = person.id;
+    renderAll();
+  }
+  function removePerson(id) {
+    var m = currentMeeting();
+    m.people = m.people.filter(function (p) { return p.id !== id; });
+    delete m.avail[id];
+    if (m.activeId === id) m.activeId = m.people.length ? m.people[m.people.length - 1].id : null;
+    renderAll();
+  }
+  function setActive(id) { currentMeeting().activeId = id; renderAll(); }
+  function setChosen(key) { currentMeeting().chosen = key; setStatus("", ""); renderAll(); }
+  function toggleSlot(day, hour, forceValue) {
+    var m = currentMeeting(), active = activePerson(m);
+    if (!active) return false;
+    var bag = m.avail[active.id] || (m.avail[active.id] = {});
+    var key = slotKey(day, hour);
+    var nv = (typeof forceValue === "boolean") ? forceValue : !bag[key];
+    if (nv) bag[key] = true; else delete bag[key];
+    return nv;
+  }
+
+  // Meetings
+  function switchMeeting(id) { state.currentId = id; setStatus("", ""); renderAll(); }
+  function addMeeting() {
+    var name = (prompt("Name this meeting:", "New meeting") || "").trim();
+    if (!name) return;
+    var m = newMeeting(name);
+    state.meetings.push(m); state.currentId = m.id;
+    renderAll();
+    nameInput.focus();
+  }
+  function renameMeeting() {
+    var m = currentMeeting();
+    var name = (prompt("Rename meeting:", m.name) || "").trim();
+    if (name) { m.name = name; renderAll(); }
+  }
+  function deleteMeeting() {
+    var m = currentMeeting();
+    if (state.meetings.length === 1) {
+      if (!confirm("This is your only meeting. Clear it and start fresh?")) return;
+      var fresh = newMeeting("Untitled meeting");
+      state.meetings = [fresh]; state.currentId = fresh.id;
+      renderAll(); return;
+    }
+    if (!confirm('Delete meeting "' + m.name + '"? This cannot be undone.')) return;
+    state.meetings = state.meetings.filter(function (x) { return x.id !== m.id; });
+    state.currentId = state.meetings[0].id;
+    renderAll();
+  }
+
+  // ---- Email reminders (EmailJS) ----------------------------------------
+  function setStatus(msg, kind) {
+    sendStatus.textContent = msg;
+    sendStatus.className = "send-status" + (kind ? " " + kind : "");
+  }
+  function saveEmailConfig() {
+    state.email = {
+      serviceId: document.getElementById("cfg-service").value.trim(),
+      templateId: document.getElementById("cfg-template").value.trim(),
+      publicKey: document.getElementById("cfg-key").value.trim()
+    };
+    save();
+    setStatus("Email keys saved in this browser.", "ok");
+  }
+  // ---- Date / timezone helpers ------------------------------------------
+  // Offset (minutes) of a named timezone at a given instant, via Intl.
+  function tzOffsetMinutes(tz, date) {
+    var dtf = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz, hour12: false, year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+    var parts = {};
+    dtf.formatToParts(date).forEach(function (p) { parts[p.type] = p.value; });
+    var asUTC = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour % 24, parts.minute, parts.second);
+    return (asUTC - date.getTime()) / 60000;
+  }
+  // Convert an Eastern-Time wall clock (y,mo,d,h,mi) into the correct UTC instant.
+  function etWallToUtc(y, mo, d, h, mi) {
+    var guess = Date.UTC(y, mo, d, h, mi, 0);
+    var off = tzOffsetMinutes("America/New_York", new Date(guess));
+    return new Date(guess - off * 60000);
+  }
+  // Start/end Date (UTC) for the chosen slot, on its next upcoming weekday.
+  function chosenEventTimes(m) {
+    var p = parseKey(m.chosen), dayIdx = DAYS.indexOf(p.day);
+    var now = new Date();
+    var diff = ((dayIdx + 1) - now.getDay() + 7) % 7;
+    if (diff === 0) diff = 7;
+    var base = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+    var h = Math.floor(p.min / 60), mi = p.min % 60;
+    var startUtc = etWallToUtc(base.getFullYear(), base.getMonth(), base.getDate(), h, mi);
+    return { start: startUtc, end: new Date(startUtc.getTime() + STEP_MIN * 60000) };
+  }
+  function utcStamp(dt) {
+    function z(n) { return (n < 10 ? "0" : "") + n; }
+    return dt.getUTCFullYear() + z(dt.getUTCMonth() + 1) + z(dt.getUTCDate()) + "T" +
+           z(dt.getUTCHours()) + z(dt.getUTCMinutes()) + "00Z";
+  }
+  // One-click "add to calendar" links for the chosen time (empty if none chosen).
+  function calendarLinks(m) {
+    if (!m.chosen) return { outlook: "", google: "" };
+    var t = chosenEventTimes(m);
+    var subject = encodeURIComponent(m.name || "Meeting");
+    var details = encodeURIComponent("Scheduled via Overlap (Gencom). Attendees: " +
+      m.people.map(function (x) { return x.name; }).join(", "));
+    var outlook = "https://outlook.office.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent" +
+      "&subject=" + subject + "&startdt=" + t.start.toISOString() + "&enddt=" + t.end.toISOString() + "&body=" + details;
+    var google = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + subject +
+      "&dates=" + utcStamp(t.start) + "/" + utcStamp(t.end) + "&details=" + details;
+    return { outlook: outlook, google: google };
+  }
+
+  function sendReminders() {
+    var m = currentMeeting();
+    if (!m.chosen) { setStatus("Pick a meeting time first (click one in the list).", "err"); return; }
+    var cfg = state.email;
+    if (!cfg.serviceId || !cfg.templateId || !cfg.publicKey) {
+      document.getElementById("email-setup").open = true;
+      setStatus("Add your EmailJS keys first (Email setup below).", "err");
+      return;
+    }
+    if (!window.emailjs) { setStatus("Email library didn't load — check your connection.", "err"); return; }
+    var recipients = m.people.filter(function (p) { return validEmail(p.email); });
+    if (!recipients.length) { setStatus("No attendees have a valid email yet.", "err"); return; }
+
+    var when = labelFromKey(m.chosen) + " (" + TZ_LABEL + ")";
+    var attendees = m.people.map(function (p) { return p.name; }).join(", ");
+    var links = calendarLinks(m);
+    var btn = document.getElementById("send-btn");
+    btn.disabled = true;
+    var sent = 0, failed = 0, total = recipients.length;
+    setStatus("Sending 0/" + total + "…", "");
+
+    try { emailjs.init({ publicKey: cfg.publicKey }); } catch (e) {}
+
+    (function next(i) {
+      if (i >= recipients.length) {
+        btn.disabled = false;
+        setStatus("Sent " + sent + "/" + total + (failed ? " · " + failed + " failed" : "") + ".", failed ? "err" : "ok");
+        return;
+      }
+      var p = recipients[i];
+      emailjs.send(cfg.serviceId, cfg.templateId, {
+        to_email: p.email, to_name: p.name,
+        meeting_name: m.name || "Meeting", meeting_time: when, attendees: attendees,
+        outlook_link: links.outlook, google_link: links.google
+      }).then(function () { sent++; }, function (err) { failed++; console.warn("EmailJS error:", err); })
+        .then(function () { setStatus("Sending " + (sent + failed) + "/" + total + "…", ""); next(i + 1); });
+    })(0);
+  }
+
+  function sendTest() {
+    // Read straight from the form so it works even before "Save keys".
+    var serviceId = document.getElementById("cfg-service").value.trim();
+    var templateId = document.getElementById("cfg-template").value.trim();
+    var publicKey = document.getElementById("cfg-key").value.trim();
+    var to = document.getElementById("cfg-test-email").value.trim();
+    if (!serviceId || !templateId || !publicKey) { setStatus("Fill in all three EmailJS keys first.", "err"); return; }
+    if (!validEmail(to)) { setStatus("Enter a valid email to send the test to.", "err"); return; }
+    if (!window.emailjs) { setStatus("Email library didn't load — check your connection.", "err"); return; }
+
+    var m = currentMeeting();
+    var when = (m.chosen ? labelFromKey(m.chosen) : "Wed 10am–10:30am") + " (" + TZ_LABEL + ")";
+    var attendees = m.people.length ? m.people.map(function (p) { return p.name; }).join(", ") : "You";
+    var links = calendarLinks(m);
+    var btn = document.getElementById("cfg-test-btn");
+    btn.disabled = true;
+    setStatus("Sending test…", "");
+    try { emailjs.init({ publicKey: publicKey }); } catch (e) {}
+    emailjs.send(serviceId, templateId, {
+      to_email: to, to_name: "there",
+      meeting_name: (m.name || "Test meeting") + " (test)", meeting_time: when, attendees: attendees,
+      outlook_link: links.outlook, google_link: links.google
+    }).then(function () {
+      setStatus("Test sent to " + to + " — check the inbox.", "ok");
+    }, function (err) {
+      console.warn("EmailJS test error:", err);
+      setStatus("Test failed: " + (err && err.text ? err.text : "check your keys & allowed origins") + ".", "err");
+    }).then(function () { btn.disabled = false; });
+  }
+
+  // ---- Calendar (.ics) --------------------------------------------------
+  // Build an invite for the chosen weekday/hour in the *upcoming* week.
+  function downloadIcs() {
+    var m = currentMeeting();
+    if (!m.chosen) { setStatus("Pick a meeting time first.", "err"); return; }
+    var p = parseKey(m.chosen);
+    var dayIdx = DAYS.indexOf(p.day); // 0=Mon
+    var now = new Date();
+    var diff = ((dayIdx + 1) - now.getDay() + 7) % 7; // JS: 0=Sun,1=Mon… target weekday
+    if (diff === 0) diff = 7; // always schedule the next occurrence
+    var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff, Math.floor(p.min / 60), p.min % 60, 0);
+    var end = new Date(d.getTime() + STEP_MIN * 60 * 1000);
+    function fmt(dt) {
+      function z(n) { return (n < 10 ? "0" : "") + n; }
+      return dt.getFullYear() + z(dt.getMonth() + 1) + z(dt.getDate()) + "T" + z(dt.getHours()) + z(dt.getMinutes()) + "00";
+    }
+    var attendees = m.people.filter(function (x) { return validEmail(x.email); });
+    var ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Gencom//Overlap//EN", "CALSCALE:GREGORIAN",
+      "BEGIN:VEVENT", "UID:" + uid() + "@overlap.gencom",
+      "DTSTAMP:" + fmt(new Date()),
+      "DTSTART;TZID=America/New_York:" + fmt(d),
+      "DTEND;TZID=America/New_York:" + fmt(end),
+      "SUMMARY:" + (m.name || "Meeting"),
+      "DESCRIPTION:Scheduled via Overlap. Attendees: " + m.people.map(function (x) { return x.name; }).join(", ")
+    ].concat(attendees.map(function (x) {
+      return "ATTENDEE;CN=" + x.name + ":mailto:" + x.email;
+    })).concat(["END:VEVENT", "END:VCALENDAR"]).join("\r\n");
+
+    var blob = new Blob([ics], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (m.name || "meeting").replace(/[^a-z0-9]+/gi, "-").toLowerCase() + ".ics";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setStatus("Calendar invite downloaded.", "ok");
+  }
+
+  // ---- Drag-to-paint ----------------------------------------------------
+  var dragging = false, dragValue = null;
+  scheduleEl.addEventListener("mousedown", function (e) {
+    var cell = e.target.closest(".cell"); if (!cell) return;
+    if (!activePerson(currentMeeting())) { flashHint(); return; }
+    e.preventDefault(); dragging = true;
+    dragValue = toggleSlot(cell.dataset.day, parseInt(cell.dataset.min, 10));
+    renderAll();
+  });
+  scheduleEl.addEventListener("mouseover", function (e) {
+    if (!dragging) return;
+    var cell = e.target.closest(".cell"); if (!cell) return;
+    toggleSlot(cell.dataset.day, parseInt(cell.dataset.min, 10), dragValue);
+    renderAll();
+  });
+  document.addEventListener("mouseup", function () { dragging = false; dragValue = null; });
+  scheduleEl.addEventListener("touchstart", function (e) {
+    var t = e.touches[0], el = document.elementFromPoint(t.clientX, t.clientY);
+    var cell = el && el.closest ? el.closest(".cell") : null; if (!cell) return;
+    if (!activePerson(currentMeeting())) { flashHint(); return; }
+    e.preventDefault();
+    toggleSlot(cell.dataset.day, parseInt(cell.dataset.min, 10));
+    renderAll();
+  }, { passive: false });
+
+  // ---- Wire up UI -------------------------------------------------------
+  document.getElementById("add-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    addPerson(nameInput.value, emailInput.value);
+    nameInput.value = ""; emailInput.value = ""; nameInput.focus();
+  });
+  meetingSelect.addEventListener("change", function () { switchMeeting(meetingSelect.value); });
+  document.getElementById("new-meeting").addEventListener("click", addMeeting);
+  document.getElementById("rename-meeting").addEventListener("click", renameMeeting);
+  document.getElementById("delete-meeting").addEventListener("click", deleteMeeting);
+  document.getElementById("send-btn").addEventListener("click", sendReminders);
+  document.getElementById("ics-btn").addEventListener("click", downloadIcs);
+  document.getElementById("cfg-save").addEventListener("click", saveEmailConfig);
+  document.getElementById("cfg-test-btn").addEventListener("click", sendTest);
+
+  document.getElementById("clear-btn").addEventListener("click", function () {
+    var m = currentMeeting();
+    if (!m.people.length) return;
+    if (confirm('Remove everyone in "' + m.name + '"?')) {
+      m.people = []; m.avail = {}; m.activeId = null; m.chosen = null;
+      renderAll();
+    }
+  });
+
+  document.getElementById("share-btn").addEventListener("click", function (e) {
+    var btn = e.currentTarget, m = currentMeeting();
+    if (!m.people.length) { flashHint(); return; }
+    var url = shareUrl();
+    function done(label) { btn.textContent = label; setTimeout(function () { btn.textContent = "🔗 Share link"; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { done("✓ Link copied"); }, function () { prompt("Copy this link to share:", url); });
+    } else { prompt("Copy this link to share:", url); }
+  });
+
+  document.getElementById("export-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    var m = currentMeeting(), total = m.people.length;
+    var lines = [(m.name || "Meeting") + " — best times (" + total + " people), all " + TZ_LABEL + ":"];
+    rankedSlots(m).slice(0, 6).forEach(function (s, i) {
+      lines.push((i + 1) + ". " + slotLabel(s.day, s.min) + " — " + s.count + "/" + total + " (" + s.names.join(", ") + ")");
+    });
+    var text = lines.join("\n");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        e.target.textContent = "Copied!"; setTimeout(function () { e.target.textContent = "Copy summary"; }, 1500);
+      });
+    } else { alert(text); }
+  });
+
+  var hintEl = document.getElementById("hint");
+  function flashHint() {
+    hintEl.style.transition = "background .15s";
+    hintEl.style.background = "rgba(77,93,51,.18)";
+    setTimeout(function () { hintEl.style.background = ""; }, 350);
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  // ---- Legend -----------------------------------------------------------
+  (function buildLegend() {
+    var scale = document.getElementById("legend-scale"), steps = 6;
+    for (var i = 1; i <= steps; i++) {
+      var span = document.createElement("span");
+      span.style.background = heatColor(i, steps) || "var(--panel-2)";
+      scale.appendChild(span);
+    }
+  })();
+
+  // ---- Import a shared link, if present ---------------------------------
+  (function importFromUrl() {
+    var mm = location.hash.match(/[#&]s=([^&]+)/);
+    if (!mm) return;
+    try {
+      mergeIncoming(decodeMeeting(mm[1]));
+      var cm = currentMeeting();
+      if (!activePerson(cm) && cm.people.length) cm.activeId = cm.people[cm.people.length - 1].id;
+      history.replaceState(null, "", location.pathname + location.search);
+    } catch (err) { console.warn("Could not read shared link:", err); }
+  })();
+
+  // ---- Load email config into the form ----------------------------------
+  document.getElementById("cfg-service").value = state.email.serviceId || "";
+  document.getElementById("cfg-template").value = state.email.templateId || "";
+  document.getElementById("cfg-key").value = state.email.publicKey || "";
+
+  // ---- Go ---------------------------------------------------------------
+  renderAll();
+})();
+</script>
+</body>
+</html>

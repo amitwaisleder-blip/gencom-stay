@@ -20,6 +20,7 @@ import LunchMenu from "./pages/LunchMenu";
 import CashFlowReturns from "./pages/CashFlowReturns/app";
 import CateringEmbed from "./pages/CateringEmbed";
 import InboxBriefingEmbed from "./pages/InboxBriefingEmbed";
+import MeetingSchedulerEmbed from "./pages/MeetingSchedulerEmbed";
 import IssuesBell from "./components/IssuesBell";
 import ChatPanel from "./components/ChatPanel";
 import PropertySetup from "./pages/PropertySetup";
@@ -70,6 +71,7 @@ function useHeaderSubtitle(): string {
   if (p.startsWith("/cash-flow-returns")) return "Cash Flow Returns";
   if (p.startsWith("/catering")) return "Catering Request";
   if (p.startsWith("/inbox-briefing")) return "Inbox Briefing";
+  if (p.startsWith("/meeting-scheduler")) return "Meeting Scheduler";
   if (p.startsWith("/cost-db") || p.startsWith("/costs") || p.startsWith("/methodology")) return "Cost Database";
   if (p.startsWith("/template")) return "Template Setup";
   if (p.startsWith("/projects")) return "Projects";
@@ -250,6 +252,7 @@ export default function App() {
           <Route path="/cash-flow-returns/*" element={<CashFlowReturns />} />
           <Route path="/catering" element={<CateringEmbed />} />
           <Route path="/inbox-briefing" element={<InboxBriefingEmbed />} />
+          <Route path="/meeting-scheduler" element={<MeetingSchedulerEmbed />} />
           <Route path="/pip-generator" element={<PipGenerator />} />
           <Route path="/cost-db" element={<CostsCombined />} />
           {/* Intake questionnaire retired — old deep links drop to Setup. */}
