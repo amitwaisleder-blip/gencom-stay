@@ -158,7 +158,7 @@ const TILES: Tile[] = [
     subtitle: "Find the best time to meet",
     blurb:
       "Overlap availability across attendees to land on the best meeting time, then send invites and drop the event straight onto Google or Outlook calendars.",
-    icon: "📆",
+    icon: "🤝",
   },
 ];
 
