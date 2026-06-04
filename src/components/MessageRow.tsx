@@ -1,5 +1,7 @@
-import { score } from "../learning/ranker";
+import { ChevronRight } from "lucide-react";
+import { levelOf } from "../intel/category";
 import { senderDisplay, type EmailMessage } from "../models/types";
+import { Avatar } from "./Avatar";
 
 function relativeTime(iso: string): string {
   const diffMs = Date.now() - new Date(iso).getTime();
@@ -11,12 +13,6 @@ function relativeTime(iso: string): string {
   return `${Math.round(hours / 24)}d`;
 }
 
-function level(s: number): "high" | "medium" | "low" {
-  if (s >= 0.66) return "high";
-  if (s >= 0.4) return "medium";
-  return "low";
-}
-
 export function MessageRow({
   message,
   onOpen,
@@ -24,21 +20,25 @@ export function MessageRow({
   message: EmailMessage;
   onOpen: () => void;
 }) {
-  const lvl = level(score(message));
+  const lvl = levelOf(message);
   return (
     <li
       className={`message-row prio-${lvl} ${message.isRead ? "read" : "unread"}`}
       onClick={onOpen}
     >
-      <span className={`dot ${lvl}`} title={`Predicted importance: ${lvl}`} />
+      <Avatar message={message} />
       <div className="message-body">
         <div className="message-top">
-          <span className="sender">{senderDisplay(message)}</span>
-          <span className="time">{relativeTime(message.receivedDateTime)}</span>
+          <span className="sender">
+            <span className={`status-dot ${lvl}`} />
+            {senderDisplay(message)}
+          </span>
+          <span className={`time time-${lvl}`}>{relativeTime(message.receivedDateTime)}</span>
         </div>
         <div className="subject">{message.subject}</div>
         <div className="preview">{message.bodyPreview}</div>
       </div>
+      <ChevronRight className="row-chevron" size={18} />
     </li>
   );
 }

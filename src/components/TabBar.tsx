@@ -1,9 +1,11 @@
+import { Inbox, Star, PenLine, type LucideIcon } from "lucide-react";
+
 export type Tab = "brief" | "priority" | "drafts";
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: "brief", label: "Brief", icon: "📋" },
-  { id: "priority", label: "Priority", icon: "📥" },
-  { id: "drafts", label: "Drafts", icon: "✍️" },
+const TABS: { id: Tab; label: string; icon: LucideIcon }[] = [
+  { id: "brief", label: "Brief", icon: Inbox },
+  { id: "priority", label: "Priority", icon: Star },
+  { id: "drafts", label: "Drafts", icon: PenLine },
 ];
 
 export function TabBar({
@@ -17,17 +19,19 @@ export function TabBar({
 }) {
   return (
     <nav className="tab-bar">
-      {TABS.map((t) => (
+      {TABS.map(({ id, label, icon: Icon }) => (
         <button
-          key={t.id}
-          className={`tab ${active === t.id ? "active" : ""}`}
-          onClick={() => onChange(t.id)}
+          key={id}
+          className={`tab ${active === id ? "active" : ""}`}
+          onClick={() => onChange(id)}
         >
-          <span className="tab-icon">{t.icon}</span>
-          <span className="tab-label">{t.label}</span>
-          {t.id === "drafts" && draftCount > 0 && (
-            <span className="tab-badge">{draftCount}</span>
-          )}
+          <span className="tab-icon-wrap">
+            <Icon size={21} strokeWidth={2} />
+            {id === "drafts" && draftCount > 0 && (
+              <span className="tab-badge">{draftCount}</span>
+            )}
+          </span>
+          <span className="tab-label">{label}</span>
         </button>
       ))}
     </nav>

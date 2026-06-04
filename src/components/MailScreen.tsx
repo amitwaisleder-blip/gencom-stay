@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { RotateCw, LogOut } from "lucide-react";
+import { Logo } from "./Brand";
 import { prioritized } from "../learning/ranker";
 import { behaviorStore } from "../storage/behaviorStore";
 import { needsResponse } from "../intel/responder";
@@ -107,15 +109,15 @@ export function MailScreen({
     <div className="screen">
       <header className="app-header">
         <div className="brandmark">
-          <span className="brand-badge">g</span>
+          <Logo size={34} />
           <span className="brandmark-name">Gencom Mail</span>
         </div>
         <div className="actions">
           <button onClick={() => void refresh()} disabled={loading} aria-label="Refresh">
-            ↻
+            <RotateCw size={18} />
           </button>
-          <button className="ghost" onClick={onExit}>
-            {demo ? "Exit" : "Sign out"}
+          <button className="ghost with-icon" onClick={onExit}>
+            <LogOut size={16} /> {demo ? "Exit" : "Sign out"}
           </button>
         </div>
       </header>
