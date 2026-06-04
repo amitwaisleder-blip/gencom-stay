@@ -1,0 +1,18 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# macOS
+.DS_Store
+
+# Secrets / local config (never commit Azure client secrets)
+*.local.xcconfig
+Secrets.plist
