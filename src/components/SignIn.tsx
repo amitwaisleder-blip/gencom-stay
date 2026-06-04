@@ -4,12 +4,14 @@ export function SignIn({ onDemo }: { onDemo: () => void }) {
   const { signIn, configured, error } = useAuth();
 
   return (
-    <div className="centered">
+    <div className="centered signin-bg">
       <div className="signin-card">
-        <div className="logo">📥</div>
-        <h1>gencom-stay</h1>
+        <div className="brand-badge brand-badge-lg">g</div>
+        <h1 className="signin-title">Gencom Mail</h1>
+        <p className="signin-kicker">Inbox intelligence</p>
         <p className="tagline">
-          A companion to Outlook that learns what matters — on your device.
+          Your inbox, prioritized. Draft replies and a daily brief — that quietly
+          learn what matters to you.
         </p>
 
         <button className="primary" onClick={() => void signIn()} disabled={!configured}>
@@ -22,7 +24,7 @@ export function SignIn({ onDemo }: { onDemo: () => void }) {
 
         {!configured && (
           <p className="hint">
-            Sign-in is disabled until <code>VITE_MSAL_CLIENT_ID</code> is set (see the
+            Sign-in activates once <code>VITE_MSAL_CLIENT_ID</code> is set (see the
             README). The demo needs no account.
           </p>
         )}

@@ -11,10 +11,10 @@ function relativeTime(iso: string): string {
   return `${Math.round(hours / 24)}d`;
 }
 
-function priorityClass(s: number): string {
-  if (s >= 0.66) return "dot high";
-  if (s >= 0.4) return "dot medium";
-  return "dot low";
+function level(s: number): "high" | "medium" | "low" {
+  if (s >= 0.66) return "high";
+  if (s >= 0.4) return "medium";
+  return "low";
 }
 
 export function MessageRow({
@@ -24,16 +24,13 @@ export function MessageRow({
   message: EmailMessage;
   onOpen: () => void;
 }) {
-  const s = score(message);
+  const lvl = level(score(message));
   return (
     <li
-      className={`message-row ${message.isRead ? "read" : "unread"}`}
+      className={`message-row prio-${lvl} ${message.isRead ? "read" : "unread"}`}
       onClick={onOpen}
     >
-      <span
-        className={priorityClass(s)}
-        title={`Predicted importance: ${Math.round(s * 100)}%`}
-      />
+      <span className={`dot ${lvl}`} title={`Predicted importance: ${lvl}`} />
       <div className="message-body">
         <div className="message-top">
           <span className="sender">{senderDisplay(message)}</span>

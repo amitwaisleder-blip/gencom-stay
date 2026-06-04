@@ -91,7 +91,7 @@ export function MailScreen({
     <div className="screen">
       <header className="app-header">
         <div className="brandmark">
-          <span className="brandmark-dot">g</span>
+          <span className="brand-badge">g</span>
           <span className="brandmark-name">Gencom Mail</span>
         </div>
         <div className="actions">
@@ -117,7 +117,7 @@ export function MailScreen({
       {loading && messages.length === 0 ? (
         <div className="spinner" />
       ) : (
-        <main className="content">
+        <main className="content" key={tab}>
           {tab === "brief" && (
             <Brief
               messages={messages}
