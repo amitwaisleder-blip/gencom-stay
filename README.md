@@ -66,12 +66,23 @@ npm run dev                         # opens http://localhost:5173
    `Mail.ReadWrite`. Personal accounts grant these on consent (no admin needed).
 5. Copy the **Application (client) ID** into `.env.local` as `VITE_MSAL_CLIENT_ID`.
 
-## Deploy (so your boss can install it)
+## Deploy on Cloudflare Pages (so your boss can install it)
 
-The app is fully static — host `dist/` anywhere with HTTPS (required for PWAs):
-Vercel, Netlify, Cloudflare Pages, GitHub Pages, Azure Static Web Apps. Then add
-that HTTPS URL as a redirect URI in the Azure registration (step 3). Send your boss
-the link; on his iPhone/iPad he taps **Share → Add to Home Screen**.
+The app is fully static, deployed via Cloudflare Pages' GitHub integration — every
+push to the branch auto-builds and publishes over HTTPS (required for PWAs).
+
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** →
+   **Connect to Git** → pick this repo and the branch.
+2. Build settings:
+   - **Framework preset:** Vite
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+3. **Environment variables** → add `VITE_MSAL_CLIENT_ID` = your Azure client id
+   (it's public, not a secret, so this is safe). The build reads it.
+4. Save and deploy. Cloudflare gives you a URL like `https://gencom-stay.pages.dev`.
+5. Add that URL as a **Single-page application** redirect URI in the Azure
+   registration (see step 3 above), then send your boss the link. On his
+   iPhone/iPad he opens it in Safari and taps **Share → Add to Home Screen**.
 
 ## Status
 
