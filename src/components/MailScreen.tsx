@@ -65,19 +65,35 @@ export function MailScreen({
     [source, reRank],
   );
 
-  const handleMarkHandled = useCallback(
-    (message: EmailMessage) => {
-      // A drafted reply is the strongest "this mattered" signal.
+  const markHandled = useCallback(
+    (message: EmailMessage, action: "replied" | "opened") => {
       behaviorStore.record({
         messageId: message.id,
         conversationId: message.conversationId,
         senderAddress: message.sender?.address ?? null,
-        action: "replied",
+        action,
       });
       void source.markRead(message.id, true);
       reRank((m) => (m.id === message.id ? { ...m, isRead: true } : m));
     },
     [source, reRank],
+  );
+
+  const handleSaveDraft = useCallback(
+    async (message: EmailMessage, text: string) => {
+      await source.saveReplyDraft(message.id, text);
+      markHandled(message, "opened");
+    },
+    [source, markHandled],
+  );
+
+  const handleSendReply = useCallback(
+    async (message: EmailMessage, text: string) => {
+      // Sending is the strongest "this mattered" learning signal.
+      await source.sendReply(message.id, text);
+      markHandled(message, "replied");
+    },
+    [source, markHandled],
   );
 
   const draftCount = useMemo(() => messages.filter(needsResponse).length, [messages]);
@@ -127,7 +143,12 @@ export function MailScreen({
           )}
           {tab === "priority" && <Inbox messages={messages} onOpen={handleOpen} />}
           {tab === "drafts" && (
-            <Drafts messages={messages} onMarkHandled={handleMarkHandled} />
+            <Drafts
+              messages={messages}
+              onSaveDraft={handleSaveDraft}
+              onSendReply={handleSendReply}
+              demo={demo}
+            />
           )}
         </main>
       )}

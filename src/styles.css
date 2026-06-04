@@ -529,6 +529,37 @@ button.secondary:hover {
   display: flex;
   gap: 9px;
   margin-top: 12px;
+  align-items: center;
+}
+.copy-link {
+  margin-left: auto;
+}
+.draft-confirm {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: var(--r);
+  background: var(--brand-tint);
+  font-size: 14px;
+}
+.draft-confirm > span {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--brand-dark);
+}
+.draft-confirm .draft-actions {
+  margin-top: 0;
+}
+.draft-result {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand);
+}
+.draft-error {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--danger);
 }
 .brand-button {
   background: var(--grad-brand);

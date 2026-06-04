@@ -47,6 +47,35 @@ export class GraphClient implements MailSource {
     });
   }
 
+  /**
+   * Create a reply draft in Outlook. Graph's createReply builds a draft in the
+   * original thread (with the quoted message); `comment` is our text, placed above
+   * the quote. The draft lands in the user's Outlook Drafts folder. Needs Mail.ReadWrite.
+   */
+  async saveReplyDraft(messageId: string, bodyText: string): Promise<void> {
+    await this.request(`${GRAPH_BASE}/me/messages/${messageId}/createReply`, {
+      method: "POST",
+      body: JSON.stringify({ comment: GraphClient.toHtml(bodyText) }),
+    });
+  }
+
+  /** Send a reply in the original thread in one call. Needs Mail.Send. */
+  async sendReply(messageId: string, bodyText: string): Promise<void> {
+    await this.request(`${GRAPH_BASE}/me/messages/${messageId}/reply`, {
+      method: "POST",
+      body: JSON.stringify({ comment: GraphClient.toHtml(bodyText) }),
+    });
+  }
+
+  /** Escape text and preserve line breaks for the HTML mail body. */
+  private static toHtml(text: string): string {
+    const escaped = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    return escaped.replace(/\r?\n/g, "<br>");
+  }
+
   private async request<T>(url: string, init: RequestInit = {}): Promise<T> {
     const token = await this.getAccessToken();
     const res = await fetch(url, {
@@ -57,12 +86,11 @@ export class GraphClient implements MailSource {
         ...(init.headers ?? {}),
       },
     });
+    // Read once: send/reply return 202 with no body, createReply 201, PATCH 200.
+    const text = await res.text().catch(() => "");
     if (!res.ok) {
-      const body = await res.text().catch(() => "");
-      throw new Error(`Graph request failed (${res.status}): ${body}`);
+      throw new Error(`Graph request failed (${res.status}): ${text}`);
     }
-    // PATCH to messages returns the updated entity; callers that ignore it are fine.
-    if (res.status === 204) return undefined as T;
-    return (await res.json()) as T;
+    return (text ? JSON.parse(text) : undefined) as T;
   }
 }

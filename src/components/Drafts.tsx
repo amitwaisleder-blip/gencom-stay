@@ -6,10 +6,14 @@ import { generateDraft, needsResponse } from "../intel/responder";
 /** One editable starter draft per email that looks like it needs a reply. */
 export function Drafts({
   messages,
-  onMarkHandled,
+  onSaveDraft,
+  onSendReply,
+  demo,
 }: {
   messages: EmailMessage[];
-  onMarkHandled: (m: EmailMessage) => void;
+  onSaveDraft: (m: EmailMessage, text: string) => Promise<void>;
+  onSendReply: (m: EmailMessage, text: string) => Promise<void>;
+  demo: boolean;
 }) {
   const toReply = useMemo(() => messages.filter(needsResponse), [messages]);
 
@@ -20,26 +24,49 @@ export function Drafts({
   return (
     <div className="drafts">
       <p className="drafts-intro">
-        Starter replies, drafted on-device for each email that looks like it needs one.
-        Edit, copy, then send from Outlook. Connect Claude for smart, on-style drafts.
+        Starter replies, drafted on-device for each email that needs one. Edit, then
+        save to Outlook or send — no copy-paste.
+        {demo && " (Demo: saving and sending are simulated.)"}
       </p>
       {toReply.map((m) => (
-        <DraftCard key={m.id} message={m} onMarkHandled={() => onMarkHandled(m)} />
+        <DraftCard
+          key={m.id}
+          message={m}
+          demo={demo}
+          onSave={(text) => onSaveDraft(m, text)}
+          onSend={(text) => onSendReply(m, text)}
+        />
       ))}
     </div>
   );
 }
 
+type Status =
+  | { kind: "idle" }
+  | { kind: "confirm" }
+  | { kind: "saving" }
+  | { kind: "sending" }
+  | { kind: "saved" }
+  | { kind: "sent" }
+  | { kind: "error"; message: string };
+
 function DraftCard({
   message,
-  onMarkHandled,
+  demo,
+  onSave,
+  onSend,
 }: {
   message: EmailMessage;
-  onMarkHandled: () => void;
+  demo: boolean;
+  onSave: (text: string) => Promise<void>;
+  onSend: (text: string) => Promise<void>;
 }) {
   const [text, setText] = useState(() => generateDraft(message));
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [copied, setCopied] = useState(false);
-  const [handled, setHandled] = useState(false);
+
+  const done = status.kind === "saved" || status.kind === "sent";
+  const busy = status.kind === "saving" || status.kind === "sending";
 
   const copy = async () => {
     try {
@@ -51,8 +78,28 @@ function DraftCard({
     }
   };
 
+  const save = async () => {
+    setStatus({ kind: "saving" });
+    try {
+      await onSave(text);
+      setStatus({ kind: "saved" });
+    } catch (e) {
+      setStatus({ kind: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  };
+
+  const send = async () => {
+    setStatus({ kind: "sending" });
+    try {
+      await onSend(text);
+      setStatus({ kind: "sent" });
+    } catch (e) {
+      setStatus({ kind: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  };
+
   return (
-    <article className={`draft-card ${handled ? "handled" : ""}`}>
+    <article className={`draft-card ${done ? "handled" : ""}`}>
       <header className="draft-head">
         <div>
           <span className="draft-sender">{senderDisplay(message)}</span>
@@ -60,27 +107,53 @@ function DraftCard({
         </div>
       </header>
       <p className="draft-context">“{message.bodyPreview}”</p>
+
       <textarea
         className="draft-text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         rows={5}
+        disabled={busy || done}
       />
-      <div className="draft-actions">
-        <button className="brand-button" onClick={() => void copy()}>
-          {copied ? "Copied ✓" : "Copy draft"}
-        </button>
-        <button
-          className="ghost-button"
-          onClick={() => {
-            setHandled(true);
-            onMarkHandled();
-          }}
-          disabled={handled}
-        >
-          {handled ? "Marked handled ✓" : "Mark handled"}
-        </button>
-      </div>
+
+      {done ? (
+        <p className="draft-result">
+          {status.kind === "sent"
+            ? demo ? "Sent ✓ (demo)" : "Sent ✓"
+            : demo ? "Saved to drafts ✓ (demo)" : "Saved to Outlook Drafts ✓"}
+        </p>
+      ) : status.kind === "confirm" ? (
+        <div className="draft-confirm">
+          <span>Send this reply now?</span>
+          <div className="draft-actions">
+            <button className="brand-button" onClick={() => void send()}>
+              Confirm send
+            </button>
+            <button className="ghost-button" onClick={() => setStatus({ kind: "idle" })}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="draft-actions">
+            <button
+              className="brand-button"
+              onClick={() => setStatus({ kind: "confirm" })}
+              disabled={busy}
+            >
+              {status.kind === "sending" ? "Sending…" : "Send reply"}
+            </button>
+            <button className="ghost-button" onClick={() => void save()} disabled={busy}>
+              {status.kind === "saving" ? "Saving…" : "Save to Outlook"}
+            </button>
+            <button className="linklike copy-link" onClick={() => void copy()}>
+              {copied ? "Copied ✓" : "Copy"}
+            </button>
+          </div>
+          {status.kind === "error" && <p className="draft-error">{status.message}</p>}
+        </>
+      )}
     </article>
   );
 }

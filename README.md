@@ -68,7 +68,8 @@ tap messages and watch the order adapt. To connect your real Outlook later, copy
    - `http://localhost:5173` (local dev)
    - your deployed PWA URL (see Deploy below)
 4. **API permissions → Microsoft Graph → Delegated:** `User.Read`, `Mail.Read`,
-   `Mail.ReadWrite`. Personal accounts grant these on consent (no admin needed).
+   `Mail.ReadWrite` (read + save replies to Drafts), and `Mail.Send` (one-tap send).
+   Personal accounts grant these on consent (no admin needed).
 5. Copy the **Application (client) ID** into `.env.local` as `VITE_MSAL_CLIENT_ID`.
 
 ## Deploy on Cloudflare Pages (so your boss can install it)

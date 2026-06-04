@@ -32,9 +32,12 @@ export const msalConfig: Configuration = {
   },
 };
 
-/** Delegated Graph scopes. Least privilege for an on-device triage prototype. */
+/**
+ * Delegated Graph scopes. Read + triage, plus Mail.Send so the app can send a
+ * reply directly (one-tap send). Save-to-draft only needs Mail.ReadWrite.
+ */
 export const loginRequest: PopupRequest = {
-  scopes: ["User.Read", "Mail.Read", "Mail.ReadWrite"],
+  scopes: ["User.Read", "Mail.Read", "Mail.ReadWrite", "Mail.Send"],
 };
 
 export const isMsalConfigured = (): boolean => CLIENT_ID.length > 0;

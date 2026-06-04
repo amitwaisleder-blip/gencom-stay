@@ -19,4 +19,20 @@ export class DemoMailSource implements MailSource {
     const msg = this.messages.find((m) => m.id === messageId);
     if (msg) msg.isRead = isRead;
   }
+
+  // Simulated in demo mode (no real mailbox). The short delay lets the UI show its
+  // loading state so the flow feels real.
+  async saveReplyDraft(messageId: string): Promise<void> {
+    await this.delay();
+    await this.markRead(messageId, true);
+  }
+
+  async sendReply(messageId: string): Promise<void> {
+    await this.delay();
+    await this.markRead(messageId, true);
+  }
+
+  private delay(ms = 650): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
