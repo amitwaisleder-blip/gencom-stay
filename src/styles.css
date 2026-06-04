@@ -78,6 +78,44 @@ button.primary:disabled {
   cursor: not-allowed;
 }
 
+button.secondary {
+  width: 100%;
+  margin-top: 10px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--surface-2);
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 18px;
+}
+
+.demo-banner {
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 8px 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-2);
+}
+.linklike {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* Inbox */
 .inbox {
   max-width: 640px;

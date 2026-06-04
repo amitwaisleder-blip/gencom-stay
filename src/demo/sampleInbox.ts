@@ -1,0 +1,157 @@
+import type { EmailMessage } from "../models/types";
+
+// Sample inbox used by demo mode. Designed to exercise the ranker: a mix of a
+// likely-important boss/client, direct vs. bulk recipients, high-importance flags,
+// attachments, newsletters, and automated noise. Several senders appear more than
+// once so opening one message visibly promotes that sender's other mail as the
+// on-device learning kicks in.
+
+const minutesAgo = (m: number) => new Date(Date.now() - m * 60_000).toISOString();
+
+let counter = 0;
+const id = () => `demo-${++counter}`;
+
+export function sampleInbox(): EmailMessage[] {
+  return [
+    {
+      id: id(),
+      conversationId: "c-acme",
+      subject: "Re: Q3 proposal — need your sign-off today",
+      sender: { name: "Dana Whitfield", address: "dana@acme-client.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(12),
+      bodyPreview:
+        "Hi — legal cleared the redlines. Can you confirm the pricing table before 5pm so we can countersign?",
+      isRead: false,
+      hasAttachments: true,
+      importance: "high",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-boss",
+      subject: "Board deck — can you take a pass?",
+      sender: { name: "Marcus Lee (CEO)", address: "marcus@yourcompany.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(35),
+      bodyPreview:
+        "Pulled together a first draft for Thursday. Slides 6–9 on growth need your eyes. No rush but ideally tonight.",
+      isRead: false,
+      hasAttachments: true,
+      importance: "normal",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-newsletter",
+      subject: "📈 The Hustle: 5 trends reshaping logistics",
+      sender: { name: "The Hustle", address: "news@thehustle.co" },
+      toRecipients: [
+        { name: "Subscribers", address: "list@thehustle.co" },
+        { name: "a", address: "a@x.com" },
+        { name: "b", address: "b@x.com" },
+        { name: "c", address: "c@x.com" },
+      ],
+      receivedDateTime: minutesAgo(50),
+      bodyPreview: "Plus: why warehouse robotics just hit an inflection point...",
+      isRead: false,
+      hasAttachments: false,
+      importance: "normal",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-boss",
+      subject: "Quick one — dinner reservation Thursday?",
+      sender: { name: "Marcus Lee (CEO)", address: "marcus@yourcompany.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(70),
+      bodyPreview: "Can you book somewhere for 6 near the office after the board meeting?",
+      isRead: false,
+      hasAttachments: false,
+      importance: "normal",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-it",
+      subject: "[Automated] Your password expires in 7 days",
+      sender: { name: "IT Service Desk", address: "noreply@yourcompany.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(95),
+      bodyPreview: "Action may be required. Reset your password to avoid interruption.",
+      isRead: false,
+      hasAttachments: false,
+      importance: "high",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-acme",
+      subject: "Invoice #4471 attached",
+      sender: { name: "Dana Whitfield", address: "dana@acme-client.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(140),
+      bodyPreview: "Attaching this month's invoice. Let me know if the PO number is correct.",
+      isRead: true,
+      hasAttachments: true,
+      importance: "normal",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-linkedin",
+      subject: "You appeared in 9 searches this week",
+      sender: { name: "LinkedIn", address: "notifications@linkedin.com" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(180),
+      bodyPreview: "See who's looking at your profile. Upgrade to Premium to learn more.",
+      isRead: false,
+      hasAttachments: false,
+      importance: "low",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-team",
+      subject: "Standup notes + blockers",
+      sender: { name: "Priya Nair", address: "priya@yourcompany.com" },
+      toRecipients: [
+        { name: "You", address: "you@example.com" },
+        { name: "Team", address: "team@yourcompany.com" },
+      ],
+      receivedDateTime: minutesAgo(220),
+      bodyPreview: "Two blockers on the data migration — flagging in case you can unblock.",
+      isRead: false,
+      hasAttachments: false,
+      importance: "normal",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-promo",
+      subject: "🎉 48-hour flash sale — everything 30% off",
+      sender: { name: "OfficeSupplies+", address: "deals@officesupplies.example" },
+      toRecipients: [{ name: "Valued Customer", address: "list@officesupplies.example" }],
+      receivedDateTime: minutesAgo(300),
+      bodyPreview: "Stock up now. Free shipping over $50. Unsubscribe anytime.",
+      isRead: false,
+      hasAttachments: false,
+      importance: "low",
+      webLink: null,
+    },
+    {
+      id: id(),
+      conversationId: "c-recruit",
+      subject: "Exciting opportunity that matches your background",
+      sender: { name: "Talent Partners", address: "recruiter@talentpartners.example" },
+      toRecipients: [{ name: "You", address: "you@example.com" }],
+      receivedDateTime: minutesAgo(420),
+      bodyPreview: "I came across your profile and think you'd be a great fit for a role...",
+      isRead: false,
+      hasAttachments: false,
+      importance: "normal",
+      webLink: null,
+    },
+  ];
+}

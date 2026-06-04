@@ -1,6 +1,6 @@
 import { useAuth } from "../auth/AuthProvider";
 
-export function SignIn() {
+export function SignIn({ onDemo }: { onDemo: () => void }) {
   const { signIn, configured, error } = useAuth();
 
   return (
@@ -12,16 +12,20 @@ export function SignIn() {
           A companion to Outlook that learns what matters — on your device.
         </p>
 
-        {!configured && (
-          <p className="warning">
-            Set <code>VITE_MSAL_CLIENT_ID</code> in <code>.env.local</code> to enable
-            sign-in. See the README.
-          </p>
-        )}
-
         <button className="primary" onClick={() => void signIn()} disabled={!configured}>
           Sign in with Microsoft
         </button>
+
+        <button className="secondary" onClick={onDemo}>
+          Explore the demo
+        </button>
+
+        {!configured && (
+          <p className="hint">
+            Sign-in is disabled until <code>VITE_MSAL_CLIENT_ID</code> is set (see the
+            README). The demo needs no account.
+          </p>
+        )}
 
         {error && <p className="error">{error}</p>}
       </div>

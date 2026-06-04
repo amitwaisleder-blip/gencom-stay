@@ -1,4 +1,5 @@
 import type { EmailMessage } from "../models/types";
+import type { MailSource } from "../models/mailSource";
 import {
   normalizeMessage,
   type GraphCollection,
@@ -12,7 +13,7 @@ const GRAPH_BASE = "https://graph.microsoft.com/v1.0";
  * Every request attaches a fresh bearer token from the supplied async getter, so
  * token refresh stays entirely in the auth layer.
  */
-export class GraphClient {
+export class GraphClient implements MailSource {
   constructor(private readonly getAccessToken: () => Promise<string>) {}
 
   /** Fetch recent inbox messages, newest first. */

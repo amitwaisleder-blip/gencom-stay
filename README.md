@@ -48,9 +48,14 @@ public/        icons + favicon
 
 ```bash
 npm install
-cp .env.local.example .env.local   # then paste your Azure client id
 npm run dev                         # opens http://localhost:5173
 ```
+
+No Azure account needed to try it: on the start screen click **Explore the demo**
+for a sample inbox where the priority ranking and on-device learning run for real —
+tap messages and watch the order adapt. To connect your real Outlook later, copy
+`.env.local.example` to `.env.local`, paste your Azure client id, and use
+**Sign in with Microsoft**.
 
 `npm run build` produces a deployable `dist/`. `npm run preview` serves it.
 
