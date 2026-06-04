@@ -3,7 +3,7 @@ import { useAuth } from "./auth/AuthProvider";
 import { GraphClient } from "./graph/graphClient";
 import { DemoMailSource } from "./demo/demoMailSource";
 import { SignIn } from "./components/SignIn";
-import { Inbox } from "./components/Inbox";
+import { MailScreen } from "./components/MailScreen";
 
 export function App() {
   const { ready, account, getAccessToken, signOut } = useAuth();
@@ -23,13 +23,18 @@ export function App() {
 
   if (demo) {
     return (
-      <Inbox source={demoSource} accountLabel="Demo inbox" onExit={() => setDemo(false)} demo />
+      <MailScreen
+        source={demoSource}
+        accountLabel="Demo inbox"
+        onExit={() => setDemo(false)}
+        demo
+      />
     );
   }
 
   if (account) {
     return (
-      <Inbox
+      <MailScreen
         source={graphSource}
         accountLabel={account.username}
         onExit={() => void signOut()}

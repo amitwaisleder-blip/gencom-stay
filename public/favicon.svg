@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="gencom-stay">
-  <rect width="512" height="512" rx="112" fill="#0f172a"/>
-  <rect x="96" y="140" width="320" height="232" rx="28" fill="#1e293b" stroke="#38bdf8" stroke-width="14"/>
-  <path d="M110 168 L256 286 L402 168" fill="none" stroke="#38bdf8" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="372" cy="160" r="46" fill="#f87171" stroke="#0f172a" stroke-width="12"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Gencom Mail">
+  <rect width="512" height="512" rx="112" fill="#4e6137"/>
+  <rect x="104" y="156" width="304" height="200" rx="24" fill="#ffffff"/>
+  <path d="M120 176 L256 280 L392 176" fill="none" stroke="#4e6137" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
