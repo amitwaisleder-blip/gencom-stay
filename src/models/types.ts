@@ -33,6 +33,8 @@ export interface BehaviorEvent {
   occurredAt: string; // ISO-8601
   /** Seconds between arrival and action, when known. */
   secondsToAction: number | null;
+  /** Explicit 1–5 importance the user gave this message (only for "rated"). */
+  rating: number | null;
 }
 
 export type BehaviorAction =
@@ -42,9 +44,13 @@ export type BehaviorAction =
   | "archived"
   | "deleted"
   | "flagged"
-  | "ignored";
+  | "ignored"
+  | "rated";
 
-/** How strongly an action implies the user cared. Used by the rules ranker. */
+/**
+ * How strongly an implicit action implies the user cared. Used by the rules ranker.
+ * "rated" is handled separately (it carries an explicit 1–5 score), so it's 0 here.
+ */
 export const ENGAGEMENT_WEIGHT: Record<BehaviorAction, number> = {
   replied: 1.0,
   forwarded: 0.8,
@@ -53,6 +59,7 @@ export const ENGAGEMENT_WEIGHT: Record<BehaviorAction, number> = {
   archived: -0.2,
   ignored: -0.4,
   deleted: -0.8,
+  rated: 0,
 };
 
 export function senderDisplay(message: EmailMessage): string {

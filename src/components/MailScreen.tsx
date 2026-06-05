@@ -10,6 +10,7 @@ import { TabBar, type Tab } from "./TabBar";
 import { Brief } from "./Brief";
 import { Inbox } from "./Inbox";
 import { Drafts } from "./Drafts";
+import { MessageDetail } from "./MessageDetail";
 
 /** Top-level signed-in / demo screen: fetches the inbox once and hosts the tabs. */
 export function MailScreen({
@@ -27,6 +28,7 @@ export function MailScreen({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("brief");
+  const [selected, setSelected] = useState<EmailMessage | null>(null);
 
   const refresh = useCallback(async () => {
     setLoading(true);
@@ -62,9 +64,24 @@ export function MailScreen({
       });
       void source.markRead(message.id, true);
       reRank((m) => (m.id === message.id ? { ...m, isRead: true } : m));
-      if (message.webLink) window.open(message.webLink, "_blank", "noopener");
+      setSelected(message); // open the in-app reading + rating view
     },
     [source, reRank],
+  );
+
+  const handleRate = useCallback(
+    (message: EmailMessage, rating: number) => {
+      behaviorStore.record({
+        messageId: message.id,
+        conversationId: message.conversationId,
+        senderAddress: message.sender?.address ?? null,
+        action: "rated",
+        rating,
+      });
+      // Scores change because the ranker reads the store — re-sort to reflect it.
+      reRank((m) => m);
+    },
+    [reRank],
   );
 
   const markHandled = useCallback(
@@ -156,6 +173,14 @@ export function MailScreen({
       )}
 
       <TabBar active={tab} onChange={setTab} draftCount={draftCount} />
+
+      {selected && (
+        <MessageDetail
+          message={selected}
+          onClose={() => setSelected(null)}
+          onRate={handleRate}
+        />
+      )}
     </div>
   );
 }

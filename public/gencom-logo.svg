@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Gencom">
-  <rect width="512" height="512" rx="134" fill="#3A5A20" />
-  <text x="256" y="356" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="320"
-        font-style="italic" fill="#ffffff">g</text>
+  <circle cx="256" cy="256" r="256" fill="#4c5f33" />
+  <text x="256" y="368" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="340"
+        font-weight="500" fill="#ffffff">g</text>
 </svg>

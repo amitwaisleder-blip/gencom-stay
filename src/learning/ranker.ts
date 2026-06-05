@@ -12,6 +12,7 @@ import { behaviorStore } from "../storage/behaviorStore";
 export interface MessageFeatures {
   senderEngagement: number; // -1..1 average engagement weight for the sender
   senderInteractionCount: number;
+  manualImportance: number | null; // 0..1 from explicit 1–5 ratings, null if none
   isHighImportance: boolean;
   hasAttachments: boolean;
   isUnread: boolean;
@@ -22,15 +23,26 @@ export function features(message: EmailMessage): MessageFeatures {
   const history = message.sender
     ? behaviorStore.forSender(message.sender.address)
     : [];
-  const engagementSum = history.reduce(
+
+  // Implicit actions feed the engagement average; explicit ratings are separate.
+  const implicit = history.filter((e) => e.action !== "rated");
+  const engagementSum = implicit.reduce(
     (sum, e) => sum + ENGAGEMENT_WEIGHT[e.action],
     0,
   );
-  const senderEngagement = history.length ? engagementSum / history.length : 0;
+  const senderEngagement = implicit.length ? engagementSum / implicit.length : 0;
+
+  const ratings = history
+    .filter((e) => e.action === "rated" && typeof e.rating === "number")
+    .map((e) => e.rating as number);
+  const manualImportance = ratings.length
+    ? (ratings.reduce((a, b) => a + b, 0) / ratings.length - 1) / 4 // 1..5 -> 0..1
+    : null;
 
   return {
     senderEngagement,
     senderInteractionCount: history.length,
+    manualImportance,
     isHighImportance: message.importance === "high",
     hasAttachments: message.hasAttachments,
     isUnread: !message.isRead,
@@ -42,6 +54,11 @@ export function features(message: EmailMessage): MessageFeatures {
 export function score(message: EmailMessage): number {
   const f = features(message);
   let s = 0.5;
+  // An explicit 1–5 rating is the strongest signal the user can give, so it gets
+  // the most weight and overrides the implicit lean for that sender.
+  if (f.manualImportance !== null) {
+    s += (f.manualImportance - 0.5) * 0.5; // ±0.25
+  }
   s += f.senderEngagement * 0.3; // learned per-sender signal
   s += f.isHighImportance ? 0.15 : 0;
   s += f.addressedDirectly ? 0.1 : -0.05; // direct beats bulk/CC blasts

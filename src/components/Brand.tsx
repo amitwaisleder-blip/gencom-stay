@@ -12,8 +12,8 @@ export function Logo({ size = 34, className = "" }: { size?: number; className?:
       style={{
         width: size,
         height: size,
-        borderRadius: Math.round(size * 0.26),
-        fontSize: Math.round(size * 0.56),
+        borderRadius: "50%",
+        fontSize: Math.round(size * 0.62),
       }}
       aria-label="Gencom"
     >

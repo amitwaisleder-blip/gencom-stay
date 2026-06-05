@@ -34,6 +34,7 @@ export const behaviorStore = {
     senderAddress: string | null;
     action: BehaviorAction;
     secondsToAction?: number | null;
+    rating?: number | null;
   }): BehaviorEvent {
     const event: BehaviorEvent = {
       id: crypto.randomUUID(),
@@ -43,6 +44,7 @@ export const behaviorStore = {
       action: input.action,
       occurredAt: new Date().toISOString(),
       secondsToAction: input.secondsToAction ?? null,
+      rating: input.rating ?? null,
     };
     const events = loadAll();
     events.push(event);
