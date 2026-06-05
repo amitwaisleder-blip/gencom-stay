@@ -101,10 +101,8 @@ button {
   width: 100%;
   height: 100%;
   border-radius: 44px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   background: var(--bg);
-  transform: translateZ(0);
 }
 .device-island {
   position: absolute;
@@ -126,15 +124,17 @@ button {
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   color: #7e9070;
 }
-.device-screen .screen,
+.device-screen .screen {
+  height: 100%;
+}
 .device-screen .centered {
-  min-height: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding-top: 44px;
 }
 .device-screen .app-header {
   padding-top: 32px;
-}
-.device-screen .centered {
-  padding-top: 44px;
 }
 @media (max-width: 767px) {
   .device-stage,
@@ -168,7 +168,10 @@ button {
 .screen {
   max-width: 640px;
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 .app-header {
   position: sticky;
@@ -243,7 +246,9 @@ button {
   padding: 0;
 }
 .content {
-  padding: 6px 16px 92px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 16px 20px;
   animation: rise 0.28s ease both;
 }
 @keyframes rise {
@@ -715,10 +720,7 @@ button {
 
 /* ---------- Bottom tab bar ---------- */
 .tab-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex-shrink: 0;
   height: 66px;
   display: flex;
   background: var(--tbbg);
@@ -726,7 +728,6 @@ button {
   -webkit-backdrop-filter: blur(18px);
   border-top: 1px solid var(--bord);
   padding-bottom: env(safe-area-inset-bottom);
-  z-index: 10;
 }
 .tab {
   flex: 1;
