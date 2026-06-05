@@ -1,11 +1,25 @@
 import { defineConfig } from "vite";
+import { execSync } from "node:child_process";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+
+// Stamp the current git commit so the running app can show which build it is — the
+// fastest way to confirm a pull actually took effect. Falls back to "dev" if git
+// isn't available.
+let buildId = "dev";
+try {
+  buildId = execSync("git rev-parse --short HEAD").toString().trim();
+} catch {
+  /* not a git checkout */
+}
 
 // gencom-stay is installed to the iPhone/iPad home screen as a PWA. The manifest
 // and service worker below are what make "Add to Home Screen" behave like a real
 // app (own icon, standalone window, offline shell).
 export default defineConfig({
+  define: {
+    __BUILD_ID__: JSON.stringify(buildId),
+  },
   plugins: [
     react(),
     VitePWA({

@@ -293,6 +293,17 @@ button.secondary:hover {
   line-height: 1.5;
   margin-top: 20px;
 }
+.build-tag {
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #aab09a;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.device-build {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  color: #9aa089;
+}
 
 /* ---------- App shell ---------- */
 .screen {

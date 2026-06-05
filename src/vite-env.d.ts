@@ -9,3 +9,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+/** Git commit hash of the running build, injected by vite.config.ts. */
+declare const __BUILD_ID__: string;

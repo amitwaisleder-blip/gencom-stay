@@ -16,6 +16,8 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
       </div>
       <p className="device-caption">
         Mobile preview — open on your phone (or narrow this window) for full screen.
+        <br />
+        <span className="device-build">build {__BUILD_ID__}</span>
       </p>
     </div>
   );

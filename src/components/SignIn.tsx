@@ -35,6 +35,8 @@ export function SignIn({ onDemo }: { onDemo: () => void }) {
         )}
 
         {error && <p className="error">{error}</p>}
+
+        <p className="build-tag">build {__BUILD_ID__}</p>
       </div>
     </div>
   );
