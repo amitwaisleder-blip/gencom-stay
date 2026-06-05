@@ -20,9 +20,20 @@ export default defineConfig({
   define: {
     __BUILD_ID__: JSON.stringify(buildId),
   },
+  server: {
+    // Always use this exact port, and FAIL LOUDLY if it's already taken (instead of
+    // silently moving to another port, which makes you reload a stale old server).
+    port: 5173,
+    strictPort: true,
+  },
   plugins: [
     react(),
     VitePWA({
+      // selfDestroying makes any previously-installed service worker unregister and
+      // wipe its caches, so a stale cached build can't keep serving old files during
+      // this prototyping phase. Re-enable normal caching before production deploy.
+      selfDestroying: true,
+      injectRegister: "auto",
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png"],
       manifest: {
