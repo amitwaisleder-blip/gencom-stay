@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Inter", system-ui, sans-serif;
+  color-scheme: light;
+}
+
+body {
+  @apply bg-gencom-mist text-gencom-ink;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  /* Crisper type rendering across the app. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Very soft warm wash so flat white cards have something to sit on,
+     without reading as a heavy gradient. */
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgba(79, 111, 85, 0.06), transparent 60%),
+    radial-gradient(1000px 500px at -10% 0%, rgba(184, 149, 85, 0.035), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* ---- Typography hierarchy ----------------------------------------------
+   One scale across the whole app. Prefer these over ad-hoc text-* classes.
+
+     .t-hero     — page title on the top banner (serif display)
+     .t-h1       — top of a page or major section
+     .t-h2       — section title inside a card
+     .t-h3       — sub-section / small heading
+     .t-eyebrow  — small caps label above content (stone, tracked)
+     .t-body     — primary reading text
+     .t-meta     — secondary/meta line (stone, smaller)
+     .t-micro    — footnotes, pill labels, tightest rows
+     .t-mono     — tabular numbers / $ amounts
+*/
+@layer components {
+  .t-hero    { @apply font-sans text-xl  font-bold     leading-tight text-gencom-ink; }
+  .t-h1      { @apply font-sans text-2xl font-bold     leading-tight text-gencom-ink; }
+  .t-h2      { @apply font-sans text-lg  font-bold     leading-tight text-gencom-ink; }
+  .t-h3      { @apply font-sans text-sm  font-semibold text-gencom-ink; }
+  .t-eyebrow { @apply font-sans text-[11px] uppercase tracking-[0.18em] text-gencom-stone font-semibold; }
+  .t-body    { @apply font-sans text-sm  text-gencom-ink; }
+  .t-meta    { @apply font-sans text-xs  text-gencom-stone; }
+  .t-micro   { @apply font-sans text-[11px] text-gencom-stone; }
+  .t-mono    { @apply font-mono text-sm  tabular-nums text-gencom-ink; }
+}
+
+
+/* ---- Shared surface & control primitives -------------------------------
+   Reusable component classes for a consistent, modern look across every
+   module. Adopt these instead of re-deriving card/button styles per page.
+
+     .card        — white elevated surface, soft shadow, rounded
+     .card-hover  — add lift + shadow bloom on hover (pair with .card)
+     .btn         — base button (sizing, radius, focus ring)
+     .btn-primary — solid ink button (primary action)
+     .btn-gold    — gold accent button
+     .btn-ghost   — bordered/quiet button
+     .chip        — small pill (status, tags, eyebrow counts)
+     .field       — text input / select baseline
+*/
+@layer components {
+  .card {
+    @apply bg-white border border-gencom-sand rounded-2xl shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:shadow-card-hover hover:-translate-y-0.5 hover:border-gencom-stone/30;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold
+           transition-colors duration-200 select-none
+           focus:outline-none focus-visible:shadow-ring disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary { @apply btn bg-gencom-ink text-white hover:bg-gencom-ink/90; }
+  .btn-gold    { @apply btn bg-gencom-gold text-gencom-ink hover:bg-gencom-gold/85; }
+  .btn-ghost   { @apply btn border border-gencom-sand bg-white text-gencom-stone hover:text-gencom-ink hover:bg-gencom-cloud; }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-gencom-sand bg-gencom-cloud
+           px-2.5 py-0.5 text-[11px] font-semibold text-gencom-stone;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-gencom-sand bg-white px-3 py-2 text-sm text-gencom-ink
+           placeholder:text-gencom-stone/60
+           focus:outline-none focus:border-gencom-green focus-visible:shadow-ring transition;
+  }
+  .btn-green { @apply btn bg-gencom-green text-white hover:bg-gencom-greendark; }
+}
+
+
+/* ---- Number inputs · suppress native spinners -------------------------
+   Browsers stamp ▲/▼ spinner buttons inside <input type="number"> on focus,
+   which narrows the text-content area and visually shifts right-aligned
+   digits leftward when the user clicks in. Hiding the spinners keeps the
+   number's position stable across focused/blurred states. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+
+/* ---- Cash Flow Returns · zoom slider ---------------------------------- */
+.cfr-zoom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: linear-gradient(to right, #ece6d7, #d9d4c8);
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+.cfr-zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #b89555;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 2px rgba(26, 29, 36, 0.3);
+  cursor: grab;
+  transition: transform 120ms ease;
+}
+.cfr-zoom-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.cfr-zoom-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.1); }
+.cfr-zoom-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #b89555;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 2px rgba(26, 29, 36, 0.3);
+  cursor: grab;
+}
+.cfr-zoom-slider::-moz-range-track {
+  height: 4px;
+  background: #ece6d7;
+  border-radius: 9999px;
+}
+
+
+/* ---- Cash Flow Returns · print stylesheet (Phase 9/10) ----------------
+   The Export → PDF flow opens /cash-flow-returns/:dealId/print which
+   auto-invokes window.print(). This stylesheet strips app chrome
+   (top-nav, header tabs) and forces portrait A4 margins so the output
+   looks like a polished IC one-pager. */
+@media print {
+  /* Force a clean page — no scrollbars, no background tint. */
+  html, body { background: #fff !important; }
+
+  @page { size: A4 portrait; margin: 12mm; }
+
+  /* Hide the global Gencom header + anything in the top nav. */
+  body > div > header.sticky,
+  body > div > header[class*="sticky"] { display: none !important; }
+
+  /* Neutralize the main wrapper's padding so the print content uses the
+     full page width. */
+  main { padding: 0 !important; max-width: none !important; }
+
+  /* Hide the global chat host, issues bell, any floating UI. */
+  [class*="ChatPanel"], [role="dialog"] { display: none !important; }
+
+  /* Avoid awkward page breaks mid-table. */
+  .cfr-print table { page-break-inside: auto; }
+  .cfr-print tr    { page-break-inside: avoid; page-break-after: auto; }
+  .cfr-print section { page-break-inside: avoid; }
+
+  /* Tighten body spacing. */
+  .cfr-print { font-size: 10px !important; }
+}

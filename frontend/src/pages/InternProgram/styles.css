@@ -1,0 +1,99 @@
+/* Intern Program — module-scoped CSS variables and utilities.
+   Wrap the module root in className="intern-module" so these tokens
+   only apply to intern surfaces and don't bleed into the rest of the
+   pip-budget-app.
+
+   Palette intentionally lifted from ROM CAPEX Budget so the Intern
+   Program reads as the same product family:
+     · ink            #1a1d24  (gencom.ink)
+     · stone          #6b6f78  (gencom.stone)
+     · sand           #d9d4c8  (gencom.sand) — borders
+     · gold           #b89555  (gencom.gold) — accent
+     · mist           #f5f3ee  (gencom.mist) — host bg
+   Plus a desaturated sage for primary CTAs / "Active" affordances. */
+
+.intern-module {
+  --background: 40 25% 95%;          /* gencom.mist */
+  --foreground: 220 17% 12%;         /* gencom.ink */
+
+  --card: 0 0% 100%;
+  --card-foreground: 220 17% 12%;
+
+  --muted: 38 22% 92%;
+  --muted-foreground: 220 6% 45%;    /* gencom.stone */
+
+  --border: 38 18% 82%;              /* gencom.sand */
+  --input: 38 18% 82%;
+  --ring: 36 38% 53%;                /* gencom.gold */
+
+  /* Primary CTA — calm sage, matches the "Next →" button in
+     ROM CAPEX. Foreground is the host's cream so it never clashes. */
+  --primary: 110 18% 42%;
+  --primary-foreground: 40 25% 96%;
+
+  --secondary: 38 22% 92%;
+  --secondary-foreground: 220 17% 12%;
+
+  /* Accent = gold. Used for eyebrows, active states, dividers. */
+  --accent: 36 38% 53%;
+  --accent-foreground: 220 17% 12%;
+
+  --destructive: 0 60% 55%;
+  --destructive-foreground: 0 0% 98%;
+
+  --success: 110 18% 42%;
+  --success-foreground: 0 0% 98%;
+
+  --warning: 36 65% 48%;
+  --warning-foreground: 220 17% 12%;
+
+  --radius: 0.5rem;
+
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Card hairline + soft shadow.  Matches the floating-card silhouette
+   used by every ROM CAPEX surface. */
+.intern-module .card-border {
+  box-shadow: inset 0 0 0 1px hsl(var(--border));
+}
+
+.intern-module .skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.55) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: 0.375rem;
+}
+
+/* A thin gold rule used under display headlines, mirroring the gold
+   accent strip ROM CAPEX puts under section titles. */
+.intern-module .gold-rule {
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: hsl(var(--accent));
+  border-radius: 999px;
+}
+
+/* Portfolio export — `window.print()` from the portfolio route. */
+@media print {
+  body { background: white !important; }
+  .print\:hidden { display: none !important; }
+
+  .intern-module nav[aria-label="Intern sections"] { display: none !important; }
+  .intern-module .intern-profile-header { display: none !important; }
+
+  .intern-module #portfolio {
+    box-shadow: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+  }
+  .intern-module section h2 { break-after: avoid; }
+  .intern-module a { color: hsl(36 50% 30%); text-decoration: none; }
+}
