@@ -1,9 +1,9 @@
-import { Inbox, Star, PenLine, type LucideIcon } from "lucide-react";
+import { Mail, Star, PenLine, type LucideIcon } from "lucide-react";
 
 export type Tab = "brief" | "priority" | "drafts";
 
 const TABS: { id: Tab; label: string; icon: LucideIcon }[] = [
-  { id: "brief", label: "Brief", icon: Inbox },
+  { id: "brief", label: "Brief", icon: Mail },
   { id: "priority", label: "Priority", icon: Star },
   { id: "drafts", label: "Drafts", icon: PenLine },
 ];

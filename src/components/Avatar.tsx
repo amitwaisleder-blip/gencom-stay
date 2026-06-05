@@ -1,38 +1,24 @@
-import {
-  ShieldAlert,
-  Tag,
-  CalendarDays,
-  Newspaper,
-  Users,
-  Package,
-  User,
-  AtSign,
-  type LucideIcon,
-} from "lucide-react";
 import type { EmailMessage } from "../models/types";
-import { categoryOf, levelOf } from "../intel/category";
+import { levelOf } from "../intel/category";
 
-const ICONS: Record<string, LucideIcon> = {
-  security: ShieldAlert,
-  social: AtSign,
-  promo: Tag,
-  calendar: CalendarDays,
-  news: Newspaper,
-  group: Users,
-  update: Package,
-  person: User,
-};
+/** Two-letter initials from a sender's name (or address as a fallback). */
+function initials(name: string): string {
+  const clean = name.replace(/\(.*?\)/g, "").trim();
+  const parts = clean.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
 
-/** A tinted rounded tile with a category icon, colored by predicted priority. */
-export function Avatar({ message, size = 44 }: { message: EmailMessage; size?: number }) {
+/** A rounded tile with the sender's initials, colored by predicted priority. */
+export function Avatar({ message, size = 40 }: { message: EmailMessage; size?: number }) {
   const level = levelOf(message);
-  const Icon = ICONS[categoryOf(message)] ?? User;
+  const label = message.sender
+    ? initials(message.sender.name || message.sender.address)
+    : "?";
   return (
-    <span
-      className={`avatar lvl-${level}`}
-      style={{ width: size, height: size, borderRadius: size * 0.3 }}
-    >
-      <Icon size={size * 0.5} strokeWidth={2} />
+    <span className={`gm-av av-${level}`} style={{ width: size, height: size }}>
+      {label}
     </span>
   );
 }

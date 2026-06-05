@@ -58,11 +58,22 @@ export function buildBrief(messages: EmailMessage[]): DailyBrief {
   const highPriority = today.filter((m) => score(m) >= 0.66).length;
   const toReply = today.filter(needsResponse);
 
+  const parts: string[] = [];
+  if (highPriority > 0) {
+    parts.push(
+      `${highPriority} urgent message${highPriority === 1 ? "" : "s"} ` +
+        `need${highPriority === 1 ? "s" : ""} attention.`,
+    );
+  }
+  if (toReply.length > 0) {
+    parts.push(
+      `${toReply.length} email${toReply.length === 1 ? " is" : "s are"} waiting on a reply.`,
+    );
+  }
   const headline =
     today.length === 0
       ? "No new mail so far today."
-      : `${today.length} email${today.length === 1 ? "" : "s"} so far today` +
-        ` · ${unread} unread · ${toReply.length} need a reply.`;
+      : parts.join(" ") || `${today.length} emails so far today.`;
 
   return {
     greeting: greetingForNow(),

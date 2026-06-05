@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import { levelOf } from "../intel/category";
+import { levelOf, type Level } from "../intel/category";
 import { senderDisplay, type EmailMessage } from "../models/types";
 import { Avatar } from "./Avatar";
 
@@ -13,6 +13,11 @@ function relativeTime(iso: string): string {
   return `${Math.round(hours / 24)}d`;
 }
 
+export function PriorityPill({ level }: { level: Level }) {
+  const label = { high: "High", medium: "Med", low: "Low" }[level];
+  return <span className={`prio-pill pill-${level}`}>{label}</span>;
+}
+
 export function MessageRow({
   message,
   onOpen,
@@ -22,23 +27,20 @@ export function MessageRow({
 }) {
   const lvl = levelOf(message);
   return (
-    <li
-      className={`message-row prio-${lvl} ${message.isRead ? "read" : "unread"}`}
-      onClick={onOpen}
-    >
+    <li className="message-row" onClick={onOpen}>
       <Avatar message={message} />
       <div className="message-body">
         <div className="message-top">
-          <span className="sender">
-            <span className={`status-dot ${lvl}`} />
-            {senderDisplay(message)}
+          <span className="sender">{senderDisplay(message)}</span>
+          <span className="row-meta">
+            <PriorityPill level={lvl} />
+            <span className={`time time-${lvl}`}>{relativeTime(message.receivedDateTime)}</span>
           </span>
-          <span className={`time time-${lvl}`}>{relativeTime(message.receivedDateTime)}</span>
         </div>
-        <div className="subject">{message.subject}</div>
+        <div className={`subject ${message.isRead ? "" : "unread"}`}>{message.subject}</div>
         <div className="preview">{message.bodyPreview}</div>
       </div>
-      <ChevronRight className="row-chevron" size={18} />
+      <ChevronRight className="row-chevron" size={16} />
     </li>
   );
 }

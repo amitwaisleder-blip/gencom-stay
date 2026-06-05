@@ -3,15 +3,22 @@
 // asset any time to use the exact brand image; everything here picks it up.
 
 export function Logo({ size = 34, className = "" }: { size?: number; className?: string }) {
+  // Styled badge per the Alpine design direction: serif italic "g" on the accent
+  // green. Replace /gencom-logo.svg (used for favicons/app icons) with the official
+  // asset any time; this in-app mark mirrors it.
   return (
-    <img
-      src="/gencom-logo.svg"
-      width={size}
-      height={size}
-      alt="Gencom"
-      className={`logo-img ${className}`}
-      style={{ borderRadius: size * 0.32 }}
-    />
+    <span
+      className={`gm-logo ${className}`}
+      style={{
+        width: size,
+        height: size,
+        borderRadius: Math.round(size * 0.26),
+        fontSize: Math.round(size * 0.56),
+      }}
+      aria-label="Gencom"
+    >
+      g
+    </span>
   );
 }
 

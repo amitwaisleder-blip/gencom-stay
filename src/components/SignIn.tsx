@@ -42,15 +42,14 @@ export function SignIn({ onDemo }: { onDemo: () => void }) {
   );
 }
 
-/** Soft botanical decoration behind the sign-in card. */
+/** Soft circle decoration behind the sign-in card (Alpine direction). */
 function Leaves() {
   return (
-    <svg className="leaves" viewBox="0 0 1440 900" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-      <g fill="#4e6137" opacity="0.10">
-        <path d="M1230 70c70 30 120 110 110 200-90-10-170-70-180-160-3-22 5-35 70-40z" />
-        <path d="M1320 150c-40 60-40 150 10 210 50-50 70-140 30-210-12-20-28-22-40 0z" />
-        <path d="M150 760c-70-30-120-110-110-200 90 10 170 70 180 160 3 22-5 35-70 40z" />
-        <path d="M60 690c40-60 40-150-10-210-50 50-70 140-30 210 12 20 28 22 40 0z" />
+    <svg className="leaves" viewBox="0 0 390 680" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <g fill="#3A5A20">
+        <circle cx="345" cy="55" r="115" opacity="0.06" />
+        <circle cx="45" cy="645" r="95" opacity="0.06" />
+        <circle cx="200" cy="355" r="55" opacity="0.04" />
       </g>
     </svg>
   );
